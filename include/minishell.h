@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/23 16:10:55 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:07:46 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h> // strerror
 # include <signal.h> // signal, sigaction, sigemptyset, sigaddset, kill
 # include <dirent.h> // opendir, readdir, closedir
+# include <stdbool.h> // true/false
 # include <termcap.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <termios.h> // tcgetattr, tcsetattr
 # include <sys/wait.h> // wait, waitpid, wait3, wait4
