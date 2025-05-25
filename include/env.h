@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/25 15:31:26 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:13:52 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	add_sys_env(t_env **env_list, char *env_str);
 
 // ENV_UTILS
 t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported);
+void	remove_env(t_env **env_list, char *key);
 
 #endif
