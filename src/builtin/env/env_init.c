@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/26 12:08:05 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:52:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ t_env	*init_env(char **envp)
 	while (envp[++i])
 		add_sys_env(&env_list, envp[i]);
 	return (env_list);
+}
+
+void	free_env_list(t_env *env_list)
+{
+	t_env	*tmp;
+
+	while (tmp)
+	{
+		tmp = env_list;
+		env_list = env_list->next;
+		free(tmp->key);	
+		free(tmp->value);
+		free(tmp);
+	}
 }

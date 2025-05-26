@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/26 12:08:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:58:34 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_env
 t_env	*create_env_node(char *key, char *value, bool exported);
 void	add_sys_env(t_env **env_list, char *env_str);
 t_env	*init_env(char **envp);
+void	free_env_list(t_env *env_list);
 
 // ENV_UTILS
 t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported);
