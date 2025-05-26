@@ -6,15 +6,12 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/25 16:14:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:12:58 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-/*
-** env_list'e yeni bir node ekleyen/node'u güncelleyen fonksiyon
-*/
 t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported)
 {
 	t_env	*node;
@@ -41,9 +38,6 @@ t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported)
 	return (node);
 }
 
-/*
-** env_list'ten env_node silen fonksiyon
-*/
 void	remove_env(t_env **env_list, char *key)
 {
 	t_env	*curr;
@@ -70,4 +64,21 @@ void	remove_env(t_env **env_list, char *key)
 		prev = curr;
 		curr = curr->next;
 	}
+}
+
+t_env	*find_env(t_env *env_list, char *key)
+{
+	size_t	key_len;
+
+	if (!key)
+		return (NULL);
+	key_len = ft_strlen(key);
+	while (env_list)
+	{
+		if (ft_strlen(env_list->key) == key_len &&
+			ft_strncmp(env_list->key, key, key_len) == 0)
+			return (env_list);
+		env_list = env_list->next;
+	}
+	return (NULL);
 }
