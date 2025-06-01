@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/01 15:26:26 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:58:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*init_env(char **envp);
 void	free_env_list(t_env *env_list);
 
 // ENV_UTILS
-t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported);
+t_env	*add_env(t_env **env_list, char *key, char *value, bool exported);
 void	remove_env(t_env **env_list, char *key);
 t_env	*find_env(t_env *env_list, char *key);
 char	*get_env_value(t_env *env_list, char *key);
@@ -42,5 +42,8 @@ int		count_exported_env(t_env *env_list);
 char	*create_env_string(char *key, char *value);
 char	**env_to_arr(t_env *env_list);
 void	free_env_arr(char **env_arr);
+
+// ENV
+void	env(t_env *env_list);
 
 #endif
