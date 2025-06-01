@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/26 13:52:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:58:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ void	free_env_list(t_env *env_list)
 	{
 		tmp = env_list;
 		env_list = env_list->next;
-		free(tmp->key);	
-		free(tmp->value);
+		free(tmp->key);
+		if (tmp->value)
+			free(tmp->value);
 		free(tmp);
 	}
 }
