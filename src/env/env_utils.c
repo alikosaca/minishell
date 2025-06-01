@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/05/26 14:12:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:11:38 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,14 @@ t_env	*find_env(t_env *env_list, char *key)
 		env_list = env_list->next;
 	}
 	return (NULL);
+}
+
+char	*get_env_value(t_env *env_list, char *key)
+{
+	t_env	*node;
+	
+	node = find_env(env_list, key);
+	if (!node)
+		return (NULL);
+	return (node->value);
 }
