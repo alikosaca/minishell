@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/01 13:11:38 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:54:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../../include/env.h"
 
 t_env	*add_env(t_env **env_list, char *key, char *value, bool *exported)
 {
