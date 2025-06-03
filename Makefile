@@ -1,32 +1,82 @@
-NAME = minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
+#    Updated: 2025/06/03 16:46:56 by yaycicek         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -Llibft -lft
-INCLUDES = -Iinclude -Ilibft
+NAME         = minishell
 
-RM = rm -rf
+CC           = cc
+CFLAGS       = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR)
+READLINE     = -lreadline
+RM           = rm -f
 
-SRC = # minishell source files here
-OBJ = $(SRC:.c=.o)
+SRC_DIR      = src
+INC_DIR      = include
+LIBFT_DIR    = libft
 
-LIBFT = libft/libft.a
+LIBFT        = $(LIBFT_DIR)/libft.a
+
+
+MAIN_SRC     = $(SRC_DIR)/main.c
+LEXER_DIR    = $(SRC_DIR)/lexer
+PARSER_DIR   = $(SRC_DIR)/parser
+EXECUTOR_DIR = $(SRC_DIR)/executor
+ENV_DIR      = $(SRC_DIR)/env
+BUILTIN_DIR  = $(SRC_DIR)/builtin
+UTILS_DIR    = $(SRC_DIR)/utils
+
+LEXER_SRC    = \
+            #    $(LEXER_DIR)/lexer.c
+PARSER_SRC   = \
+            #    $(PARSER_DIR)/parser.c
+EXECUTOR_SRC = \
+            #    $(EXECUTOR_DIR)/executor.c
+ENV_SRC	     = \
+               $(ENV_DIR)/env_init.c \
+               $(ENV_DIR)/env_utils.c \
+               $(ENV_DIR)/env_convert.c \
+               $(ENV_DIR)/env.c
+BUILTIN_SRC  = \
+               $(BUILTIN_DIR)/builtin_echo.c
+UTILS_SRC    = \
+            #    $(UTILS_DIR)/utils.c
+
+MAIN_OBJ     = $(MAIN_SRC:.c=.o)
+LEXER_OBJ    = $(LEXER_SRC:.c=.o)
+PARSER_OBJ   = $(PARSER_SRC:.c=.o)
+EXECUTOR_OBJ = $(EXECUTOR_SRC:.c=.o)
+ENV_OBJ	     = $(ENV_SRC:.c=.o)
+BUILTIN_OBJ  = $(BUILTIN_SRC:.c=.o)
+UTILS_OBJ    = $(UTILS_SRC:.c=.o)
+
+SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
+               $(ENV_SRC) $(BUILTIN_SRC) $(UTILS_SRC)
+# ----------------------------------------------------------------------- #
+OBJS         = $(MAIN_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXECUTOR_OBJ) \
+               $(ENV_OBJ) $(BUILTIN_OBJ) $(UTILS_OBJ)
 
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C libft
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
-	make -C libft clean
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
-	make -C libft fclean
 
 re: fclean all
 
