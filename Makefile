@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/03 16:46:56 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/03 16:49:38 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CFLAGS       = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR)
 READLINE     = -lreadline
 RM           = rm -f
 
-SRC_DIR      = src
 INC_DIR      = include
+SRC_DIR      = src
 LIBFT_DIR    = libft
 
 LIBFT        = $(LIBFT_DIR)/libft.a
