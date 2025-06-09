@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/04 18:54:35 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/09 13:20:21 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-# include "minishell.h"
 
 typedef enum e_token_type
 {
