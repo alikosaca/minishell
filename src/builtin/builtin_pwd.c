@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 20:07:24 by yaycicek         ###   ########.fr       */
+/*   Created: 2025/06/09 12:41:08 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/06/09 19:01:55 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "../../include/minishell.h"
 
-# define ERR_HOME_NOT_SET "HOME not set"
-# define ERR_TOO_MANY_ARGS "too many arguments"
-# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"
+int	builtin_pwd(void)
+{
+	char	cwd[PATH_MAX];
 
-int	builtin_echo(char **args);
-int	builtin_cd(t_env *env_list, char **args);
-int	builtin_pwd(void);
-
-#endif
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+		return (error("pwd", NULL, strerror(errno)));
+	printf("%s\n", cwd);
+	return (0);
+}
