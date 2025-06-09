@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/03 16:49:38 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/09 13:46:33 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ ENV_SRC	     = \
 BUILTIN_SRC  = \
                $(BUILTIN_DIR)/builtin_echo.c
 UTILS_SRC    = \
-            #    $(UTILS_DIR)/utils.c
+               $(UTILS_DIR)/error.c
 
 MAIN_OBJ     = $(MAIN_SRC:.c=.o)
 LEXER_OBJ    = $(LEXER_SRC:.c=.o)
