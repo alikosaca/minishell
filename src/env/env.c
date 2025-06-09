@@ -6,12 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:30:39 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/03 14:20:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:16:39 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/env.h"
-#include <stdio.h>
+#include "../../include/minishell.h"
 
 void	env(t_env *env_list)
 {
