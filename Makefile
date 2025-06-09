@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/09 13:46:33 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/09 20:03:32 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ ENV_SRC	     = \
                $(ENV_DIR)/env_convert.c \
                $(ENV_DIR)/env.c
 BUILTIN_SRC  = \
-               $(BUILTIN_DIR)/builtin_echo.c
+               $(BUILTIN_DIR)/builtin_echo.c \
+               $(BUILTIN_DIR)/builtin_cd.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c
 

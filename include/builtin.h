@@ -6,15 +6,18 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 13:20:11 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:03:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# define ERR_HOME_NOT_SET "HOME not set"
+# define ERR_TOO_MANY_ARGS "too many arguments"
+# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"
+
 int	builtin_echo(char **args);
 int	builtin_cd(t_env *env_list, char **args);
-int	builtin_pwd(void);
 
 #endif
