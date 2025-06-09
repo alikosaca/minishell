@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 13:15:37 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:51:36 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <sys/wait.h> // wait, waitpid, wait3, wait4
 # include <sys/stat.h> // stat, lstat, fstat
 # include <sys/ioctl.h> // ioctl
-#include "linux/limits.h" //! PATH_MAX
+# include "linux/limits.h" // ! PATH_MAX
 # include <readline/history.h> // add_history
 # include <readline/readline.h> // rl_*
 
