@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/09 13:16:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:24:47 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ static void	process_tokens(char *input, t_token **tokens)
 	{
 		if (!skip_whitespace(&input))
 			break ;
-		//! proccess these-> '<', '>', '|', '$', '"', '\''
+		else if (*input == '|')
+		{
+			new_token = create_token(TOKEN_PIPE, ft_strdup("|"));
+			add_tokenn(*tokens, new_token);
+			input++;
+		}
 	}
 }
 

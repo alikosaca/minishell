@@ -3,21 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/09 13:16:49 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:22:37 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int skip_whitespace(char **input)
+int	is_whitespace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+}
+
+int	skip_whitespace(char **input)
 {
 	while (**input && is_whitespace(**input))
 		(*input)++;
 	if (*input)
-		return (0);
-	else
 		return (1);
+	else
+		return (0);
+}
+
+t_token	*create_token(t_token_type type, char *value)
+{
+	t_token *token;
+
+	token = malloc(sizeof(t_token));
+	if (!token)
+	{
+		if (value)
+			free(value);
+		return (1);
+	}
+	token->type = type;
+	token->value = value;
+	token->next = NULL;
+	return (token);
 }
