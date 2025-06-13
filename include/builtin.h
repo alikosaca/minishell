@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/10 16:40:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/13 22:06:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	builtin_echo(char **args);
 int	builtin_cd(t_env *env_list, char **args);
 int	builtin_pwd(void);
 int	builtin_export(t_env **env_list, char **args);
+int builtin_unset(t_env **env_list, char **args);
 
 #endif
