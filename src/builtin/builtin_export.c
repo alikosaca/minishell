@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/10 18:42:54 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:51:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	print_export_list(t_env *env_list)
 {
 	while (env_list)
 	{
-		if (env_list->exported)
+		if (env_list->key && env_list->exported)
 		{
 			printf("declare -x %s", env_list->key);
 			if (env_list->value)
