@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/13 18:39:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/13 19:12:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	add_sys_env(t_env **env_list, char *env_str)
 	char	*key;
 	char	*value;
 
+	equal_sign = NULL;
 	key = NULL;
 	value = NULL;
 
@@ -61,7 +62,10 @@ void	add_sys_env(t_env **env_list, char *env_str)
 		free(value);
 	}
 	else
+	{
+		key = env_str;
 		add_env(env_list, key, value, true);
+	}
 }
 
 t_env	*init_env(char **envp)
