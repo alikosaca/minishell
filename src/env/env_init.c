@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/13 18:30:54 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:39:58 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	add_sys_env(t_env **env_list, char *env_str)
 	equal_sign = ft_strchr(env_str, '=');
 	if (equal_sign)
 	{
-		key = malloc(equal_sign - env_str);
+		key = malloc(equal_sign - env_str + 1);
 		value = ft_strdup(equal_sign + 1);
 		ft_strlcpy(key, env_str, equal_sign - env_str + 1);
 		key[equal_sign - env_str] = '\0';
@@ -78,12 +78,15 @@ t_env	*init_env(char **envp)
 
 void	free_env_list(t_env *env_list)
 {
+	t_env	*tmp;
+
 	while (env_list)
 	{
+		tmp = env_list->next;
 		free(env_list->key);
 		if (env_list->value)
 			free(env_list->value);
 		free(env_list);
-		env_list = env_list->next;
+		env_list = tmp;
 	}
 }
