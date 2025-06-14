@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/10 19:22:37 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/14 17:49:30 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ t_token	*create_token(t_token_type type, char *value)
 	token->value = value;
 	token->next = NULL;
 	return (token);
+}
+
+void	add_token(t_token **tokens, t_token *new_token)
+{
+	t_token	*temp;
+
+	temp = *tokens;
+	if (!*tokens)
+	{
+		*tokens = new_token;
+		return ;
+	}
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_token;
 }
