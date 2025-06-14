@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/13 22:08:33 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/14 10:41:35 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ BUILTIN_SRC  = \
                $(BUILTIN_DIR)/builtin_cd.c \
                $(BUILTIN_DIR)/builtin_pwd.c \
                $(BUILTIN_DIR)/builtin_export.c \
-               $(BUILTIN_DIR)/builtin_unset.c
+               $(BUILTIN_DIR)/builtin_unset.c \
+               $(BUILTIN_DIR)/builtin_exit.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c
 
