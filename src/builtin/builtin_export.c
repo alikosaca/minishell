@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/13 18:51:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:31:46 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	builtin_export(t_env **env_list, char **args)
 		if (is_valid_identifier(args[i]))
 			add_sys_env(env_list, args[i]);
 		else
-			return (error("export", args[i], ERR_NOT_A_VALID_IDENTIFIER));
+			return (error("export", args[i], ERR_NOT_A_VALID_IDENTIFIER, 1));
 		i++;
 	}
 	return (0);
