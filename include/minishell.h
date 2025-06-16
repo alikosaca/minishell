@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 19:51:36 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:04:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@
 # include "env.h"
 # include "builtin.h"
 # include "lexer.h"
+# include "signal.h"
 
 #endif

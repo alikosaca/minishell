@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/14 10:41:35 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/16 14:42:55 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ PARSER_DIR   = $(SRC_DIR)/parser
 EXECUTOR_DIR = $(SRC_DIR)/executor
 ENV_DIR      = $(SRC_DIR)/env
 BUILTIN_DIR  = $(SRC_DIR)/builtin
+SIGNAL_DIR   = $(SRC_DIR)/signal
 UTILS_DIR    = $(SRC_DIR)/utils
 
 LEXER_SRC    = \
@@ -50,6 +51,8 @@ BUILTIN_SRC  = \
                $(BUILTIN_DIR)/builtin_export.c \
                $(BUILTIN_DIR)/builtin_unset.c \
                $(BUILTIN_DIR)/builtin_exit.c
+SIGNAL_SRC   = \
+               $(SIGNAL_DIR)/signal.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c
 
@@ -59,13 +62,14 @@ PARSER_OBJ   = $(PARSER_SRC:.c=.o)
 EXECUTOR_OBJ = $(EXECUTOR_SRC:.c=.o)
 ENV_OBJ	     = $(ENV_SRC:.c=.o)
 BUILTIN_OBJ  = $(BUILTIN_SRC:.c=.o)
+SIGNAL_OBJ   = $(SIGNAL_SRC:.c=.o)
 UTILS_OBJ    = $(UTILS_SRC:.c=.o)
 
 SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
-               $(ENV_SRC) $(BUILTIN_SRC) $(UTILS_SRC)
+               $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)
 # ----------------------------------------------------------------------- #
 OBJS         = $(MAIN_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXECUTOR_OBJ) \
-               $(ENV_OBJ) $(BUILTIN_OBJ) $(UTILS_OBJ)
+               $(ENV_OBJ) $(BUILTIN_OBJ) $(SIGNAL_OBJ) $(UTILS_OBJ)
 
 all: $(LIBFT) $(NAME)
 
