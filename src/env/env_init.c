@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/13 19:12:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:52:04 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,57 +40,60 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 	return (node);
 }
 
-void	add_sys_env(t_env **env_list, char *env_str)
+void	add_sys_env(t_env **envlist, char *envstr)
 {
-	char	*equal_sign;
 	char	*key;
+	char	*equal;
 	char	*value;
 
-	equal_sign = NULL;
 	key = NULL;
+	equal = NULL;
 	value = NULL;
 
-	equal_sign = ft_strchr(env_str, '=');
-	if (equal_sign)
+	equal = ft_strchr(envstr, '=');
+	if (equal)
 	{
-		key = malloc(equal_sign - env_str + 1);
-		value = ft_strdup(equal_sign + 1);
-		ft_strlcpy(key, env_str, equal_sign - env_str + 1);
-		key[equal_sign - env_str] = '\0';
-		add_env(env_list, key, value, true);
+		key = malloc(equal - envstr + 1);
+		value = ft_strdup(equal + 1);
+		ft_strlcpy(key, envstr, equal - envstr + 1);
+		key[equal - envstr] = '\0';
+		add_env(envlist, key, value, true);
 		free(key);
 		free(value);
 	}
 	else
 	{
-		key = env_str;
-		add_env(env_list, key, value, true);
+		key = envstr;
+		add_env(envlist, key, value, true);
 	}
 }
 
 t_env	*init_env(char **envp)
 {
-	t_env	*env_list;
 	int		i;
+	t_env	*envlist;
 
-	env_list = NULL;
-	i = -1;
-	while (envp[++i])
-		add_sys_env(&env_list, envp[i]);
-	return (env_list);
+	envlist = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		add_sys_env(&envlist, envp[i]);
+		i++;
+	}
+	return (envlist);
 }
 
-void	free_env_list(t_env *env_list)
+void	free_envlist(t_env *envlist)
 {
 	t_env	*tmp;
 
-	while (env_list)
+	while (envlist)
 	{
-		tmp = env_list->next;
-		free(env_list->key);
-		if (env_list->value)
-			free(env_list->value);
-		free(env_list);
-		env_list = tmp;
+		tmp = envlist->next;
+		free(envlist->key);
+		if (envlist->value)
+			free(envlist->value);
+		free(envlist);
+		envlist = tmp;
 	}
 }

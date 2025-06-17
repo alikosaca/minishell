@@ -6,66 +6,66 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 13:16:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:35:06 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	count_exported_env(t_env *env_list)
+int	count_exported_env(t_env *envlist)
 {
 	int		count;
-	t_env	*curr;
+	t_env	*tmp;
 
 	count = 0;
-	curr = env_list;
-	while (curr)
+	tmp = envlist;
+	while (tmp)
 	{
-		if (curr->exported && curr->value)
+		if (tmp->exported && tmp->value)
 			count++;
-		curr = curr->next;
+		tmp = tmp->next;
 	}
 	return (count);
 }
 
-char	*create_env_string(char *key, char *value)
+char	*create_envstr(char *key, char *value)
 {
 	char	*tmp;
-	char	*result;
+	char	*ret;
 
 	tmp = ft_strjoin(key, "=");
 	if (!tmp)
 		return (NULL);
-	result = ft_strjoin(tmp, value);
+	ret = ft_strjoin(tmp, value);
 	free(tmp);
-	return (result);
+	return (ret);
 }
 
-char	**env_to_arr(t_env *env_list)
+char	**env_to_arr(t_env *envlist)
 {
-	char	**env_arr;
-	int		count;
 	int		i;
-	t_env	*curr;
+	int		count;
+	char	**env_arr;
+	t_env	*tmp;
 
-	count = count_exported_env(env_list);
+	count = count_exported_env(envlist);
 	env_arr = ft_calloc(count + 1, sizeof(char *));
 	if (!env_arr)
 		return (NULL);
 	i = -1;
-	curr = env_list;
-	while (curr && ++i < count)
+	tmp = envlist;
+	while (tmp && ++i < count)
 	{
-		if (curr->exported && curr->value)
+		if (tmp->exported && tmp->value)
 		{
-			env_arr[i] = create_env_string(curr->key, curr->value);
+			env_arr[i] = create_envstr(tmp->key, tmp->value);
 			if (!env_arr[i])
 			{
 				free_env_arr(env_arr);
 				return (NULL);
 			}
 		}
-		curr = curr->next;
+		tmp = tmp->next;
 	}
 	return (env_arr);
 }

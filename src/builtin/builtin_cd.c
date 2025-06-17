@@ -6,17 +6,17 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:15:49 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/16 14:30:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:46:39 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	find_home_dir(t_env *env_list)
+static int	find_home_dir(t_env *envlist)
 {
 	char	*home;
 
-	home = get_env_value(env_list, "HOME");
+	home = get_env_value(envlist, "HOME");
 	if (!home)
 		return (error("cd", NULL, ERR_HOME_NOT_SET, 1));
 	if (chdir(home) == -1)
@@ -31,10 +31,10 @@ static int	find_path(char *path)
 	return (0);
 }
 
-int	builtin_cd(t_env *env_list, char **args)
+int	builtin_cd(t_env *envlist, char **args)
 {
 	if (!args[1])
-		return (find_home_dir(env_list));
+		return (find_home_dir(envlist));
 	else if (args[1] && args[2])
 		return (error("cd", NULL, ERR_TOO_MANY_ARGS, 1));
 	else
