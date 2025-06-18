@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 03:43:12 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 06:32:52 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LEXER_H
 
 # include <stdlib.h>
+
+# define ERR_SYNTAX "syntax error near unexpected token 'newline'"
 
 typedef enum e_token_type
 {
@@ -25,7 +27,7 @@ typedef enum e_token_type
 	T_HEREDOC,			// <<
 	T_SINGLE_QUOTE,		// 'text'
 	T_DOUBLE_QUOTE,		// "text"
-	T_ENV_VAR,			// $HOME, $USER
+	T_DOLLAR,			// $HOME, $USER
 	T_EOF,				// input sonu
 	T_ERROR,			// hatalı token
 }			t_token_type;
@@ -37,31 +39,16 @@ typedef struct s_token
 	struct s_token	*next;	// sonraki token
 }				t_token;
 
-// Boşluk var mı kontrol et varsa is_whitespace ile boşlukları atla
-int		skip_whitespace(char **input);
+int	is_whitespace(char c);
+int	skip_whitespace(char **input);
 
-//Boşlukları atla
-int		is_whitespace(char c);
-
-// Özel karakterleri kontrol et
-int		is_special_char(char c);
-
-// Boşlukları atla
-
+void	error_lexer(t_token **tokens);
+void	handle_word(t_token **tokens, char **input);
 void	add_token(t_token **tokens, t_token *new_token);
-void	free_tokens(t_token *tokens);
+void	add_op(t_token_type type, t_token **tokens, char **input, char *val);
+void	handle_string_literal(t_token_type type, t_token **tokens, char **input, char *val);
 
-char	*extract_word(char **input);
-char	*extract_quoted_string(char **input, char quote);
-char	*extract_env_var(char **input);
-
-t_token	*process_redirect(char **input);
-t_token	*create_token(t_token_type type, char *value);
-
-
-t_token		*lexer(char *input);
-t_token		*create_token(t_token_type type, char *value);
-void		add_token(t_token **tokens, t_token *new_token);
-void		free_tokens(t_token *tokens);
+t_token	*lexer(char *input);
+t_token	*create_token(t_token_type type, t_token **tokens, char *value);
 
 #endif

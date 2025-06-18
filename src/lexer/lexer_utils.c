@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 03:17:37 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 06:32:18 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	skip_whitespace(char **input)
 {
 	while (**input && is_whitespace(**input))
 		(*input)++;
-	if (*input)
+	if (**input)
 		return (1);
 	else
 		return (0);
 }
 
-t_token	*create_token(t_token_type type, char *value)
+t_token	*create_token(t_token_type type, t_token **tokens, char *value)
 {
 	t_token *token;
 
@@ -36,7 +36,7 @@ t_token	*create_token(t_token_type type, char *value)
 	{
 		if (value)
 			free(value);
-		return (1);
+		error_lexer(tokens);
 	}
 	token->type = type;
 	token->value = value;
@@ -57,4 +57,21 @@ void	add_token(t_token **tokens, t_token *new_token)
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new_token;
+}
+
+void	error_lexer(t_token **tokens)
+{
+	t_token *tmp;
+
+	if (!tokens || !*tokens)
+		exit(error(NULL, NULL, ERR_SYNTAX, 1));
+	while (*tokens)
+	{
+		tmp = (*tokens)->next;
+		if ((*tokens)->value)
+			free((*tokens)->value);
+		free(*tokens);
+		*tokens = tmp;
+	}
+	exit(error(NULL, NULL, ERR_SYNTAX, 1));
 }

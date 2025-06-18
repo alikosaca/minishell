@@ -3,23 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 03:17:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 06:31:20 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-void	handle_operator(t_token_type type, t_token **tokens, char **input, char *val)
+void	handle_word(t_token **tokens, char **input)
 {
-	t_token	*token;
+	const char	*start = *input;
+	char		*word;
+	int			len;
 
-	token = create_token(T_PIPE, ft_strdup(val));
-	add_token(tokens, token);
-	if (type == T_PIPE || type == T_REDIRECT_IN || type == T_REDIRECT_OUT)
-		*input++;
+	len = 0;
+	while (**input && **input != ' ' && **input != '\t' && \
+		**input != '\n' && **input != '\r' && \
+		**input != '|' && **input != '<' && \
+		**input != '>' && **input != '\'' && \
+		**input != '"' && **input != '$')
+	{
+		(*input)++;
+		len++;
+	}
+	if (len == 0)
+		return ;
+	word = malloc(len + 1);
+	if (!word)
+		error_lexer(tokens);
+	ft_memcpy(word, start, len);
+	word[len] = '\0';
+	add_token(tokens, create_token(T_WORD, tokens, word));
+}
+
+void	handle_string_literal(t_token_type type, t_token **tokens, char **input, char *val)
+{
+	const char	*start = ++(*input);
+	char		*str;
+
+	while (**input && **input != *val)
+		(*input)++;
+	if (**input != *val)
+		error_lexer(tokens);
+	str = malloc(*input - start + 1);
+	if (!str)
+		error_lexer(tokens);
+	ft_memcpy(str, start, *input - start);
+	str[*input - start] = '\0';
+	add_token(tokens, create_token(type, tokens, ft_strdup(val)));
+	add_token(tokens, create_token(T_WORD, tokens, str));
+	add_token(tokens, create_token(type, tokens, ft_strdup(val)));
+	(*input)++;
+}
+
+void	add_op(t_token_type type, t_token **tokens, char **input, char *val)
+{
+	add_token(tokens, create_token(type, tokens, ft_strdup(val)));
+	if (type == T_PIPE || type == T_REDIRECT_IN || \
+		type == T_REDIRECT_OUT || type == T_DOLLAR)
+		(*input)++;
 	else if (type == T_HEREDOC || type == T_REDIRECT_APPEND)
 		*input = *input + 2;
 }
@@ -31,35 +75,34 @@ static void	process_tokens(char *input, t_token **tokens)
 		if (!skip_whitespace(&input))
 			break ;
 		else if (*input == '<' && *(input + 1) == '<')
-				handle_operator(T_HEREDOC, tokens, &input, "<<");
+				add_op(T_HEREDOC, tokens, &input, "<<");
 		else if (*input == '<')
-				handle_operator(T_REDIRECT_IN, tokens, &input, "<");
+				add_op(T_REDIRECT_IN, tokens, &input, "<");
 		else if (*input == '>' && *(input + 1) == '>')
-				handle_operator(T_REDIRECT_APPEND, tokens, &input, ">>");
+				add_op(T_REDIRECT_APPEND, tokens, &input, ">>");
 		else if (*input == '>')
-				handle_operator(T_REDIRECT_OUT, tokens, &input, ">");
+				add_op(T_REDIRECT_OUT, tokens, &input, ">");
 		else if (*input == '|')
-			handle_operator(T_PIPE, tokens, &input, "|");
-		// else if (*input == '\'')
-		// 	handle_single_quote(tokens, &input);
-		// else if (*input == '"')
-		// 	handle_double_quote(tokens, &input);
-		// else if (*input == '$')
-		// 	handle_env_var(tokens, &input);
-		// else
-		// 	handle_word(tokens, &input);
+			add_op(T_PIPE, tokens, &input, "|");
+		else if (*input == '\'')
+			handle_string_literal(T_SINGLE_QUOTE, tokens, &input, "\'");
+		else if (*input == '"')
+			handle_string_literal(T_DOUBLE_QUOTE, tokens, &input, "\"");
+		else if (*input == '$')
+			add_op(T_DOLLAR, tokens, &input, "$");
+		else
+			handle_word(tokens, &input);
 	}
 }
+
 t_token	*lexer(char *input)
 {
 	t_token	*tokens;
-	t_token	*new_token;
-	char	*value;
 
 	if (!input)
 		return (NULL);
 	tokens = NULL;
 	process_tokens(input, &tokens);
-	add_token(&tokens, create_token(T_EOF, NULL));
+	add_token(&tokens, create_token(T_EOF, &tokens, NULL));
 	return (tokens);
 }
