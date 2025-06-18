@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 06:32:18 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:21:22 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	error_lexer(t_token **tokens)
 	t_token *tmp;
 
 	if (!tokens || !*tokens)
-		exit(error(NULL, NULL, ERR_SYNTAX, 1));
+		exit(EXIT_FAILURE);
 	while (*tokens)
 	{
 		tmp = (*tokens)->next;
@@ -73,5 +73,5 @@ void	error_lexer(t_token **tokens)
 		free(*tokens);
 		*tokens = tmp;
 	}
-	exit(error(NULL, NULL, ERR_SYNTAX, 1));
+	exit(error_syntax(ERR_SYNTAX, "newline", 2));
 }

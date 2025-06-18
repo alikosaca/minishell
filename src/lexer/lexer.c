@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 06:31:20 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:19:39 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void	handle_word(t_token **tokens, char **input)
 	int			len;
 
 	len = 0;
-	while (**input && **input != ' ' && **input != '\t' && \
-		**input != '\n' && **input != '\r' && \
-		**input != '|' && **input != '<' && \
-		**input != '>' && **input != '\'' && \
-		**input != '"' && **input != '$')
+	while (**input && **input != ' '
+		&& **input != '\t' && **input != '\n'
+		&& **input != '\r' && **input != '|'
+		&& **input != '<' && **input != '>'
+		&& **input != '\'' && **input != '"'
+		&& **input != '$' && **input != '&'
+		&& **input != '(' && **input != ')')
 	{
 		(*input)++;
 		len++;
@@ -38,7 +40,8 @@ void	handle_word(t_token **tokens, char **input)
 	add_token(tokens, create_token(T_WORD, tokens, word));
 }
 
-void	handle_string_literal(t_token_type type, t_token **tokens, char **input, char *val)
+void	handle_string_literal(t_token_type type, t_token **tokens,
+							char **input, char *val)
 {
 	const char	*start = ++(*input);
 	char		*str;
@@ -75,14 +78,14 @@ static void	process_tokens(char *input, t_token **tokens)
 		if (!skip_whitespace(&input))
 			break ;
 		else if (*input == '<' && *(input + 1) == '<')
-				add_op(T_HEREDOC, tokens, &input, "<<");
+			add_op(T_HEREDOC, tokens, &input, "<<");
 		else if (*input == '<')
-				add_op(T_REDIRECT_IN, tokens, &input, "<");
+			add_op(T_REDIRECT_IN, tokens, &input, "<");
 		else if (*input == '>' && *(input + 1) == '>')
-				add_op(T_REDIRECT_APPEND, tokens, &input, ">>");
+			add_op(T_REDIRECT_APPEND, tokens, &input, ">>");
 		else if (*input == '>')
-				add_op(T_REDIRECT_OUT, tokens, &input, ">");
-		else if (*input == '|')
+			add_op(T_REDIRECT_OUT, tokens, &input, ">");
+		else if (*input == '|' && *(input + 1) == '|')
 			add_op(T_PIPE, tokens, &input, "|");
 		else if (*input == '\'')
 			handle_string_literal(T_SINGLE_QUOTE, tokens, &input, "\'");
