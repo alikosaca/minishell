@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:03:04 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:29:00 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 07:56:14 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 int	error(const char *cmd, const char *target, const char *errmsg, int retval)
 {
 	if (target)
-		printf("bash: %s: %s: %s\n", cmd, target, errmsg);
+		printf(BASH_TAG "%s: %s: %s\n", cmd, target, errmsg);
 	else if (cmd)
-		printf("bash: %s: %s\n", cmd, errmsg);
+		printf(BASH_TAG "%s: %s\n", cmd, errmsg);
 	else
-		printf("bash: %s\n", errmsg);
+		printf(BASH_TAG "%s\n", errmsg);
+	return (retval);
+}
+
+int	error_syntax(const char *errmsg, const char *target, int retval)
+{
+	if (target)
+		printf(BASH_TAG "%s `%s'\n", errmsg, target);
 	return (retval);
 }
