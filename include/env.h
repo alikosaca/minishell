@@ -6,12 +6,17 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/09 13:20:15 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:09:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "../../libft/libft.h"
 
 typedef struct s_env
 {

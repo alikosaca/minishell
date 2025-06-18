@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/14 20:39:39 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/18 03:43:12 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+# include <stdlib.h>
 
 typedef enum e_token_type
 {

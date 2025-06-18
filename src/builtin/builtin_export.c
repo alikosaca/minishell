@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 02:50:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:11:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/builtin.h"
 
 static int	print_export_list(t_env *envlist)
 {

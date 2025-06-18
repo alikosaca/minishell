@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 02:35:06 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:05:38 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/env.h"
 
 int	count_exported_env(t_env *envlist)
 {

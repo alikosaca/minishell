@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 02:53:07 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:05:49 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/env.h"
 
 void	add_env_to_end(t_env **envlist, t_env *node)
 {

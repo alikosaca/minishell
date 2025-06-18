@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:03:04 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/14 10:36:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:29:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/utils.h"
 
 int	error(const char *cmd, const char *target, const char *errmsg, int retval)
 {

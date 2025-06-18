@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:29:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/14 16:20:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/18 03:11:21 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/builtin.h"
 
 int	builtin_exit(char **args)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/14 20:12:38 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/18 03:17:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 void	handle_operator(t_token_type type, t_token **tokens, char **input, char *val)
 {
