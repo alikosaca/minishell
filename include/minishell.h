@@ -6,14 +6,15 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 07:03:26 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:43:35 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <aio.h> // for pid_t
+#include <readline/readline.h>
+#include <readline/history.h>
 
 # include "env.h"
 # include "builtin.h"
@@ -21,6 +22,9 @@
 # include "utils.h"
 # include "lexer.h"
 # include "parser.h"
+# include "executor.h"
+
+# define PROMPT "minishell$ "
 
 typedef struct s_shell
 {
@@ -40,5 +44,7 @@ typedef struct s_shell
 	int			stdout_backup;
 	int			syntax_error;
 }	t_shell;
+
+void	init_shell(t_shell *shell, char **envp);
 
 #endif

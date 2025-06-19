@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
+#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/18 08:14:07 by akosaca          ###   ########.fr        #
+#    Updated: 2025/06/19 16:53:57 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ LIBFT_DIR    = libft
 LIBFT        = $(LIBFT_DIR)/libft.a
 
 
-MAIN_SRC     = $(SRC_DIR)/main.c
 LEXER_DIR    = $(SRC_DIR)/lexer
 PARSER_DIR   = $(SRC_DIR)/parser
 EXECUTOR_DIR = $(SRC_DIR)/executor
@@ -33,6 +32,8 @@ BUILTIN_DIR  = $(SRC_DIR)/builtin
 SIGNAL_DIR   = $(SRC_DIR)/signal
 UTILS_DIR    = $(SRC_DIR)/utils
 
+MAIN_SRC     = $(SRC_DIR)/main.c \
+               $(SRC_DIR)/init.c
 LEXER_SRC    = \
 				$(LEXER_DIR)/lexer.c \
 				$(LEXER_DIR)/lexer_utils.c
