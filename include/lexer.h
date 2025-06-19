@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 07:57:01 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:46:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LEXER_H
 
 # include <stdlib.h>
+# include "utils.h"
+# include "../libft/libft.h"
 
 # define ERR_SYNTAX "syntax error near unexpected token"
 
