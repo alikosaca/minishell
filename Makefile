@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/19 16:53:57 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/19 17:01:19 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SIGNAL_DIR   = $(SRC_DIR)/signal
 UTILS_DIR    = $(SRC_DIR)/utils
 
 MAIN_SRC     = $(SRC_DIR)/main.c \
-               $(SRC_DIR)/init.c
+               $(SRC_DIR)/init.c \
+               $(SRC_DIR)/cleanup.c
 LEXER_SRC    = \
 				$(LEXER_DIR)/lexer.c \
 				$(LEXER_DIR)/lexer_utils.c

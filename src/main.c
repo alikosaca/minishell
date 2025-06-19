@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/19 16:43:22 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:00:39 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 
 	init_shell(shell, envp);
 	loop(shell);
+	cleanup(shell);
 	rl_clear_history();
 	return (shell->exit_status);
 }
