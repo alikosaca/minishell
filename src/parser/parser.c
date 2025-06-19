@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 08:22:27 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/19 16:04:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_command	parser(t_token *tokens)
 {
-	
+	(void)tokens;	
 }

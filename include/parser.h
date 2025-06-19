@@ -6,12 +6,14 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 02:26:31 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:04:06 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include "lexer.h"
 
 typedef enum e_redirect_type
 {
