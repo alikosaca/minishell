@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:05:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:46:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 		node->value = ft_strdup(value);
 		if (!node->value)
 		{
-			free(node);
 			free(node->key);
+			free(node);
 			return (NULL);
 		}
 	}
