@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/19 11:46:00 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:10:46 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_token
 }				t_token;
 
 int	is_whitespace(char c);
+int	is_special_char(char *i);
 int	skip_whitespace(char **input);
 
 void	error_lexer(t_token **tokens);
@@ -49,6 +50,7 @@ void	handle_word(t_token **tokens, char **input);
 void	add_token(t_token **tokens, t_token *new_token);
 void	add_op(t_token_type type, t_token **tokens, char **input, char *val);
 void	handle_string_literal(t_token_type type, t_token **tokens, char **input, char *val);
+void	sntax_error_check(t_token **tokens, char **input);
 
 t_token	*lexer(char *input);
 t_token	*create_token(t_token_type type, t_token **tokens, char *value);

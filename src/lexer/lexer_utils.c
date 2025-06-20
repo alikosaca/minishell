@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/18 08:21:22 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/20 18:18:31 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,33 @@ void	error_lexer(t_token **tokens)
 		*tokens = tmp;
 	}
 	exit(error_syntax(ERR_SYNTAX, "newline", 2));
+}
+
+int	is_special_char(char *i)
+{
+	return (*i == ' ' || *i == '\t' || *i == '\n' || *i == '\r'
+		|| (*i == '|' && *(i+1) == '|') || *i == '<' || *i == '>'
+		|| *i == '\'' || *i == '"' || *i == '$'
+		|| *i == '&' || *i == '(' || *i == ')' || *i == '\0');
+}
+//!
+void	sntax_error_check(t_token **tokens, char **input)
+{
+	char *error_msg;
+
+	if (**input == '&')
+		error_msg = "&";
+	else if (**input == ';')
+		error_msg = ";";
+	else if (**input == '(')
+		error_msg = "(";
+	else if (**input == ')')
+		error_msg = ")";
+	else if (**input == '|')
+		error_msg = "|";
+	else
+		return ;
+
+	add_token(tokens, create_token(T_ERROR, tokens, error_msg));
+	(*input)++;
 }
