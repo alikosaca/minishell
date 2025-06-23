@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/19 17:00:39 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:32:54 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void	process_input(t_shell *shell)
 {
-	(void)shell;	
+	shell->tokens = lexer(shell->input);
+	if (!shell->tokens)
+		return ;
+	return ;
 }
 
 static void	loop(t_shell *shell)
@@ -32,6 +35,7 @@ static void	loop(t_shell *shell)
 			add_history(shell->input);
 		process_input(shell);
 		free(shell->input);
+		shell->input = NULL;
 	}
 }
 
