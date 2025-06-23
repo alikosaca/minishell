@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/23 20:46:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:08:26 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*handle_dollar(char **input)
 	(*input)++;
 	start = (*input);
 	len = 0;
-	while ((**input) && (ft_isalnum(**input) || (**input) == '_'))
+	while (**input && (ft_isalnum(**input) || **input == '_'))
 	{
 		(*input)++;
 		len++;
@@ -84,9 +84,9 @@ char	*handle_word(char **input)
 	char	*start;
 	char	*result;
 
-	start = (*input);
+	start = *input;
 	len = 0;
-	while ((**input) && !is_word_delimiter(**input))
+	while (**input && !is_word_delimiter(**input))
 	{
 		(*input)++;
 		len++;

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/23 20:46:15 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:04:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	add_token(t_token **tokens, t_token *new_token)
 
 	if (!tokens || !new_token)
 		return ;
-	if (!(*tokens))
+	if (!*tokens)
 	{
 		*tokens = new_token;
 		return ;
