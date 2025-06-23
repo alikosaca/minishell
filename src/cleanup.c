@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:29:43 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/19 16:37:56 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/23 20:39:06 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cleanup(t_shell *shell)
 	if (shell->envlist)
 		free_envlist(shell->envlist);
 	if (shell->tokens)
-		error_lexer(&shell->tokens);
+		free_tokenlist(shell->tokens);
 	// if (shell->commands)
 		// free_commands(...);
 	if (shell->pids)
