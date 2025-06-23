@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/19 17:01:19 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/23 20:50:29 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ MAIN_SRC     = $(SRC_DIR)/main.c \
                $(SRC_DIR)/cleanup.c
 LEXER_SRC    = \
 				$(LEXER_DIR)/lexer.c \
-				$(LEXER_DIR)/lexer_utils.c
+				$(LEXER_DIR)/lexer_utils.c \
+				$(LEXER_DIR)/token.c \
+				$(LEXER_DIR)/token_handlers.c \
+				$(LEXER_DIR)/token_process.c
 				
 PARSER_SRC   = \
             #    $(PARSER_DIR)/parser.c

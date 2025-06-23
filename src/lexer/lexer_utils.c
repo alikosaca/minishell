@@ -3,104 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/20 18:18:31 by akosaca          ###   ########.fr       */
+/*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/06/23 20:46:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-int	is_whitespace(char c)
+void	skip_whitespace(char **input)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
-}
-
-int	skip_whitespace(char **input)
-{
-	while (**input && is_whitespace(**input))
+	while ((**input) && ft_isspace((**input)))
 		(*input)++;
-	if (**input)
-		return (1);
-	else
-		return (0);
 }
 
-t_token	*create_token(t_token_type type, t_token **tokens, char *value)
+int	is_error_char(char c)
 {
-	t_token *token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-	{
-		if (value)
-			free(value);
-		error_lexer(tokens);
-	}
-	token->type = type;
-	token->value = value;
-	token->next = NULL;
-	return (token);
+	return (c == '&' || c == '\\' || c == ';' || c == '(' || c == ')');
 }
 
-void	add_token(t_token **tokens, t_token *new_token)
+int	check_error_sequence(char *input)
 {
-	t_token	*temp;
-
-	temp = *tokens;
-	if (!*tokens)
-	{
-		*tokens = new_token;
-		return ;
-	}
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new_token;
-}
-
-void	error_lexer(t_token **tokens)
-{
-	t_token *tmp;
-
-	if (!tokens || !*tokens)
-		exit(EXIT_FAILURE);
-	while (*tokens)
-	{
-		tmp = (*tokens)->next;
-		if ((*tokens)->value)
-			free((*tokens)->value);
-		free(*tokens);
-		*tokens = tmp;
-	}
-	exit(error_syntax(ERR_SYNTAX, "newline", 2));
-}
-
-int	is_special_char(char *i)
-{
-	return (*i == ' ' || *i == '\t' || *i == '\n' || *i == '\r'
-		|| (*i == '|' && *(i+1) == '|') || *i == '<' || *i == '>'
-		|| *i == '\'' || *i == '"' || *i == '$'
-		|| *i == '&' || *i == '(' || *i == ')' || *i == '\0');
-}
-//!
-void	sntax_error_check(t_token **tokens, char **input)
-{
-	char *error_msg;
-
-	if (**input == '&')
-		error_msg = "&";
-	else if (**input == ';')
-		error_msg = ";";
-	else if (**input == '(')
-		error_msg = "(";
-	else if (**input == ')')
-		error_msg = ")";
-	else if (**input == '|')
-		error_msg = "|";
-	else
-		return ;
-
-	add_token(tokens, create_token(T_ERROR, tokens, error_msg));
-	(*input)++;
+	if ((*input) == '|' && *(input + 1) == '|')
+		return (2);
+	if ((*input) == '&' && *(input + 1) == '&')
+		return (2);
+	return (0);
 }

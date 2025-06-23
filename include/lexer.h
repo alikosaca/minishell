@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/20 18:10:46 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:55:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,43 @@
 
 typedef enum e_token_type
 {
-	T_WORD,				//normal kelimeler: ls, cat, file.txt
-	T_PIPE,				// |
-	T_REDIRECT_IN,		// <
-	T_REDIRECT_OUT,		// >
-	T_REDIRECT_APPEND,	// >>
-	T_HEREDOC,			// <<
-	T_SINGLE_QUOTE,		// 'text'
-	T_DOUBLE_QUOTE,		// "text"
-	T_DOLLAR,			// $HOME, $USER
-	T_EOF,				// input sonu
-	T_ERROR,			// hatalı token
-}			t_token_type;
+	T_WORD,
+	T_SINGLE_QUOTE,
+	T_DOUBLE_QUOTE,
+	T_REDIRECT_IN,
+	T_REDIRECT_OUT,
+	T_REDIRECT_APPEND,
+	T_HEREDOC,
+	T_PIPE,
+	T_DOLLAR,
+	T_ERROR			
+}	t_token_type;
 
 typedef struct s_token
 {
-	t_token_type	type;	// token türü
-	char			*value;	// token değeri
-	struct s_token	*next;	// sonraki token
-}				t_token;
-
-int	is_whitespace(char c);
-int	is_special_char(char *i);
-int	skip_whitespace(char **input);
-
-void	error_lexer(t_token **tokens);
-void	handle_word(t_token **tokens, char **input);
-void	add_token(t_token **tokens, t_token *new_token);
-void	add_op(t_token_type type, t_token **tokens, char **input, char *val);
-void	handle_string_literal(t_token_type type, t_token **tokens, char **input, char *val);
-void	sntax_error_check(t_token **tokens, char **input);
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+}	t_token;
 
 t_token	*lexer(char *input);
-t_token	*create_token(t_token_type type, t_token **tokens, char *value);
+
+void	skip_whitespace(char **input);
+int		is_error_char(char c);
+int		check_error_sequence(char *input);
+
+t_token	*create_token(t_token_type type, char *value);
+void	add_token(t_token **tokens, t_token *new_token);
+void	free_tokenlist(t_token *tokens);
+
+char	*handle_quote(char **input);
+char	*handle_dollar(char **input);
+char	*handle_word(char **input);
+
+int		process_errors(t_token **tokens, char **input);
+int		process_redirection(t_token **tokens, char **input);
+int		process_operator(t_token **tokens, char **input);
+int		process_quote(t_token **tokens, char **input);
+int		process_dollar_or_word(t_token **tokens, char **input);
 
 #endif
