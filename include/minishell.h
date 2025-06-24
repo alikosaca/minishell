@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/19 17:00:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:22:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ typedef struct s_shell
 
 void	init_shell(t_shell *shell, char **envp);
 void	cleanup(t_shell *shell);
+int		syntax(t_token *tokens);
 
 #endif
