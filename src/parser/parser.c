@@ -3,16 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/19 16:04:22 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:43:55 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-t_command	parser(t_token *tokens)
+static void token_command(t_cmd **cmd, t_token *tokens)
 {
-	(void)tokens;	
+	t_token	*val;
+
+	val = tokens;
+	while (val)
+	{
+		if (val->type == T_WORD)
+			cmd_word(cmd, &tokens);
+		val = val->next;
+	}
+	
+}
+
+t_cmd	*parser(t_token *tokens)
+{
+	t_cmd	*cmd;
+
+	cmd = NULL;
+	token_command(&cmd, tokens);
+
+	return (cmd);
 }

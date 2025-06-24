@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/19 16:04:06 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:42:27 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
-typedef struct s_command
+typedef struct s_cmd
 {
 	char				**argv;       // execve için argüman listesi (with NULL terminated)
 	t_redirect			*redirects;   // redirection listesi (last arg: NULL)
 	struct s_command	*next;        // pipe varsa bir sonraki komuta
-}	t_command;
+}	t_cmd;
 
 #endif
+
+void	cmd_word(t_cmd **cmd, t_token *token);
+
