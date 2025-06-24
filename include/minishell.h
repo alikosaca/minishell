@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/24 17:22:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/25 00:54:14 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_shell
 	char		*input;
 	t_env		*envlist;
 	t_token		*tokens;
-	t_command	*commands;
+	t_cmd		*commands;
 	int			exit_status;
 	int			last_exit_code;
 	pid_t		*pids;
