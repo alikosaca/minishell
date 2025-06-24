@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/23 21:08:26 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/24 14:23:37 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	is_word_delimiter(char c)
 		|| c == '"'
 		|| c == '$'
 		|| c == '\0'
-		|| is_error_char(c)
+		|| check_e_sequence(&c)
 	);
 }
 

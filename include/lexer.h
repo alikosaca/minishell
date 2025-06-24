@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/23 20:55:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:12:55 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef struct s_token
 t_token	*lexer(char *input);
 
 void	skip_whitespace(char **input);
-int		is_error_char(char c);
-int		check_error_sequence(char *input);
+int		check_e_sequence(char *input);
 
 t_token	*create_token(t_token_type type, char *value);
 void	add_token(t_token **tokens, t_token *new_token);
