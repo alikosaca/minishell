@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/24 19:42:27 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/25 20:13:57 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_redirect
 {
 	t_redirect_type		type;         // redirection tipi
 	char				*file;        // hedef dosya adı
-	char				*limiter;     // heredoc limiter
+	char				*delimiter;     // heredoc delimiter
 	struct s_redirect	*next;
 }	t_redirect;
 
