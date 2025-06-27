@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:05:49 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 12:00:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	remove_env(t_env **envlist, char *key)
 	cur = *envlist;
 	while (cur)
 	{
-		if (ft_strncmp(cur->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strcmp(cur->key, key) == 0)
 		{
 			if (prev)
 				prev->next = cur->next;
@@ -85,7 +85,7 @@ t_env	*find_env(t_env *envlist, char *key)
 		return (NULL);
 	while (envlist)
 	{
-		if (ft_strncmp(envlist->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strcmp(envlist->key, key) == 0)
 			return (envlist);
 		envlist = envlist->next;
 	}
