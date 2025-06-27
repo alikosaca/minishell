@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/27 12:53:51 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/28 00:20:16 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ LEXER_SRC    = \
 				$(LEXER_DIR)/token_process.c \
 				$(LEXER_DIR)/syntax.c
 EXPAND_SRC   = \
-               $(EXPAND_DIR)/expansion.c
+               $(EXPAND_DIR)/expansion.c \
+               $(EXPAND_DIR)/expansion_utils.c
 PARSER_SRC   = \
             #    $(PARSER_DIR)/parser.c
 EXECUTOR_SRC = \

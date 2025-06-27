@@ -6,26 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 12:40:59 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/28 00:16:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/expansion.h"
-
-static char	*expand_dollar(t_shell *shell, char *key)
-{
-	char	*value;
-
-	if (!shell || !key)
-		return (NULL);
-	key++;
-	if (ft_strncmp(key, "?", 1) == 0)
-		return (ft_itoa(shell->last_exit_code));
-	value = get_env_value(shell->envlist, key);
-	if (!value)
-		return (ft_strdup(""));
-	return (ft_strdup(value));
-}
 
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
@@ -35,8 +20,8 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 		return ;
 	if (token->type == T_DOLLAR)
 		expanded = expand_dollar(shell, token->value);
-	// else if (token->type == T_DOUBLE_QUOTE)
-	// 	expanded = expand_dquote(shell, token->value);
+	else if (token->type == T_DOUBLE_QUOTE)
+		expanded = expand_dquote(shell, token->value);
 	if (expanded)
 		free(token->value);
 	token->value = expanded;
