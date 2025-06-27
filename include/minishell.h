@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/25 00:54:14 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:34:33 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,11 @@
 # include "signal.h"
 # include "utils.h"
 # include "lexer.h"
+# include "expansion.h"
 # include "parser.h"
 # include "executor.h"
 
 # define PROMPT "minishell$ "
-
-typedef struct s_shell
-{
-	char		*prompt;
-	char		*input;
-	t_env		*envlist;
-	t_token		*tokens;
-	t_cmd		*commands;
-	int			exit_status;
-	int			last_exit_code;
-	pid_t		*pids;
-	int			pid_count;
-	int			signal_received;
-	int			in_execution;
-	int			in_heredoc;
-	int			stdin_backup;
-	int			stdout_backup;
-	int			syntax_error;
-}	t_shell;
 
 void	init_shell(t_shell *shell, char **envp);
 void	cleanup(t_shell *shell);

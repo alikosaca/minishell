@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:16:18 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:37:13 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string.h>
 # include <errno.h>
 # include <linux/limits.h>
+# include "structs.h"
 # include "env.h"
 # include "utils.h"
 
