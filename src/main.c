@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/24 19:01:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 12:51:51 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	process_input(t_shell *shell)
 	shell->tokens = lexer(shell->input);
 	if (!shell->tokens)
 		return ;
-	if (syntax(shell->tokens))
+	shell->tokens = expansion(shell, shell->tokens);
+	if (!shell->tokens)
 		return ;
 	return ;
 }

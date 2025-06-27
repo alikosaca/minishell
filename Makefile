@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/24 17:24:33 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/06/27 12:53:51 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ LIBFT        = $(LIBFT_DIR)/libft.a
 
 
 LEXER_DIR    = $(SRC_DIR)/lexer
+EXPAND_DIR   = $(SRC_DIR)/expansion
 PARSER_DIR   = $(SRC_DIR)/parser
 EXECUTOR_DIR = $(SRC_DIR)/executor
 ENV_DIR      = $(SRC_DIR)/env
@@ -34,15 +35,16 @@ UTILS_DIR    = $(SRC_DIR)/utils
 
 MAIN_SRC     = $(SRC_DIR)/main.c \
                $(SRC_DIR)/init.c \
-               $(SRC_DIR)/cleanup.c \
-               $(SRC_DIR)/syntax.c
+               $(SRC_DIR)/cleanup.c
 LEXER_SRC    = \
 				$(LEXER_DIR)/lexer.c \
 				$(LEXER_DIR)/lexer_utils.c \
 				$(LEXER_DIR)/token.c \
 				$(LEXER_DIR)/token_handlers.c \
-				$(LEXER_DIR)/token_process.c
-				
+				$(LEXER_DIR)/token_process.c \
+				$(LEXER_DIR)/syntax.c
+EXPAND_SRC   = \
+               $(EXPAND_DIR)/expansion.c
 PARSER_SRC   = \
             #    $(PARSER_DIR)/parser.c
 EXECUTOR_SRC = \
@@ -66,6 +68,7 @@ UTILS_SRC    = \
 
 MAIN_OBJ     = $(MAIN_SRC:.c=.o)
 LEXER_OBJ    = $(LEXER_SRC:.c=.o)
+EXPAND_OBJ   = $(EXPAND_SRC:.c=.o)
 PARSER_OBJ   = $(PARSER_SRC:.c=.o)
 EXECUTOR_OBJ = $(EXECUTOR_SRC:.c=.o)
 ENV_OBJ	     = $(ENV_SRC:.c=.o)
@@ -73,10 +76,10 @@ BUILTIN_OBJ  = $(BUILTIN_SRC:.c=.o)
 SIGNAL_OBJ   = $(SIGNAL_SRC:.c=.o)
 UTILS_OBJ    = $(UTILS_SRC:.c=.o)
 
-SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
+SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
                $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)
 # ----------------------------------------------------------------------- #
-OBJS         = $(MAIN_OBJ) $(LEXER_OBJ) $(PARSER_OBJ) $(EXECUTOR_OBJ) \
+OBJS         = $(MAIN_OBJ) $(LEXER_OBJ) $(EXPAND_OBJ) $(PARSER_OBJ) $(EXECUTOR_OBJ) \
                $(ENV_OBJ) $(BUILTIN_OBJ) $(SIGNAL_OBJ) $(UTILS_OBJ)
 
 all: $(LIBFT) $(NAME)
