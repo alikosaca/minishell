@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/26 21:49:35 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 12:36:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,68 @@ char	*handle_quote(char **input)
 	return (result);
 }
 
+// char	*handle_dollar(char **input)
+// {
+// 	int		len;
+// 	char	*start;
+// 	char	*result;
+
+// 	(*input)++;
+// 	if (!(**input && (ft_isalpha(**input) || **input == '_' || **input == '?')))
+// 		return (NULL);
+// 	start = *input;
+// 	len = 1;
+// 	while (**input && (ft_isalnum(**input) || **input == '_'))
+// 	{
+// 		(*input)++;
+// 		len++;
+// 	}
+// 	result = malloc(len + 1);
+// 	if (!result)
+// 		return (NULL);
+// 	ft_memcpy(result, start, len);
+// 	result[len] = '\0';
+// 	return (result);
+// }
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_handlers.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Updated: 2025/06/27 13:00:00 by yaycicek         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 char	*handle_dollar(char **input)
 {
-	int		len;
-	char	*start;
-	char	*result;
+    int		len;
+    char	*start;
+    char	*result;
 
-	(*input)++;
-	if (!(**input && (ft_isalpha(**input) || **input == '_' || **input == '?')))
-		return (NULL);
-	start = *input;
-	len = 1;
-	while (**input && (ft_isalnum(**input) || **input == '_'))
-	{
+    start = *input;
+    len = 1;
+    (*input)++;
+    if (!(**input && (ft_isalpha(**input) || **input == '_' || **input == '?')))
+        return (NULL);
+    else
+    {
 		(*input)++;
 		len++;
-	}
-	result = malloc(len + 1);
-	if (!result)
-		return (NULL);
-	ft_memcpy(result, start, len);
-	result[len] = '\0';
-	return (result);
+        while (**input && (ft_isalnum(**input) || **input == '_'))
+        {
+            (*input)++;
+            len++;
+        }
+    }
+    result = malloc(len + 1);
+    if (!result)
+        return (NULL);
+    ft_memcpy(result, start, len);
+    result[len] = '\0';
+    return (result);
 }
 
 static int	is_word_delimiter(char c)

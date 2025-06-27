@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/23 21:05:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/27 12:52:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ t_token	*lexer(char *input)
 		return (NULL);
 	tokens = NULL;
 	process_tokens(input, &tokens);
+	if (syntax(tokens) == 2)
+		return (NULL);
 	return (tokens);
 }
