@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/28 00:18:49 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:18:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*expand_dollar(t_shell *shell, char *str)
 		return (NULL);
 	str++;
 	if (ft_strncmp(str, "?", 1) == 0)
-		return (ft_itoa(shell->last_exit_code));
+		return (ft_itoa(shell->exitcode));
 	value = get_env_value(shell->envlist, str);
 	if (!value)
 		return (ft_strdup(""));
@@ -49,7 +49,7 @@ static char	*get_var_value(t_shell *shell, char *str, int *i)
 	if (str[*i] == '?')
 	{
 		(*i)++;
-		return (ft_itoa(shell->last_exit_code));
+		return (ft_itoa(shell->exitcode));
 	}
 	key = ft_substr(str, *i, var_len(&str[*i]));
 	*i += ft_strlen(key);
