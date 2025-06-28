@@ -6,13 +6,41 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:29 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/24 19:46:06 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/06/28 14:09:36 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-void	cmd_word(t_cmd **cmd, t_token *token)
+int	is_redirect(t_token_type type)
 {
-	
+	if (type == T_REDIRECT_IN || type == T_REDIRECT_OUT
+		|| type == T_REDIRECT_APPEND || type == T_HEREDOC)
+		return (1);
+	else
+		return (0);
+}
+
+int	is_pipe(t_token_type type)
+{
+	if (type == T_PIPE)
+		return (1);
+	else
+		return (0);
+}
+
+t_redirect_type	redirect_type(t_token_type *type)
+{
+	t_redirect_type redirect_type;
+
+	if (*type == T_REDIRECT_IN)
+		redirect_type = REDIR_INPUT;
+	else if (*type == T_REDIRECT_OUT)
+		redirect_type = REDIR_OUTPUT;
+	else if (*type == T_REDIRECT_APPEND)
+		redirect_type = REDIR_APPEND;
+	else if (*type == T_HEREDOC)
+		redirect_type = REDIR_HEREDOC;
+
+	return (redirect_type);
 }
