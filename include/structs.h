@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 11:31:03 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/28 18:35:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_cmd
 {
 	char				**argv;       // execve için argüman listesi (with NULL terminated)
 	t_redirect			*redirects;   // redirection listesi (last arg: NULL)
-	struct s_command	*next;        // pipe varsa bir sonraki komuta
+	struct s_cmd		*next;        // pipe varsa bir sonraki komuta
 }	t_cmd;
 
 typedef struct s_shell
@@ -75,8 +75,8 @@ typedef struct s_shell
 	t_env		*envlist;
 	t_token		*tokens;
 	t_cmd		*commands;
-	int			exit_status;
-	int			last_exit_code;
+	int			exitstat;
+	int			exitcode;
 	pid_t		*pids;
 	int			pid_count;
 	int			signal_received;
