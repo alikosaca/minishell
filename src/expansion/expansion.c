@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/28 00:16:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/29 13:32:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 {
 	char	*expanded;
 
+	expanded = NULL;
 	if (!shell || !token)
 		return ;
 	if (token->type == T_DOLLAR)
@@ -38,6 +39,16 @@ static int	should_expand(t_token *token)
 	return (0);
 }
 
+static void	change_token_type(t_token *token)
+{
+	if (token->type == T_SINGLE_QUOTE)
+		token->type = T_WORD;
+	else if (token->type == T_DOUBLE_QUOTE)
+		token->type = T_WORD;
+	else if (token->type == T_DOLLAR)
+		token->type = T_WORD;
+}
+
 t_token	*expansion(t_shell *shell, t_token *tokens)
 {
 	t_token	*cur;
@@ -54,6 +65,7 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 		}
 		if (should_expand(cur))
 			handle_expansion(shell, cur);
+		change_token_type(cur);
 		cur = cur->next;
 	}
 	return (tokens);
