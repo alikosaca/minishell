@@ -6,11 +6,17 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/29 13:32:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:15:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/expansion.h"
+
+static void	adjust_heredoc_expansion(t_token **token)
+{
+	if ((*token)->type == T_SINGLE_QUOTE || (*token)->type == T_DOUBLE_QUOTE)
+		(*token)->type = T_WORD; 
+}
 
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
@@ -60,6 +66,7 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 	{
 		if (cur->type == T_HEREDOC && cur->next)
 		{
+			adjust_heredoc_expansion(&(cur->next));
 			cur = cur->next->next;
 			continue ;
 		}
