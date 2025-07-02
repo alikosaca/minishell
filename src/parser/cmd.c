@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/01 21:42:46 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:40:55 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,3 +84,17 @@ void	add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 		last_cmd = last_cmd->next;
 	last_cmd->next = new_cmd;
 }
+
+void	free_cmdlist(t_cmd *cmds)
+{
+	t_cmd	*tmp;
+
+	while (cmds)
+	{
+		tmp = cmds->next;
+		if (cmds->redirects)
+			free(cmds->redirects);
+		cmds = tmp;
+	}
+}
+
