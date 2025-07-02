@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 11:32:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:04:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char	*create_envstr(char *key, char *value);
 char	**env_to_arr(t_env *envlist);
 void	free_env_arr(char **env_arr);
 
-void	env(t_env *envlist);
+int		env(t_env *envlist, char **argv);
 
 #endif
