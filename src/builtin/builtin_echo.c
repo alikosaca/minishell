@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:20:14 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:11:18 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:46:43 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@ static bool	is_n_option(char *arg)
 	return (i > 1);
 }
 
-int	builtin_echo(char **args)
+int	builtin_echo(char **argv)
 {
 	int		i;
 	bool	newline;
 
-	if (!args || !args[0])
+	if (!argv || !argv[0])
 		return (1);
 	i = 1;
 	newline = true;
-	while (args[i] && is_n_option(args[i]))
+	while (argv[i] && is_n_option(argv[i]))
 	{
 		newline = false;
 		i++;
 	}
-	while (args[i])
+	while (argv[i])
 	{
-		printf("%s", args[i]);
-		if (args[i + 1])
+		printf("%s", argv[i]);
+		if (argv[i + 1])
 			printf(" ");
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:18:17 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@
 
 # define ERR_HOME_NOT_SET "HOME not set"
 # define ERR_TOO_MANY_ARGS "too many arguments"
-# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"
-# define ERR_NOT_A_VALID_IDENTIFIER "not a valid identifier"
+# define ERR_NOT_A_VALID_IDENT "not a valid identifier"
 # define ERR_NUM_ARG_REQ "numeric argument required"
 
-int	builtin_echo(char **args);
-int	builtin_cd(t_env *env_list, char **args);
-int	builtin_pwd(void);
-int	builtin_export(t_env **env_list, char **args);
-int builtin_unset(t_env **env_list, char **args);
-int	builtin_exit(char **args);
+int		builtin_echo(char **argv);
+int		builtin_cd(t_shell *shell, char **argv);
+int		builtin_pwd(t_shell *shell);
+int		builtin_export(t_shell *shell, char **argv);
+int		builtin_unset(t_shell *shell, char **argv);
+int		builtin_exit(t_shell *shell, char **argv);
 
 #endif

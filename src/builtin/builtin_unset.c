@@ -6,22 +6,22 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 21:58:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/18 03:11:31 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 17:42:15 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtin.h"
 
-int	builtin_unset(t_env **envlist, char **args)
+int	builtin_unset(t_shell *shell, char **argv)
 {
 	int	i;
 
-	if (!args[1])
+	if (!argv[1])
 		return (0);
 	i = 1;
-	while (args[i])
+	while (argv[i])
 	{
-		remove_env(envlist, args[i]);
+		remove_env(&(shell->envlist), argv[i]);
 		i++;
 	}
 	return (0);
