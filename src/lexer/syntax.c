@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 11:36:01 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:05:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,35 @@ static int	is_word_like(t_token_type type)
 		|| type == T_DOLLAR);
 }
 
-int	syntax(t_token *token)
+int	syntax(t_shell *shell, t_token *token)
 {
 	if (token && !token->next)
 		if (token->type == T_PIPE || is_redir(token->type))
-			return (error_syntax(ERR_SYNTAX, token->value, 2));
+			return(lx_err(shell, ERR_SYNTAX, token->value)); 
+			// return (error_syntax(ERR_SYNTAX, token->value, 2));
 	if (token && token->next && !token->next->next)
 	{
 		if (token->type == T_PIPE)
-			return (error_syntax(ERR_SYNTAX, token->value, 2));
+			return (lx_err(shell, ERR_SYNTAX, token->value));
+			// return (error_syntax(ERR_SYNTAX, token->value, 2));
 		else if (token->next->type == T_PIPE)
-			return (error_syntax(ERR_SYNTAX, token->next->value, 2));
+			return (lx_err(shell, ERR_SYNTAX, token->next->value));
+			// return (error_syntax(ERR_SYNTAX, token->next->value, 2));
 	}
 	while (token)
 	{
 		if (token->type == T_ERROR)
-			return (error_syntax(ERR_SYNTAX, token->value, 2));
+			return (lx_err(shell, ERR_SYNTAX, token->value));
+			// return (error_syntax(ERR_SYNTAX, token->value, 2));
 		if (is_redir(token->type))
 		{
 			if (!token->next || !is_word_like(token->next->type))
-				return (error_syntax(ERR_SYNTAX, token->value, 2));
+				return (lx_err(shell, ERR_SYNTAX, token->value));
+				// return (error_syntax(ERR_SYNTAX, token->value, 2));
 		}
 		if (!token->next && (token->type == T_PIPE || is_redir(token->type)))
-			return (error_syntax(ERR_SYNTAX, token->value, 2));
+			return (lx_err(shell, ERR_SYNTAX, token->value));
+			// return (error_syntax(ERR_SYNTAX, token->value, 2));
 		token = token->next;
 	}
 	return (0);

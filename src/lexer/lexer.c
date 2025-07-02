@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/27 12:52:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:05:57 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	process_tokens(char *input, t_token **tokens)
 	}
 }
 
-t_token	*lexer(char *input)
+t_token	*lexer(t_shell *shell, char *input)
 {
 	t_token	*tokens;
 
@@ -40,7 +40,7 @@ t_token	*lexer(char *input)
 		return (NULL);
 	tokens = NULL;
 	process_tokens(input, &tokens);
-	if (syntax(tokens) == 2)
+	if (syntax(shell, tokens) == 2)
 		return (NULL);
 	return (tokens);
 }

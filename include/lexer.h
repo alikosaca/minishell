@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/27 11:34:15 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:07:14 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <stdlib.h>
 # include "structs.h"
 # include "utils.h"
+# include "structs.h"
 # include "../libft/libft.h"
 
 # define ERR_SYNTAX "syntax error near unexpected token"
 
-t_token	*lexer(char *input);
+t_token	*lexer(t_shell *shell, char *input);
 
 void	skip_whitespace(char **input);
 int		check_e_sequence(char *input);
@@ -39,6 +40,6 @@ int		process_operator(t_token **tokens, char **input);
 int		process_quote(t_token **tokens, char **input);
 int		process_dollar_or_word(t_token **tokens, char **input);
 
-int		syntax(t_token *token);
+int		syntax(t_shell *shell, t_token *token);
 
 #endif
