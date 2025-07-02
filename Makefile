@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/06/28 00:20:16 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/02 18:23:36 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ EXPAND_SRC   = \
 PARSER_SRC   = \
             #    $(PARSER_DIR)/parser.c
 EXECUTOR_SRC = \
-            #    $(EXECUTOR_DIR)/executor.c
+               $(EXECUTOR_DIR)/executor.c \
+               $(EXECUTOR_DIR)/execute_builtin.c
 ENV_SRC	     = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \

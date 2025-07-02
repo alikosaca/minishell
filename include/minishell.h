@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 11:34:33 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:14:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@
 
 void	init_shell(t_shell *shell, char **envp);
 void	cleanup(t_shell *shell);
-int		syntax(t_token *tokens);
 
 #endif

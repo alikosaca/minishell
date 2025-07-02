@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/28 19:20:25 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:35:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	executor(t_shell *shell, t_cmd *cmd)
 	while (cmd)
 	{
 		if (is_builtin(cmd->argv[0]))
-			shell->exitcode = exec_builtin();
+			shell->exitcode = exec_builtin(shell, cmd->argv);
 		else
 			shell->exitcode = 127;
 		cmd = cmd->next;
