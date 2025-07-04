@@ -6,67 +6,104 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/02 19:40:55 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/04 19:40:59 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	argv_len(t_token *token)
+int	argv_len(t_token **token)
 {
-	int	i;
+	t_token	**tmp;
+	int		i;
 
+	tmp = token;
 	i = 0;
 	if (!token)
 		return (0);
-	while (token->type == T_WORD)
+	while ((*tmp)->type == T_WORD)
 	{
 		i++;
-		token = token->next;
+		*tmp = (*tmp)->next;
 	}
 	return (i);
 }
 
-t_cmd	*create_cmd(t_token *token, t_redirect *redirect)
+char	**add_to_argv(t_cmd *cmd, t_token **tokens)
 {
-	t_cmd	*new_cmd;
-	char	**argv;
-	int		len;
+	int	i;
+
+	i = 0;
+	cmd->argv = malloc(sizeof(char *) * (argv_len(tokens) + 1));
+	if (!cmd->argv)
+		return (NULL);
+	while ((*tokens)->type == T_WORD)
+	{
+		cmd->argv[i++] = (*tokens)->value;
+		*tokens = (*tokens)->next;
+	}
+	cmd->argv[i] = NULL;
+
+	return (cmd->argv);
+}
+
+t_cmd	*init_cmd(t_cmd **cmd)
+{
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	(*cmd)->next = NULL;
+	return (cmd);
+}
+
+
+void	*add_to_redirect(t_cmd *cmd, t_token **tokens)
+{
+	t_redirect	*first_redirect;
+
+	first_redirect = cmd->redirects;
+	while ((*tokens)->next->type == T_WORD && is_redirect((*tokens)->value))
+	{
+		init_redirect(&cmd->redirects);
+		cmd->redirects = redirect_type((*tokens)->type);
+		*tokens = (*tokens)->next;
+		if ((*tokens)->type == T_WORD && cmd->redirects->type == REDIR_HEREDOC)
+			cmd->redirects->delimiter = (*tokens)->value;
+		else if ((*tokens)->type == T_WORD)
+			cmd->redirects->file = (*tokens)->value;
+		*tokens = (*tokens)->next;
+		cmd->redirects = cmd->redirects->next;
+	}
+
+}
+t_redirect	*init_redirect(t_redirect **redirect)
+{
+	redirect = malloc(sizeof(t_redirect));
+	if (!redirect)
+		return (NULL);
+	(*redirect)->next = NULL;
+	return (NULL);
+}
+
+t_cmd	*create_cmd(t_token **token, t_redirect *redirect)
+{
+	t_cmd	*new_cmd;	//oluşturulucak yeni cmd malloc'a gerek var
 	int		i;
 
 	i = 0;
-	len = argv_len(token);
-	argv = malloc(sizeof(char *) * (len + 1));
-	if (!argv)
-		return (NULL);
-	while (len > i)
-	{
-		argv[i] = token->value;
-		token = token->next;
-		i++;
-	}
-	argv[i] = NULL;
 	new_cmd = malloc(sizeof(t_cmd));
-	if (!new_cmd)
-	{
-		free(argv);
+	if (!new_cmd) //?sorun çıkması halinde free yapıyor muyuz
 		return (NULL);
-	}
-	new_cmd->argv = argv;
-	new_cmd->next = NULL;
-	if (redirect)
+	while (*token) //? Word olduğu durumu sadece ele alıyorum
 	{
-		new_cmd->redirects = malloc(sizeof(t_redirect));
-		if (new_cmd->redirects)
-		{
-			new_cmd->redirects->type = redirect->type;
-			new_cmd->redirects->file = redirect->file;
-			new_cmd->redirects->next = NULL;
-			new_cmd->redirects = redirect;
-		}
+		if ((*token)->type == T_WORD)
+			new_cmd->argv[i++] = (*token)->value;
+		else if (is_redirect((*token)->type) && (*token)->next)
+			
+		*token = (*token)->next; //sıradaki token'a geç
 	}
-	else
-		new_cmd->redirects = NULL;
+	
+	new_cmd->next = NULL;
 	return (new_cmd);
 }
 
