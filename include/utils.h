@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 18:27:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:10:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 
 # define BASH "bash"
 
-int		cmd_err(t_shell *shell, char *cmd, char *opt, char *msg);
-int		lx_err(t_shell *shell, char *msg, char *sep);
+# define ERR_SYNTAX "syntax error near unexpected token"
+
+int		cmd_err(t_shell *shell, char *cmd, char *msg, int ret);
+int		lx_err(t_shell *shell, char *sep);
 
 #endif

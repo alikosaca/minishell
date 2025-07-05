@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:29:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 11:06:04 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:18:33 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,9 @@ int	builtin_exit(t_shell *shell, char **argv)
 	j = -1;
 	while (argv[1][++j])
 		if (!ft_isdigit(argv[1][j]))
-		{
-			shell->exitcode = 2;
-			exit(cmd_err(shell, "exit", argv[1], ERR_NUM_ARG_REQ));
-		}
+			exit(cmd_err(shell, "exit", ERR_NUM_ARG_REQ, 2));
 	if (argv[2])
-	{
-		shell->exitcode = 1;
-		cmd_err(shell, "exit", NULL, ERR_TOO_MANY_ARGS);
-		return (shell->exitcode);
-	}
+		return (cmd_err(shell, "exit", ERR_TOO_MANY_ARGS, 1));
 	shell->exitcode = ft_atoi(argv[1]) % 256;
 	exit(shell->exitcode);
 }

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:15:49 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 19:18:03 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:13:40 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static int	update_pwd_vars(t_shell *shell)
 	t_env	*pwd;
 
 	if (!getcwd(newpwd, sizeof(newpwd)))
-	{
-		shell->exitcode = 1; // check!
-		return (cmd_err(shell, "cd", NULL, strerror(errno))); // opt: NULL, but for now.
-	}
+		return (cmd_err(shell, "cd", strerror(errno), 1)); // check!
 	pwd = find_env(shell->envlist, "PWD");
 	if (pwd)
 		add_env(&(shell->envlist), "OLDPWD", pwd->value, true);
@@ -35,26 +32,16 @@ static int	find_home_dir(t_shell *shell)
 
 	home = get_env_value(shell->envlist, "HOME");
 	if (!home)
-	{
-		shell->exitcode = 1;
-		return (cmd_err(shell, "cd", NULL, ERR_HOME_NOT_SET));
-	}
+		return (cmd_err(shell, "cd", ERR_HOME_NOT_SET, 1));
 	if (chdir(home) == -1)
-	{
-		shell->exitcode = 1;
-		return (cmd_err(shell, "cd", home, strerror(errno)));
-	}
+		return (cmd_err(shell, "cd", strerror(errno), 1));
 	return (update_pwd_vars(shell));
 }
-
 
 static int	find_path(t_shell *shell, char *path)
 {
 	if (chdir(path) == -1)
-	{
-		shell->exitcode = 1;
-		return (cmd_err(shell, "cd", path, strerror(errno)));
-	}
+		return (cmd_err(shell, "cd", strerror(errno), 1));
 	return (update_pwd_vars(shell));
 }
 
@@ -63,10 +50,7 @@ int	builtin_cd(t_shell *shell, char **argv)
 	if (!argv[1])
 		return (find_home_dir(shell));
 	else if (argv[1] && argv[2])
-	{
-		shell->exitcode = 1;
-		return (cmd_err(shell, "cd", NULL, ERR_TOO_MANY_ARGS));
-	}
+		return (cmd_err(shell, "cd", ERR_TOO_MANY_ARGS, 1));
 	else
 	{
 		shell->exitcode = find_path(shell, argv[1]);
