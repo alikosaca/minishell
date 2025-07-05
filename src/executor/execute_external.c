@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 17:58:02 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 21:31:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	exec_external(t_shell *shell, t_cmd *cmd)
 		return (cmd_err(shell, "fork", strerror(errno), 254));
 	else if (pid == 0)
 	{
-		// if (!setup_redir())
-		// 	return (cmd_err(shell, NULL, NULL, 1));
+		if (!setup_redir(shell, cmd))
+			return (cmd_err(shell, NULL, NULL, 1));
 		return (child(shell, cmd, path));
 	}
 	free(path);

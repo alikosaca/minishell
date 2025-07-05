@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 17:55:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 21:30:09 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int		exec_external(t_shell *shell, t_cmd *cmd);
 
 char	*find_cmd_path(t_shell *shell, char *cmd);
 
-int		setup_redir();
+int		setup_redir(t_shell *shell, t_cmd *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/28 18:35:24 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 19:19:40 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ typedef struct s_token
 
 typedef enum e_redirect_type
 {
-	REDIR_INPUT,                      // <
-	REDIR_OUTPUT,                     // >
-	REDIR_APPEND,                     // >>
-	REDIR_HEREDOC                     // <<
+	REDIR_IN,                      // <
+	REDIR_OUT,                     // >
+	REDIR_APPEND,                  // >>
+	REDIR_HEREDOC                  // <<
 }	t_redirect_type;
 
 typedef struct s_redirect
@@ -58,6 +58,7 @@ typedef struct s_redirect
 	t_redirect_type		type;         // redirection tipi
 	char				*file;        // hedef dosya adı
 	char				*delimiter;   // heredoc delimiter
+	bool				should_be_expand;
 	struct s_redirect	*next;
 }	t_redirect;
 
