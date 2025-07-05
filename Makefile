@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/02 18:23:36 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/05 16:48:01 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,10 @@ PARSER_SRC   = \
             #    $(PARSER_DIR)/parser.c
 EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/executor.c \
-               $(EXECUTOR_DIR)/execute_builtin.c
+               $(EXECUTOR_DIR)/execute_builtin.c \
+               $(EXECUTOR_DIR)/execute_external.c \
+               $(EXECUTOR_DIR)/external_utils.c \
+               $(EXECUTOR_DIR)/redirections.c
 ENV_SRC	     = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \

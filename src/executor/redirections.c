@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 12:07:27 by yaycicek         ###   ########.fr       */
+/*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/07/05 16:43:35 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+# include "../../include/executor.h"
 
-int	executor(t_shell *shell, t_cmd *cmd)
+int	setup_redir()
 {
-	if (!shell || !cmd || !cmd->argv || !cmd->argv[0])
-		return (0);
-	while (cmd)
-	{
-		if (is_builtin(cmd->argv[0]))
-			shell->exitcode = exec_builtin(shell, cmd->argv);
-		else
-			shell->exitcode = exec_external(shell, cmd);
-		cmd = cmd->next;
-	}
-	return (shell->exitcode);
+	return (0);
 }

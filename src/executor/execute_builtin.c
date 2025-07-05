@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 19:06:33 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:49:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	is_builtin(char *cmd)
 		return (1);
 	else if (ft_strcmp(cmd, "exit") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "clear") == 0)
-		return (1);
 	return (0);
 }
 
@@ -53,7 +51,5 @@ int	exec_builtin(t_shell *shell, char **argv)
 		return (env(shell->envlist, argv));
 	else if (ft_strcmp(argv[0], "exit") == 0)
 		return (builtin_exit(shell, argv));
-	else if (ft_strcmp(argv[0], "clear") == 0)
-		return (write(STDOUT_FILENO, "\033[2J\033[H", 7));
 	return (shell->exitcode);
 }
