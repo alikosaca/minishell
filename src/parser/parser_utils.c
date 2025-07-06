@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:29 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/28 14:09:36 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/06 15:28:11 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_redirect_type	redirect_type(t_token_type *type)
 	t_redirect_type redirect_type;
 
 	if (*type == T_REDIRECT_IN)
-		redirect_type = REDIR_INPUT;
+		redirect_type = REDIR_IN;
 	else if (*type == T_REDIRECT_OUT)
-		redirect_type = REDIR_OUTPUT;
+		redirect_type = REDIR_OUT;
 	else if (*type == T_REDIRECT_APPEND)
 		redirect_type = REDIR_APPEND;
 	else if (*type == T_HEREDOC)
