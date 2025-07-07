@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 13:28:36 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:34:02 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ static char	*find_path(char **paths, char *cmd)
 {
 	int	i;
 	char	*path;
+	char	*temp;
 
 	if (!paths || !paths[0])
 		return (NULL);
 	i = 0;
 	while (paths[i])
 	{
-		path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(path, cmd);
+		temp = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(temp, cmd);
+		free(temp);
 		if (access(path, X_OK) == 0)
 		{
 			free_split(paths);
-			printf("%s\n", path);
 			return (path);
 		}
 		free(path);
@@ -57,7 +58,7 @@ char	*find_cmd_path(t_shell *shell, char *cmd)
 	char	*fpath;
 
 	if (ft_strchr(cmd, '/'))
-		return (cmd);
+		return (ft_strdup(cmd));
 	path = get_env_value(shell->envlist, "PATH");
 	if (!path)
 		return (NULL);

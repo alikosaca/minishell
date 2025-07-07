@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/05 16:48:01 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/07 20:30:02 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/execute_builtin.c \
                $(EXECUTOR_DIR)/execute_external.c \
                $(EXECUTOR_DIR)/external_utils.c \
-               $(EXECUTOR_DIR)/redirections.c
+               $(EXECUTOR_DIR)/redirections.c \
+               $(EXECUTOR_DIR)/restore.c
 ENV_SRC	     = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \
@@ -69,7 +70,7 @@ BUILTIN_SRC  = \
 SIGNAL_SRC   = \
                $(SIGNAL_DIR)/signal.c
 UTILS_SRC    = \
-               $(UTILS_DIR)/error.c
+               $(UTILS_DIR)/error.c \
 
 MAIN_OBJ     = $(MAIN_SRC:.c=.o)
 LEXER_OBJ    = $(LEXER_SRC:.c=.o)

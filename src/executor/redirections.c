@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 21:33:57 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/07 21:58:03 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	redir_in(t_shell *shell, t_redirect *redir)
 	fd = open(redir->file, O_RDONLY);
 	if (fd == -1)
 		return (cmd_err(shell, "infile", strerror(errno), 1)); // !!
-	dup2(fd, STDOUT_FILENO);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (0);
 }
@@ -28,7 +28,7 @@ static int	redir_out(t_shell *shell, t_redirect *redir)
 {
 	int	fd;
 
-	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC);
+	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 		return (cmd_err(shell, "outfile", strerror(errno), 1));
 	dup2(fd, STDOUT_FILENO);
@@ -40,7 +40,7 @@ static int	redir_append(t_shell *shell, t_redirect *redir)
 {
 	int	fd;
 
-	fd = open(redir->file, O_CREAT | O_WRONLY | O_APPEND);
+	fd = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
 		return (cmd_err(shell, "outfile", strerror(errno), 1));
 	dup2(fd, STDOUT_FILENO);
@@ -50,9 +50,9 @@ static int	redir_append(t_shell *shell, t_redirect *redir)
 
 static int	redir_heredoc(t_shell *shell, t_redirect *redir)
 {
-	(void)shell;	
+	(void)shell;
 	(void)redir;
-	return (0);
+	return (shell->exitcode);
 }
 
 int	setup_redir(t_shell *shell, t_cmd *cmd)
@@ -64,14 +64,19 @@ int	setup_redir(t_shell *shell, t_cmd *cmd)
 	redir = cmd->redirects;
 	while (redir)
 	{
+		printf("redir->type: %d\n", redir->type);
 		if (redir->type == REDIR_IN)
-			redir_in(shell, redir);
+		 	shell->exitcode = redir_in(shell, redir);
 		else if (redir->type == REDIR_OUT)
-			redir_out(shell, redir);
+		{
+			printf("3\n");
+			shell->exitcode = redir_out(shell, redir);
+		}
 		else if (redir->type == REDIR_APPEND)
-			redir_append(shell, redir);
+		 	shell->exitcode = redir_append(shell, redir);
 		else if (redir->type == REDIR_HEREDOC)
-			redir_heredoc(shell, redir);
+		 	shell->exitcode = redir_heredoc(shell, redir);
+		redir = redir->next;
 	}
-	return (0);
+	return (shell->exitcode);
 }

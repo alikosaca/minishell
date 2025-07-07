@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 21:31:00 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:01:29 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,22 @@ static int	child(t_shell *shell, t_cmd *cmd, char *path)
 	return (0);
 }
 
+static int	parent(t_shell *shell, pid_t pid)
+{
+	int	status;
+
+	status = 0;
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
+	return (shell->exitcode);
+}
+
 int	exec_external(t_shell *shell, t_cmd *cmd)
 {
 	pid_t	pid;
-	int		status;
 	char	*path;
 
 	path = find_cmd_path(shell, cmd->argv[0]);
@@ -43,15 +55,10 @@ int	exec_external(t_shell *shell, t_cmd *cmd)
 		return (cmd_err(shell, "fork", strerror(errno), 254));
 	else if (pid == 0)
 	{
-		if (!setup_redir(shell, cmd))
+		if (setup_redir(shell, cmd))
 			return (cmd_err(shell, NULL, NULL, 1));
 		return (child(shell, cmd, path));
 	}
 	free(path);
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	return (shell->exitcode);
+	return (parent(shell, pid));
 }

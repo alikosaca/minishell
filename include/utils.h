@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 12:10:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:02:38 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define UTILS_H
 
 # include <stdio.h>
+# include <string.h>
+# include <errno.h>
 # include "structs.h"
 # include "../libft/libft.h"
 
