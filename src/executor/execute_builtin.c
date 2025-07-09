@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/07 22:00:57 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/09 19:31:13 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(char *cmd)
 {
-	if (!cmd)
+	if (!cmd || !cmd[0])
 		return (0);
 	else if (ft_strcmp(cmd, "echo") == 0)
 		return (1);
@@ -37,8 +37,6 @@ int	exec_builtin(t_shell *shell, t_cmd *cmd)
 {
 	if (!shell || !cmd->argv || !cmd->argv[0])
 		return (1);
-	if (setup_redir(shell, cmd))
-			return (cmd_err(shell, NULL, NULL, 1));
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (builtin_echo(cmd->argv));
 	else if (ft_strcmp(cmd->argv[0], "cd") == 0)

@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/07 20:30:02 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/09 19:40:03 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRC_DIR      = src
 LIBFT_DIR    = libft
 
 LIBFT        = $(LIBFT_DIR)/libft.a
-
 
 LEXER_DIR    = $(SRC_DIR)/lexer
 EXPAND_DIR   = $(SRC_DIR)/expansion
@@ -54,7 +53,8 @@ EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/execute_external.c \
                $(EXECUTOR_DIR)/external_utils.c \
                $(EXECUTOR_DIR)/redirections.c \
-               $(EXECUTOR_DIR)/restore.c
+               $(EXECUTOR_DIR)/restore.c \
+               $(EXECUTOR_DIR)/heredoc_utils.c
 ENV_SRC	     = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \
@@ -68,7 +68,8 @@ BUILTIN_SRC  = \
                $(BUILTIN_DIR)/builtin_unset.c \
                $(BUILTIN_DIR)/builtin_exit.c
 SIGNAL_SRC   = \
-               $(SIGNAL_DIR)/signal.c
+               $(SIGNAL_DIR)/signals.c \
+               $(SIGNAL_DIR)/handle_signals.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c \
 
@@ -105,5 +106,29 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+val:
+	valgrind \
+	--leak-check=full \
+	--show-leak-kinds=all \
+	--track-origins=yes \
+	--track-fds=yes \
+	--trace-children=yes \
+	--child-silent-after-fork=yes \
+	./minishell
+
+val2:
+	valgrind \
+	--leak-check=full \
+	--show-leak-kinds=all \
+	--track-origins=yes \
+	--track-fds=yes \
+	--trace-children=yes \
+	--child-silent-after-fork=yes \
+	--log-file="valgrind.log" \
+	./minishell
+
+a:
+	./minishell
 
 .PHONY: all clean fclean re

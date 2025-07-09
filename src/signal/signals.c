@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 12:25:58 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/09 12:41:16 by yaycicek         ###   ########.fr       */
+/*   Created: 2025/07/08 17:02:23 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/07/08 17:04:47 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/signal.h"
 
-int	init_shell(t_shell *shell, char **envp)
+void	check_signals(void)
 {
-	shell->prompt = PROMPT;
-	shell->stdin_backup = dup(STDIN_FILENO);
-	shell->stdout_backup = dup(STDOUT_FILENO);
-	if (shell->stdin_backup == -1 || shell->stdout_backup == -1)
-		return (cmd_err(shell, "dup", strerror(errno), 1));
-	init_envlist(&shell->envlist, envp);
-	return (0);
+    signal(SIGINT, handle_sigint);
+    signal(SIGQUIT, SIG_IGN);
+}
+
+void	heredoc_signals(void)
+{
+    signal(SIGINT, handle_sigint_heredoc);
+    signal(SIGQUIT, SIG_IGN);
+}
+
+void	ignore_signals(void)
+{
+    signal(SIGINT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+}
+
+void	default_signals(void)
+{
+    signal(SIGINT, SIG_DFL);
+    signal(SIGQUIT, SIG_DFL);
 }

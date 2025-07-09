@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 19:19:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/09 20:30:31 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,9 @@ typedef struct s_shell
 	int			exitcode;
 	pid_t		*pids;
 	int			pid_count;
-	int			signal_received;
-	int			in_execution;
-	int			in_heredoc;
+	bool		in_heredoc;
 	int			stdin_backup;
 	int			stdout_backup;
-	int			syntax_error;
 }	t_shell;
 
 #endif
