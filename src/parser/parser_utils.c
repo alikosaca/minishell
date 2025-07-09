@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:29 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/06 15:28:11 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/09 20:10:57 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int	is_pipe(t_token_type type)
 		return (0);
 }
 
-t_redirect_type	redirect_type(t_token_type *type)
+t_redirect_type	redirect_type(t_token_type type)
 {
 	t_redirect_type redirect_type;
 
-	if (*type == T_REDIRECT_IN)
+	if (type == T_REDIRECT_IN)
 		redirect_type = REDIR_IN;
-	else if (*type == T_REDIRECT_OUT)
+	else if (type == T_REDIRECT_OUT)
 		redirect_type = REDIR_OUT;
-	else if (*type == T_REDIRECT_APPEND)
+	else if (type == T_REDIRECT_APPEND)
 		redirect_type = REDIR_APPEND;
-	else if (*type == T_HEREDOC)
+	else if (type == T_HEREDOC)
 		redirect_type = REDIR_HEREDOC;
 
 	return (redirect_type);
