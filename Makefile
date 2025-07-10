@@ -6,7 +6,7 @@
 #    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/10 11:55:30 by akosaca          ###   ########.fr        #
+#    Updated: 2025/07/10 17:39:50 by akosaca          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ EXPAND_SRC   = \
                $(EXPAND_DIR)/expansion.c \
                $(EXPAND_DIR)/expansion_utils.c
 PARSER_SRC   = \
-               $(PARSER_DIR)/parser.c \
+	            $(PARSER_DIR)/parser.c \
                $(PARSER_DIR)/parser_utils.c \
                $(PARSER_DIR)/cmd.c
 EXECUTOR_SRC = \
