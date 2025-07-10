@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/09 19:35:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:23:41 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	executor(t_shell *shell, t_cmd *cmd)
 	{
 		if (setup_redir(shell, cmd))
 			return (shell->exitcode);
+		printf("buraya gelmiyor sanırım\n");
 		if (is_builtin(cmd->argv[0]))
 			shell->exitcode = exec_builtin(shell, cmd);
-		else if (cmd->argv[0])
+		else if (is_external(shell, cmd->argv[0]))
 			shell->exitcode = exec_external(shell, cmd);
 		if (restore_std_fds(shell))
 			return (shell->exitcode);

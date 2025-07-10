@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:16:25 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/09 16:33:02 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:35:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	restore_std_fds(t_shell *shell)
 {
-	(void)shell;
 	if (dup2(shell->stdin_backup, STDIN_FILENO) == -1)
 		return (cmd_err(shell, "dup2", strerror(errno), 1));
 	if (dup2(shell->stdout_backup, STDOUT_FILENO) == -1)

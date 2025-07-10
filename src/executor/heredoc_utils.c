@@ -6,35 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/09 19:46:56 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/10 23:57:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
-
-int	heredoc1(t_shell *shell, int fd[2], char *line)
-{
-	if (g_exit_status == 130)
-	{
-		printf("heredoc1(1), g_exit_status: %d\n", g_exit_status);
-		printf("heredoc1(1), shell->exitcode: %d\n", shell->exitcode);
-		shell->exitcode = g_exit_status;
-		g_exit_status = 0;
-		printf("heredoc1(2), g_exit_status: %d\n", g_exit_status);
-		printf("heredoc1(2), shell->exitcode: %d\n", shell->exitcode);
-		if (line)
-			free(line);
-		close(fd[0]);
-		close(fd[1]);
-		return (shell->exitcode);
-	}
-	if (!line)
-	{
-		close(fd[1]);
-		return (shell->exitcode);
-	}
-	return (0);
-}
 
 int	is_it_over(t_redirect *redir, int fd[2], char *line)
 {
@@ -44,9 +20,9 @@ int	is_it_over(t_redirect *redir, int fd[2], char *line)
 	{
 		free(line);
 		close(fd[1]);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 void	print_line(int fd[2], char *line, char *expanded_line)

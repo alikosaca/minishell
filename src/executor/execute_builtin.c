@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/09 19:31:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:13:12 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(char *cmd)
 {
-	if (!cmd || !cmd[0])
+	if (!cmd)
 		return (0);
 	else if (ft_strcmp(cmd, "echo") == 0)
 		return (1);

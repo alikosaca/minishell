@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:29:43 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/10 17:06:52 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/10 23:05:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	cleanup(t_shell *shell)
 	if (shell->tokens)
 		free_tokenlist(shell->tokens);
 	if (shell->commands)
-		free_cmdlist(shell->commands);
+		free_cmdlist(&shell->commands);
 	if (shell->pids)
 		free(shell->pids);
 	close(shell->stdin_backup);

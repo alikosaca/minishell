@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/10 17:40:45 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/10 23:58:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,118 +44,94 @@ void	print_tokens(t_token *token_list)
 	}
 }
 
-static int	is_redirection_file(t_token *tokens, t_token *current)
-{
-    t_token *tmp = tokens;
-    
-    // Bu token'dan önceki token'ı bul
-    while (tmp && tmp->next != current)
-        tmp = tmp->next;
-    
-    // Önceki token redirection mu?
-    if (tmp && tmp->type >= T_REDIRECT_IN && tmp->type <= T_HEREDOC)
-        return (1);
-    return (0);
-}
 
-static char	**tokens_to_argv(t_token *tokens)
+// Main'de commands test etme fonksiyonu
+static void	print_commands_debug(t_cmd *commands)
 {
-    int		i;
-    char	**argv;
-    t_token	*tmp;
+    t_cmd		*cmd;
+    t_redirect	*redir;
+    int			cmd_count;
+    int			arg_count;
 
-    // Önce sadece komut argümanlarını say
-    i = 0;
-    tmp = tokens;
-    while (tmp)
+    if (!commands)
     {
-        if (tmp->type == T_WORD && !is_redirection_file(tokens, tmp))
-            i++;
-        tmp = tmp->next;
+        printf("❌ Commands: NULL\n");
+        return ;
     }
     
-    argv = malloc(sizeof(char *) * (i + 1));
-    if (!argv)
-        return (NULL);
+    cmd = commands;
+    cmd_count = 0;
     
-    // Şimdi sadece komut argümanlarını ekle
-    tmp = tokens;
-    i = 0;
-    while (tmp)
+    printf("\n🔍 === COMMANDS DEBUG === \n");
+    while (cmd)
     {
-        if (tmp->type == T_WORD && !is_redirection_file(tokens, tmp))
-            argv[i++] = tmp->value;
-        tmp = tmp->next;
+        printf("📋 Command [%d]:\n", cmd_count);
+        
+        // Command name - argv[0] kullan
+        if (cmd->argv && cmd->argv[0])
+            printf("  ├─ cmd: \"%s\"\n", cmd->argv[0]);
+        else
+            printf("  ├─ cmd: NULL\n");
+        
+        // Arguments
+        if (cmd->argv)
+        {
+            printf("  ├─ argv: ");
+            arg_count = 0;
+            while (cmd->argv[arg_count])
+            {
+                printf("\"%s\"", cmd->argv[arg_count]);
+                if (cmd->argv[arg_count + 1])
+                    printf(", ");
+                arg_count++;
+            }
+            printf("\n");
+            printf("  ├─ argc: %d\n", arg_count);
+        }
+        else
+            printf("  ├─ argv: NULL\n");
+        
+        // Redirections
+        if (cmd->redirects)
+        {
+            printf("  ├─ redirections:\n");
+            redir = cmd->redirects;
+            while (redir)
+            {
+                printf("  │  ├─ type: %d ", redir->type);
+                if (redir->type == REDIR_IN)
+                    printf("(<)");
+                else if (redir->type == REDIR_OUT)
+                    printf("(>)");
+                else if (redir->type == REDIR_APPEND)
+                    printf("(>>)");
+                else if (redir->type == REDIR_HEREDOC)
+                    printf("(<<)");
+                printf("\n");
+                
+                if (redir->file)
+                    printf("  │  ├─ file: \"%s\"\n", redir->file);
+                if (redir->delimiter)
+                    printf("  │  ├─ delimiter: \"%s\"\n", redir->delimiter);
+                
+                redir = redir->next;
+            }
+        }
+        else
+            printf("  ├─ redirections: NULL\n");
+        
+        // Next command
+        if (cmd->next)
+            printf("  └─ has_next: YES\n");
+        else
+            printf("  └─ has_next: NO\n");
+        
+        printf("\n");
+        cmd = cmd->next;
+        cmd_count++;
     }
-    argv[i] = NULL;
-    return (argv);
+    printf("🔍 === END DEBUG ===\n\n");
 }
-
-static t_redirect_type	token_to_redirect_type(t_token_type type)
-{
-	if (type == T_REDIRECT_IN)
-		return (REDIR_IN);
-	else if (type == T_REDIRECT_OUT)
-		return (REDIR_OUT);
-	else if (type == T_REDIRECT_APPEND)
-		return (REDIR_APPEND);
-	else if (type == T_HEREDOC)
-		return (REDIR_HEREDOC);
-	return (REDIR_IN); // varsayılan dönüş
-}
-
-static t_redirect	*parse_redirects(t_token *tokens)
-{
-	t_redirect	*head = NULL;
-	t_redirect	*last = NULL;
-	t_redirect	*new;
-
-	while (tokens && tokens->next)
-	{
-		if (tokens->type >= T_REDIRECT_IN && tokens->type <= T_HEREDOC)
-		{
-			new = malloc(sizeof(t_redirect));
-			if (!new)
-				return (NULL);
-			new->type = token_to_redirect_type(tokens->type);
-			new->file = NULL;
-			new->delimiter = NULL;
-			new->should_be_expand = false;
-			new->next = NULL;
-
-			if (tokens->type == T_HEREDOC)
-			{
-				new->delimiter = tokens->next->value;
-				if (tokens->next->type == T_DOLLAR)
-					new->should_be_expand = true;
-			}
-			else
-			{
-				new->file = tokens->next->value;
-			}
-			if (!head)
-				head = new;
-			else
-				last->next = new;
-			last = new;
-			tokens = tokens->next;
-		}
-		tokens = tokens->next;
-	}
-	return (head);
-}
-
-static t_cmd	*create_cmds(t_token *tokens, t_cmd *cmd)
-{
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->argv = tokens_to_argv(tokens);
-	cmd->redirects = parse_redirects(tokens);
-	cmd->next = NULL;
-	return (cmd);
-}
-
 
 static void	process_input(t_shell *shell)
 {
@@ -168,6 +144,7 @@ static void	process_input(t_shell *shell)
 	shell->commands = parser(shell->tokens);
 	if (!shell->commands)
 		return ;
+	print_commands_debug(shell->commands);
 	shell->exitcode = executor(shell, shell->commands);
 	return ;
 }
@@ -176,16 +153,14 @@ static void	loop(t_shell *shell)
 {
 	while (true)
 	{
-		check_signals();
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
-			builtin_exit(shell, (char *[]){"exit", NULL});
+		{
+			exit(0);
+			break ;
+		}
 		if ((*shell->input))
 			add_history(shell->input);
-		// if (g_exit_status == 130)
-		// 	shell->exitcode = g_exit_status;
-		if (g_exit_status == 130 && shell->input && shell->input[0] == '\0')
-    		shell->exitcode = g_exit_status;
 		process_input(shell);
 		free(shell->input);
 		shell->input = NULL;

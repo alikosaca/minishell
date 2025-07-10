@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
+#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/10 17:39:50 by akosaca          ###   ########.fr        #
+#    Updated: 2025/07/10 23:56:42 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,8 @@ BUILTIN_SRC  = \
                $(BUILTIN_DIR)/builtin_unset.c \
                $(BUILTIN_DIR)/builtin_exit.c
 SIGNAL_SRC   = \
-               $(SIGNAL_DIR)/signals.c \
-               $(SIGNAL_DIR)/handle_signals.c
+            #    $(SIGNAL_DIR)/signals.c \
+            #    $(SIGNAL_DIR)/handle_signals.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c \
 

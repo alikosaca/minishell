@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/08 20:40:21 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:34:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			is_builtin(char *cmd);
 int			exec_builtin(t_shell *shell, t_cmd *cmd);
 
 int			exec_external(t_shell *shell, t_cmd *cmd);
+int			is_external(t_shell *shell, char *cmd);
 
 char		*find_cmd_path(t_shell *shell, char *cmd);
 
@@ -43,7 +44,6 @@ int			setup_redir(t_shell *shell, t_cmd *cmd);
 int			restore_std_fds(t_shell *shell);
 int 		restore_doc_fds(t_shell *shell, int fd[2], bool should_dup);
 
-int			heredoc1(t_shell *shell, int fd[2], char *line);
 int			is_it_over(t_redirect *redir, int fd[2], char *line);
 void		print_line(int fd[2], char *line, char *expanded_line);
 char		*should_be_expand(t_redirect *redir, char *line);

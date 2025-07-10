@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/07 20:34:02 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:33:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_split(char **arr)
 	free(arr);
 }
 
-static char	*find_path(char **paths, char *cmd)
+static char	*find_full_path(char **paths, char *cmd)
 {
 	int	i;
 	char	*path;
@@ -58,14 +58,14 @@ char	*find_cmd_path(t_shell *shell, char *cmd)
 	char	*fpath;
 
 	if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
+		return (cmd);
 	path = get_env_value(shell->envlist, "PATH");
 	if (!path)
 		return (NULL);
 	paths = ft_split(path, ':');
 	if (!paths)
 		return (NULL);
-	fpath = find_path(paths, cmd);
+	fpath = find_full_path(paths, cmd);
 	if (!fpath)
 		return (NULL);
 	return (fpath);
