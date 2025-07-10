@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 19:30:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/10 17:27:07 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	process_input(t_shell *shell)
 	shell->tokens = expansion(shell, shell->tokens);
 	if (!shell->tokens)
 		return ;
+	shell->commands = parser(shell->tokens);
+	if (!shell->commands)
+		return ;
+	print_commands_debug(shell->commands);
 	shell->exitcode = executor(shell, shell->commands);
 	return ;
 }

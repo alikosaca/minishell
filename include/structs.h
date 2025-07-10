@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 19:19:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/10 17:33:26 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,34 @@ typedef struct s_token
 
 typedef enum e_redirect_type
 {
-	REDIR_IN,                      // <
-	REDIR_OUT,                     // >
-	REDIR_APPEND,                  // >>
-	REDIR_HEREDOC                  // <<
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC
 }	t_redirect_type;
 
 typedef struct s_redirect
 {
-	t_redirect_type		type;         // redirection tipi
-	char				*file;        // hedef dosya adı
-	char				*delimiter;   // heredoc delimiter
+	t_redirect_type		type;
+	char				*file;
+	char				*delimiter;
 	bool				should_be_expand;
 	struct s_redirect	*next;
 }	t_redirect;
 
 typedef struct s_cmd
 {
-	char				**argv;       // execve için argüman listesi (with NULL terminated)
-	t_redirect			*redirects;   // redirection listesi (last arg: NULL)
-	struct s_cmd		*next;        // pipe varsa bir sonraki komuta
+	char				**argv;
+	t_redirect			*redirects;
+	struct s_cmd		*next;
 }	t_cmd;
+
+typedef struct s_arglist
+{
+	char	**argv;
+	int		argc;
+}	t_arglist;
+
 
 typedef struct s_shell
 {

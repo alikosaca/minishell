@@ -6,75 +6,26 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/09 20:58:48 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:34:35 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-// int	argv_len(t_token *token)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	if (!token)
-// 		return (0);
-// 	while (token->type == T_WORD)
-// 	{
-// 		i++;
-// 		token = token->next;
-// 	}
-// 	return (i);
-// }
-//len = argv_len(tokens);
-
-
-
-// char	**add_to_argv(char *value)
-// {
-// 	char **argv;
-// 	int	i;
-// 	int len;
-
-// 	if (!len)
-// 		return (NULL);
-// 	argv = malloc(sizeof(char *));
-// 	if (!argv)
-// 		return (NULL);
-// 	i = 0;
-// 	while (token->type == T_WORD)
-// 	{
-// 		argv[i++] = token->value;
-// 		token = token->next;
-// 	}
-// 	argv[i] = NULL;
-
-// 	return (argv);
-// }
-
-
-//*-------------------------------------------------------------------------*//
-
-int	add_to_argv(char **argv, int *argc, char *value)
+int	add_to_argv(t_arglist *args, char *value)
 {
-	
 	char	**tmp;
-	int		i;
 
-	if (!(*argv))
-		i = 2;
-	else
-		i = 1;
-	tmp = realloc(argv, sizeof(char *) * (*argc + i));
+	tmp = realloc(args->argv, sizeof(char *) * (args->argc + 2));
 	if (!tmp)
-		return (1);	
-	argv = tmp;
-	argv[(*argc)++] = value;
-	argv[(*argc)] = NULL;
+		return (1);
+
+	args->argv = tmp;
+	args->argv[args->argc++] = value;
+	args->argv[args->argc] = NULL;
 
 	return (0);
 }
-
 
 int	add_to_redirect(t_redirect **redirects, t_redirect **head, t_token **tokens)
 {
@@ -120,7 +71,6 @@ t_redirect	*init_redirect()
 }
 
 
-
 int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
 {
 	t_cmd	*new_cmd;
@@ -130,14 +80,14 @@ int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
 	if (!new_cmd)
 		return (1);
 	if (!*cmd)
-	{
 		*cmd = new_cmd;
-		return (0);
+	else
+	{
+		last_cmd = *cmd;
+		while (last_cmd->next)
+			last_cmd = last_cmd->next;
+		last_cmd->next = new_cmd;
 	}
-	last_cmd = *cmd;
-	while (last_cmd->next)
-		last_cmd = last_cmd->next;
-	last_cmd->next = new_cmd;
 
 	return (0);
 }
@@ -167,7 +117,6 @@ void	free_redirlist(t_redirect *redir)
 			free(redir);
 		redir = tmp;
 	}
-	redir = NULL;
 }
 
 void	free_cmdlist(t_cmd **cmd)

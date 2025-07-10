@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
+#    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/07 20:30:02 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/10 11:55:30 by akosaca          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,9 @@ EXPAND_SRC   = \
                $(EXPAND_DIR)/expansion.c \
                $(EXPAND_DIR)/expansion_utils.c
 PARSER_SRC   = \
-            #    $(PARSER_DIR)/parser.c
+               $(PARSER_DIR)/parser.c \
+               $(PARSER_DIR)/parser_utils.c \
+               $(PARSER_DIR)/cmd.c
 EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/executor.c \
                $(EXECUTOR_DIR)/execute_builtin.c \
