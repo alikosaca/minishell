@@ -87,12 +87,9 @@ typedef struct s_shell
 	int			exitcode;
 	pid_t		*pids;
 	int			pid_count;
-	int			signal_received;
-	int			in_execution;
-	int			in_heredoc;
+	bool		in_heredoc;
 	int			stdin_backup;
 	int			stdout_backup;
-	int			syntax_error;
 }	t_shell;
 
 #endif
