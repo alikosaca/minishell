@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/10 17:33:26 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/11 15:04:36 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef enum e_token_type
 	T_HEREDOC,
 	T_PIPE,
 	T_DOLLAR,
-	T_ERROR			
+	T_ERROR
 }	t_token_type;
 
 typedef struct s_token
@@ -65,6 +65,7 @@ typedef struct s_redirect
 typedef struct s_cmd
 {
 	char				**argv;
+	//int					argc;
 	t_redirect			*redirects;
 	struct s_cmd		*next;
 }	t_cmd;
@@ -72,6 +73,7 @@ typedef struct s_cmd
 typedef struct s_arglist
 {
 	char	**argv;
+	int		i;
 	int		argc;
 }	t_arglist;
 

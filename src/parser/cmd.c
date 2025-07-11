@@ -6,23 +6,55 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/10 17:34:35 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/11 18:16:21 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	add_to_argv(t_arglist *args, char *value)
+//* Pıpe geldiğinde sorun yaşayabilir
+int	argc_len(t_token *token)
 {
-	char	**tmp;
+	t_token	*tmp;
+	int	i;
 
-	tmp = realloc(args->argv, sizeof(char *) * (args->argc + 2));
-	if (!tmp)
+	tmp = NULL;
+	i = 0;
+	while (token && token->type != T_PIPE)
+	{
+		if (is_redirect(token->type) && token->next)
+		{
+			token = token->next->next;
+		}
+		else
+		{
+			token = token->next;
+			i++;
+		}
+	}
+
+	return (i);
+}
+// tmp = realloc(args->argv, sizeof(char *) * (args->argc + 2));
+// if (!tmp)
+// 	return (1);
+
+
+int	init_argvlist(t_arglist **args, t_token *token)
+{
+	(*args)->argc = argc_len(token);
+	(*args)->i = 0;
+	(*args)->argv = malloc(sizeof(char *) * ((*args))->argc + 1);
+	if (!(*args)->argv)
 		return (1);
+	return (0);
+}
 
-	args->argv = tmp;
-	args->argv[args->argc++] = value;
-	args->argv[args->argc] = NULL;
+int	add_to_argv(t_arglist **args, char *value)
+{
+	(*args)->argv[(*args)->i] = value;
+	(*args)->i++;
+	(*args)->argv[(*args)->i] = NULL;
 
 	return (0);
 }
@@ -51,7 +83,6 @@ int	add_to_redirect(t_redirect **redirects, t_redirect **head, t_token **tokens)
 		(*redirects)->next = new_redir;
 		*redirects = (*redirects)->next;
 	}
-
 	return (0);
 }
 
@@ -80,7 +111,17 @@ int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
 	if (!new_cmd)
 		return (1);
 	if (!*cmd)
+	{
 		*cmd = new_cmd;
+		// printf("add_cmd girdimmmmmmm \n");
+		
+		// if ((*cmd)->argv && (*cmd)->argv[0])
+        //     printf("argv[0] = %s \n", (*cmd)->argv[0]);
+        // else
+        //     printf("argv[0] = NULL \n");
+		
+		// printf("add_cmd girdimmmmmmm \n");
+	}
 	else
 	{
 		last_cmd = *cmd;
@@ -88,7 +129,6 @@ int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
 			last_cmd = last_cmd->next;
 		last_cmd->next = new_cmd;
 	}
-
 	return (0);
 }
 
@@ -113,22 +153,21 @@ void	free_redirlist(t_redirect *redir)
 	while (redir)
 	{
 		tmp = redir->next;
-		if (redir)
-			free(redir);
+		free(redir);
 		redir = tmp;
 	}
 }
 
-void	free_cmdlist(t_cmd **cmd)
+void	free_cmdlist(t_cmd *cmd)
 {
 	t_cmd	*tmp;
 
-	while (*cmd)
+	while (cmd)
 	{
-		tmp = (*cmd)->next;
-		if ((*cmd)->redirects)
-			free_redirlist((*cmd)->redirects);
-		free(*cmd);
-		(*cmd) = tmp;
+		tmp = cmd->next;
+		if (cmd->redirects)
+			free_redirlist(cmd->redirects);
+		free(cmd);
+		cmd = tmp;
 	}
 }
