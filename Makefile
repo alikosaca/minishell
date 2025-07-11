@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/10 23:56:42 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/11 19:57:04 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/external_utils.c \
                $(EXECUTOR_DIR)/redirections.c \
                $(EXECUTOR_DIR)/restore.c \
-               $(EXECUTOR_DIR)/heredoc_utils.c
+               $(EXECUTOR_DIR)/heredoc_utils.c \
+               $(EXECUTOR_DIR)/pipeline.c
 ENV_SRC	     = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \
@@ -127,7 +128,7 @@ val2:
 	--track-fds=yes \
 	--trace-children=yes \
 	--child-silent-after-fork=yes \
-	--log-file="valgrind.log" \
+	--log-file="/home/yaycicek/Desktop/minishell/valgrind.log" \
 	./minishell
 
 a:

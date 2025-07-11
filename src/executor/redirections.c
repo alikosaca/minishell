@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/10 23:59:39 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:49:20 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	redir_in(t_shell *shell, t_redirect *redir)
 
 	fd = open(redir->file, O_RDONLY);
 	if (fd == -1)
-		return (cmd_err(shell, "infile", strerror(errno), 1));
+		return (cmd_err(shell, redir->file, strerror(errno), 1));
 	if (dup2(fd, STDIN_FILENO) == -1)
 		return (cmd_err(shell, "dup2", strerror(errno), 1));
 	close(fd);
@@ -31,7 +31,7 @@ static int	redir_out(t_shell *shell, t_redirect *redir)
 
 	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
-		return (cmd_err(shell, "outfile", strerror(errno), 1));
+		return (cmd_err(shell, redir->file, strerror(errno), 1));
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (cmd_err(shell, "dup2", strerror(errno), 1));
 	close(fd);
@@ -44,7 +44,7 @@ static int	redir_append(t_shell *shell, t_redirect *redir)
 
 	fd = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
-		return (cmd_err(shell, "outfile", strerror(errno), 1));
+		return (cmd_err(shell, redir->file, strerror(errno), 1));
 	if (dup2(fd, STDOUT_FILENO) == -1)
 		return (cmd_err(shell, "dup2", strerror(errno), 1));
 	close(fd);

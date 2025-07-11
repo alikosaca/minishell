@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 00:26:16 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:58:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	child(t_shell *shell, t_cmd *cmd)
 		return (1);
 	envp = env_to_arr(shell->envlist);
 	if (!envp)
-		return (1); // ? should be '1' ?
+		return (1);
 	execve(path, cmd->argv, envp);
 	if (errno == EACCES || errno == ENOEXEC)
 		return (cmd_err(shell, NULL, strerror(errno), 126));
@@ -37,7 +37,8 @@ static int	parent(t_shell *shell, pid_t pid)
 	int	status;
 
 	status = 0;
-	waitpid(pid, &status, 0);
+	if (waitpid(pid, &status, 0) == -1)
+		return (1);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -45,16 +46,16 @@ static int	parent(t_shell *shell, pid_t pid)
 	return (1);
 }
 
-int	is_external(t_shell *shell, char *cmd)
+int	is_external(t_shell *shell, t_cmd *cmd)
 {
 	char	*path;
 
-	if (!cmd)
+	if (!cmd || !cmd->argv)
 		return (0);
-	path = find_cmd_path(shell, cmd);
+	path = find_cmd_path(shell, cmd->argv[0]);
 	if (!path)
 	{
-		cmd_err(shell, cmd, ERR_CMD_NOT_FOUND, 127);
+		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
 		return (0);
 	}
 	return (1);
