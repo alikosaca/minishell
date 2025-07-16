@@ -6,29 +6,29 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 00:13:12 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:25:03 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-int	is_builtin(char *cmd)
+int	is_builtin(t_cmd *cmd)
 {
-	if (!cmd)
+	if (!cmd || !cmd->argv)
 		return (0);
-	else if (ft_strcmp(cmd, "echo") == 0)
+	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "cd") == 0)
+	else if (ft_strcmp(cmd->argv[0], "cd") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "pwd") == 0)
+	else if (ft_strcmp(cmd->argv[0], "pwd") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "export") == 0)
+	else if (ft_strcmp(cmd->argv[0], "export") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "unset") == 0)
+	else if (ft_strcmp(cmd->argv[0], "unset") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "env") == 0)
+	else if (ft_strcmp(cmd->argv[0], "env") == 0)
 		return (1);
-	else if (ft_strcmp(cmd, "exit") == 0)
+	else if (ft_strcmp(cmd->argv[0], "exit") == 0)
 		return (1);
 	return (0);
 }
