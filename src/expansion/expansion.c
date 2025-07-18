@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/30 17:15:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:15:38 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 	if (token->type == T_DOLLAR)
 		expanded = expand_dollar(shell, token->value);
 	else if (token->type == T_DOUBLE_QUOTE)
-		expanded = expand_dquote(shell, token->value);
+		expanded = expand_dquote(shell, token->value); //!
 	if (expanded)
 		free(token->value);
 	token->value = expanded;
@@ -58,6 +58,7 @@ static void	change_token_type(t_token *token)
 t_token	*expansion(t_shell *shell, t_token *tokens)
 {
 	t_token	*cur;
+	t_token	*cur_merge;
 
 	if (!shell || !tokens)
 		return (NULL);
@@ -75,5 +76,9 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 		change_token_type(cur);
 		cur = cur->next;
 	}
+
+	cur_merge = tokens;
+	check_merge(&cur_merge);
+
 	return (tokens);
 }

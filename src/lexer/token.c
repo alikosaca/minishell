@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/06/23 21:04:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/17 20:05:51 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-t_token	*create_token(t_token_type type, char *value)
+t_token	*create_token(t_token_type type, char *value, bool merge)
 {
 	t_token	*token;
 
@@ -21,6 +21,7 @@ t_token	*create_token(t_token_type type, char *value)
 		return (NULL);
 	token->type = type;
 	token->value = ft_strdup(value);
+	token->merge = merge;
 	token->next = NULL;
 	return (token);
 }

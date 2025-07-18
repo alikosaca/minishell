@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/28 19:18:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/18 21:23:45 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,36 @@ char	*expand_dollar(t_shell *shell, char *str)
 	return (ft_strdup(value));
 }
 
-static int	var_len(char *str)
+// static int	var_len(char *str)
+// {
+// 	int	i;
+
+// 	if (!str)
+// 		return (0);
+// 	if (*str == '?')
+// 		return (1);
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
+
+
+// static int	var_len(char *str)
+// {
+// 	int	i;
+
+// 	if (!str)
+// 		return (0);
+// 	if (*str == '?')
+// 		return (1);
+// 	i = 0;
+// 	while (str[i] )
+// 		i++;
+// 	return (i);
+// }
+
+static int	env_len(char *str)
 {
 	int	i;
 
@@ -36,14 +65,14 @@ static int	var_len(char *str)
 	if (*str == '?')
 		return (1);
 	i = 0;
-	while (str[i])
+	while (str[i] && (ft_isalpha(str[i]) || str[i] == '_'))
 		i++;
 	return (i);
 }
 
 static char	*get_var_value(t_shell *shell, char *str, int *i)
 {
-	char	*key;
+	char	*env;
 	char	*val;
 
 	if (str[*i] == '?')
@@ -51,31 +80,43 @@ static char	*get_var_value(t_shell *shell, char *str, int *i)
 		(*i)++;
 		return (ft_itoa(shell->exitcode));
 	}
-	key = ft_substr(str, *i, var_len(&str[*i]));
-	*i += ft_strlen(key);
-	val = get_env_value(shell->envlist, key);
+	env = ft_substr(str, *i, env_len(&str[*i]));
+	*i += ft_strlen(env);
+	val = get_env_value(shell->envlist, env);
 	if (!val)
 		val = ft_strdup("");
 	else
 		val = ft_strdup(val);
-	free(key);
+	free(env);
+
 	return (val);
 }
+static char	*add_dquote(char *ret, char *part)
+{
+	char	*tmp;
 
+	tmp = ft_strjoin(ret, part);
+	free(ret);
+	free(part);
+
+	return (tmp);
+}
 char	*expand_dquote(t_shell *shell, char *str)
 {
 	int		i;
 	int		start;
 	char	*ret;
-	char	*tmp;
 	char	*part;
 
 	i = 0;
 	ret = ft_strdup("");
-	while (str[i])
+	while (str[i] && str[i] != '"')
 	{
-		if (str[i++] == '$')
+		if (str[i] == '$')
+		{
+			i++;
 			part = get_var_value(shell, str, &i);
+		}
 		else
 		{
 			start = i;
@@ -83,10 +124,8 @@ char	*expand_dquote(t_shell *shell, char *str)
 				i++;
 			part = ft_substr(str, start, i - start);
 		}
-		tmp = ft_strjoin(ret, part);
-		free(ret);
-		free(part);
-		ret = tmp;
+		ret = add_dquote(ret, part);
 	}
 	return (ret);
 }
+

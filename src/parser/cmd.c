@@ -6,19 +6,16 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/11 18:16:21 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:28:13 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-//* Pıpe geldiğinde sorun yaşayabilir
 int	argc_len(t_token *token)
 {
-	t_token	*tmp;
 	int	i;
 
-	tmp = NULL;
 	i = 0;
 	while (token && token->type != T_PIPE)
 	{
@@ -35,10 +32,6 @@ int	argc_len(t_token *token)
 
 	return (i);
 }
-// tmp = realloc(args->argv, sizeof(char *) * (args->argc + 2));
-// if (!tmp)
-// 	return (1);
-
 
 int	init_argvlist(t_arglist **args, t_token *token)
 {

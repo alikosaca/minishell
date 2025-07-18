@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
+#    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/11 19:57:04 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/07/18 18:34:41 by akosaca          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ LEXER_SRC    = \
 				$(LEXER_DIR)/syntax.c
 EXPAND_SRC   = \
                $(EXPAND_DIR)/expansion.c \
-               $(EXPAND_DIR)/expansion_utils.c
+               $(EXPAND_DIR)/expansion_utils.c \
+			   $(EXPAND_DIR)/merge.c
 PARSER_SRC   = \
 	            $(PARSER_DIR)/parser.c \
                $(PARSER_DIR)/parser_utils.c \

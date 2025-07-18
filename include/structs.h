@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 15:04:36 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:48:53 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
+	bool			merge;
 	struct s_token	*next;
 }	t_token;
 

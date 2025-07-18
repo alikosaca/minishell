@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/27 12:00:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/17 20:17:08 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_env	*find_env(t_env *envlist, char *key)
 char	*get_env_value(t_env *env_list, char *key)
 {
 	t_env	*node;
-	
+
 	node = find_env(env_list, key);
 	if (!node)
 		return (NULL);
