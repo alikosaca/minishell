@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/18 19:15:38 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/20 18:02:35 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 	if (token->type == T_DOLLAR)
 		expanded = expand_dollar(shell, token->value);
 	else if (token->type == T_DOUBLE_QUOTE)
-		expanded = expand_dquote(shell, token->value); //!
+		expanded = expand_dquote(shell, token->value);
 	if (expanded)
 		free(token->value);
 	token->value = expanded;
@@ -79,6 +79,5 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 
 	cur_merge = tokens;
 	check_merge(&cur_merge);
-
 	return (tokens);
 }

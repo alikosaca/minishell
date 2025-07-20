@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/11 18:16:39 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/20 18:01:09 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,6 @@ static void	process_command(t_cmd **cmd, t_token *token)
 	}
 	if (status)
 		free_cmdlist((*cmd));
-	
-
-
-		
-
-
 }
 
 t_cmd	*parser(t_token *tokens)

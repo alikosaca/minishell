@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/18 18:30:59 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/20 18:02:07 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	is_word_like(t_token_type type)
 int	syntax(t_shell *shell, t_token *token)
 {
 	if (token && !token->next)
-		if (token->type == T_PIPE || is_redir(token->type))
-			return(lx_err(shell, token->value)); 
+	if (token->type == T_PIPE || is_redir(token->type))
+	return(lx_err(shell, token->value)); 
 	if (token && token->next && !token->next->next)
 	{
 		if (token->type == T_PIPE)

@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/18 19:04:58 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/20 17:11:47 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*handle_quote(char **input)
 	return (result);
 }
 
+
 char	*handle_dollar(char **input)
 {
 	int		len;
@@ -48,8 +49,10 @@ char	*handle_dollar(char **input)
 	start = *input;
 	len = 1;
 	(*input)++;
-	if (!(**input && (ft_isalpha(**input) || **input == '_' || **input == '?')))
+	if (**input && !((ft_isalpha(**input) || **input == '_' || **input == '?')))
 		return (NULL);
+	else if ((!**input))
+		return (ft_strdup("$"));
 	else
 	{
 		(*input)++;
@@ -66,6 +69,7 @@ char	*handle_dollar(char **input)
 		return (NULL);
 	ft_memcpy(result, start, len);
 	result[len] = '\0';
+
 	return (result);
 }
 
