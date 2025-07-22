@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/20 18:02:35 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:21:03 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,14 @@ static void	change_token_type(t_token *token)
 	else if (token->type == T_DOLLAR)
 		token->type = T_WORD;
 }
-
 t_token	*expansion(t_shell *shell, t_token *tokens)
 {
 	t_token	*cur;
-	t_token	*cur_merge;
 
 	if (!shell || !tokens)
 		return (NULL);
 	cur = tokens;
+
 	while (cur)
 	{
 		if (cur->type == T_HEREDOC && cur->next)
@@ -76,8 +75,7 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 		change_token_type(cur);
 		cur = cur->next;
 	}
+	check_merge(&tokens);
 
-	cur_merge = tokens;
-	check_merge(&cur_merge);
 	return (tokens);
 }
