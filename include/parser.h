@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 16:58:13 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/24 10:14:11 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	add_to_redirect(t_redirect **redirects, t_redirect **head, t_token **tokens)
 int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv);
 
 t_redirect	*init_redirect();
-// char	**init_argvlist(t_arglist **args);
+
 int	init_argvlist(t_arglist **args, t_token *token);
 
 t_cmd	*init_cmd(t_redirect *redir, char **argv);
