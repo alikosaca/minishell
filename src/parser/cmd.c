@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/17 19:28:13 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/24 12:14:53 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init_argvlist(t_arglist **args, t_token *token)
 {
 	(*args)->argc = argc_len(token);
 	(*args)->i = 0;
-	(*args)->argv = malloc(sizeof(char *) * ((*args))->argc + 1);
+	(*args)->argv = malloc(sizeof(char *) * ((*args)->argc + 1));
 	if (!(*args)->argv)
 		return (1);
 	return (0);
