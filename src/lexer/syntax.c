@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/20 18:02:07 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/23 13:52:05 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,20 @@ static int	is_word_like(t_token_type type)
 		|| type == T_DOLLAR);
 }
 
+static int	check_pipe(t_token *token)
+{
+	if (token->type == T_PIPE && token->next->type == T_PIPE)
+		return (1);
+	else
+		return (0);
+}
+
+// if (token && !token->next) //!
+// 	return (NULL);
 int	syntax(t_shell *shell, t_token *token)
 {
-	if (token && !token->next)
 	if (token->type == T_PIPE || is_redir(token->type))
-	return(lx_err(shell, token->value)); 
+		return(lx_err(shell, token->value)); 
 	if (token && token->next && !token->next->next)
 	{
 		if (token->type == T_PIPE)
@@ -42,7 +51,7 @@ int	syntax(t_shell *shell, t_token *token)
 	}
 	while (token)
 	{
-		if (token->type == T_ERROR)
+		if (token->type == T_ERROR || check_pipe(token))
 			return (lx_err(shell, token->value));
 		if (is_redir(token->type))
 		{
@@ -53,5 +62,6 @@ int	syntax(t_shell *shell, t_token *token)
 			return (lx_err(shell, token->value));
 		token = token->next;
 	}
+
 	return (0);
 }
