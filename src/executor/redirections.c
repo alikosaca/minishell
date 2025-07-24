@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 20:49:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/24 21:13:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ int redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 {
 	int		fd[2];
 	char	*line;
-	char	*expanded;
 
 	if (pipe(fd) == -1)
 		return (cmd_err(shell, "pipe", strerror(errno), 1));
 	while (true)
 	{
 		line = readline(PS2);
+		if (shell->exitcode == 130)
+			break ;
+		if (!line)
+			break ;
 		if (is_it_over(redir, fd, line))
 			break ;
-		expanded = should_be_expand(redir, line);
-		print_line(fd, line, expanded);
+		should_be_expand(redir, line);
+		print_line(fd, line);
 	}
 	return (restore_doc_fds(shell, fd, should_dup));
 }
