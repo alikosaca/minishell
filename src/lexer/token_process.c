@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/22 14:21:17 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/24 10:16:22 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,29 @@ int	process_quote(t_token **tokens, char **input)
 {
 	char	*value;
 	char	*start;
+	bool	merge;
 
+	merge = false;
 	if (**input == '\'' || **input == '"')
 	{
 		start = *input;
 		value = handle_quote(input);
+		if (input && (**input == '\'' || **input == '"' || ft_isalnum(**input)) )
+			merge = true;
 		if (!value)
 		{
-			add_token(tokens, create_token(T_ERROR, start, false));
+			add_token(tokens, create_token(T_ERROR, start, merge));
 			return (1);
 		}
 		else if (*start == '\'')
-			add_token(tokens, create_token(T_SINGLE_QUOTE, value, false));
+			add_token(tokens, create_token(T_SINGLE_QUOTE, value, merge));
 		else
-			add_token(tokens, create_token(T_DOUBLE_QUOTE, value, false));
+			add_token(tokens, create_token(T_DOUBLE_QUOTE, value, merge));
 		return (1);
 	}
 	return (0);
 }
-//printf(" \n");
+
 int	process_dollar_or_word(t_token **tokens, char **input)
 {
 	char	*value;
@@ -116,7 +120,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 		value = handle_word(input);
 		if (!value)
 			return (0);
-		if (**input == '$')
+		if (**input == '$' || ft_isalnum(**input) || **input == '\'' || **input == '"')
 			merge = true;
 		add_token(tokens, create_token(T_WORD, value, merge));
 	}
