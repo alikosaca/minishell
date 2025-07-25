@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 13:18:40 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:03:24 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static int	check_pipe(t_token *token)
 		return (0);
 }
 
-
-	// if (token && !token->next)
-	// 	return (1);
-
-	// if (token->type == T_PIPE || is_redir(token->type))
-	// 	return(lx_err(shell, token->value));
 int	syntax(t_shell *shell, t_token *token)
 {
 	if (token->type == T_PIPE)
@@ -66,6 +60,5 @@ int	syntax(t_shell *shell, t_token *token)
 			return (lx_err(shell, token->value));
 		token = token->next;
 	}
-
 	return (0);
 }

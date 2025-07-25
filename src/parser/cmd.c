@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/24 12:14:53 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:02:26 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,65 +20,87 @@ int	argc_len(t_token *token)
 	while (token && token->type != T_PIPE)
 	{
 		if (is_redirect(token->type) && token->next)
-		{
 			token = token->next->next;
-		}
 		else
 		{
 			token = token->next;
 			i++;
 		}
 	}
-
 	return (i);
 }
 
-int	init_argvlist(t_arglist **args, t_token *token)
+int	init_newcmd(t_cmd **new_cmd, t_token *token)
 {
-	(*args)->argc = argc_len(token);
-	(*args)->i = 0;
-	(*args)->argv = malloc(sizeof(char *) * ((*args)->argc + 1));
-	if (!(*args)->argv)
+	(*new_cmd) = malloc(sizeof(t_cmd));
+	if (!(*new_cmd))
 		return (1);
+	(*new_cmd)->argc = argc_len(token);
+	(*new_cmd)->i = 0;
+	(*new_cmd)->redirects = NULL;
+	if ((*new_cmd)->argc == 0)
+		(*new_cmd)->argv = NULL;
+	else
+		(*new_cmd)->argv = malloc(sizeof(char *) * ((*new_cmd)->argc + 1));
+	if (!(*new_cmd)->argv)
+	{
+		free(*new_cmd);
+		return (1);
+	}
 	return (0);
 }
 
-int	add_to_argv(t_arglist **args, char *value)
+int	add_to_argv(t_cmd **new_cmd, char *value)
 {
-	(*args)->argv[(*args)->i] = value;
-	(*args)->i++;
-	(*args)->argv[(*args)->i] = NULL;
-
+	(*new_cmd)->argv[(*new_cmd)->i] = value;
+	(*new_cmd)->i++;
+	(*new_cmd)->argv[(*new_cmd)->i] = NULL;
 	return (0);
 }
 
-int	add_to_redirect(t_redirect **redirects, t_redirect **head, t_token **tokens)
+// t_redirect **head;
+// t_redirect **redirects;
+
+int	add_to_redirect(t_redirect **redir, t_token **tokens)
 {
 	t_redirect	*new_redir;
+	t_redirect	*last_redir;
 
+	last_redir = (*redir);
 	new_redir = init_redirect();
 	if (!new_redir)
 		return (1);
 	new_redir->type = redirect_type((*tokens)->type);
 	*tokens = (*tokens)->next;
 	if ((*tokens)->type == T_WORD && new_redir->type == REDIR_HEREDOC)
-	new_redir->delimiter = (*tokens)->value;
+		new_redir->delimiter = (*tokens)->value;
 	else if ((*tokens)->type == T_WORD)
-	new_redir->file = (*tokens)->value;
-	
-	if (!(*head))
-	{
-		*head = new_redir;
-		*redirects = new_redir;
-	}
+		new_redir->file = (*tokens)->value;
+	else if ((*tokens)->type == T_DOLLAR)
+		new_redir->should_be_expand = true;
+	if (!(*redir))
+		*redir = new_redir;
 	else
 	{
-		(*redirects)->next = new_redir;
-		*redirects = (*redirects)->next;
+		while (last_redir->next)
+			last_redir = last_redir->next;
+		last_redir->next = new_redir;
 	}
+	printf("add_to_redirect çıktık \n");
+
 	return (0);
 }
-
+	// if (!(*head))
+	// {
+	// 	*head = new_redir;
+	// 	*redirects = new_redir;
+	// }
+	// else
+	// {
+	// 	(*redirects)->next = new_redir;
+	// 	*redirects = (*redirects)->next;
+	// }
+	
 t_redirect	*init_redirect()
 {
 	t_redirect	*redir;
@@ -95,26 +117,14 @@ t_redirect	*init_redirect()
 }
 
 
-int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
+int	add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 {
-	t_cmd	*new_cmd;
 	t_cmd	*last_cmd;
 
-	new_cmd = init_cmd(redir, argv);
 	if (!new_cmd)
 		return (1);
 	if (!*cmd)
-	{
 		*cmd = new_cmd;
-		// printf("add_cmd girdimmmmmmm \n");
-		
-		// if ((*cmd)->argv && (*cmd)->argv[0])
-        //     printf("argv[0] = %s \n", (*cmd)->argv[0]);
-        // else
-        //     printf("argv[0] = NULL \n");
-		
-		// printf("add_cmd girdimmmmmmm \n");
-	}
 	else
 	{
 		last_cmd = *cmd;
@@ -125,19 +135,19 @@ int	add_cmd(t_cmd **cmd, t_redirect *redir, char **argv)
 	return (0);
 }
 
-t_cmd	*init_cmd(t_redirect *redir, char **argv)
-{
-	t_cmd	*cmd;
+// t_cmd	*init_cmd(t_redirect *redir, char **argv)
+// {
+// 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->argv = argv;
-	cmd->redirects = redir;
-	cmd->next = NULL;
+// 	cmd = malloc(sizeof(t_cmd));
+// 	if (!cmd)
+// 		return (NULL);
+// 	cmd->argv = argv;
+// 	cmd->redirects = redir;
+// 	cmd->next = NULL;
 
-	return (cmd);
-}
+// 	return (cmd);
+// }
 
 void	free_redirlist(t_redirect *redir)
 {

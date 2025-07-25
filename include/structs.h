@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/23 13:32:25 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:04:06 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,11 @@ typedef struct s_redirect
 typedef struct s_cmd
 {
 	char				**argv;
+	int					argc;
+	int					i;
 	t_redirect			*redirects;
 	struct s_cmd		*next;
 }	t_cmd;
-
-typedef struct s_arglist
-{
-	char	**argv;
-	int		i;
-	int		argc;
-}	t_arglist;
 
 
 typedef struct s_shell

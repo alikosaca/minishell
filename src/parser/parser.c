@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/20 18:01:09 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 16:31:31 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,24 @@
 
 static void	process_command(t_cmd **cmd, t_token *token)
 {
-	t_redirect	*redir;
-	t_redirect	*redir_head;
 	int			status;
-	t_arglist	*args;
+	t_cmd		*new_cmd;
 
 	status = 0;
-	args = NULL;
+	new_cmd = NULL;
 	while (token && !status)
 	{
-		redir = NULL;
-		redir_head = NULL;
-		args = malloc(sizeof(t_arglist));
-        if (!args)
-        {
-            status = 1;
-            break;
-        }
-		status = init_argvlist(&args, token);
-
+		status = init_newcmd(&new_cmd, token);
 		while (token && token->type != T_PIPE && !status)
 		{
 			if (token->type == T_WORD)
-			{
-				status = add_to_argv(&args, token->value);
-			}
+				status = add_to_argv(&new_cmd, token->value);
 			else if (is_redirect(token->type) && token->next)
-				status = add_to_redirect(&redir, &redir_head, &token);
+				status = add_to_redirect(&new_cmd->redirects, &token);
 			token = token->next;
 		}
 		if (!status)
-			status = add_cmd(cmd, redir_head, args->argv);
+			status = add_cmd(cmd, new_cmd);
 		if (token && token->type == T_PIPE)
 			token = token->next;
 	}
@@ -60,6 +47,6 @@ t_cmd	*parser(t_token *tokens)
 	process_command(&cmd, tokens);
 	if (!cmd)
 		return (NULL);
-
+	
 	return (cmd);
 }
