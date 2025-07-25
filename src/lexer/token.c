@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/17 20:05:51 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:26:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,19 @@ void	add_token(t_token **tokens, t_token *new_token)
 	token->next = new_token;
 }
 
-void	free_tokenlist(t_token *tokens)
+void	free_tokenlist(t_token **tokens)
 {
 	t_token	*tmp;
 
-	while (tokens)
+	while ((*tokens))
 	{
-		tmp = tokens->next;
-		if (tokens->value)
-			free(tokens->value);
-		free(tokens);
-		tokens = tmp;
+		tmp = (*tokens)->next;
+		if ((*tokens)->value)
+		{
+			free((*tokens)->value);
+			(*tokens)->value = NULL;
+		}
+		free((*tokens));
+		(*tokens) = tmp;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 13:05:18 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/25 17:25:41 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,21 @@ void	init_envlist(t_env **envlist, char **envp)
 	}
 }
 
-void	free_envlist(t_env *envlist)
+void	free_envlist(t_env **envlist)
 {
 	t_env	*tmp;
 
-	while (envlist)
+	while ((*envlist))
 	{
-		tmp = envlist->next;
-		free(envlist->key);
-		if (envlist->value)
-			free(envlist->value);
-		free(envlist);
-		envlist = tmp;
+		tmp = (*envlist)->next;
+		free((*envlist)->key);
+		(*envlist)->key = NULL;
+		if ((*envlist)->value)
+		{
+			free((*envlist)->value);
+			(*envlist)->value = NULL;
+		}
+		free((*envlist));
+		(*envlist) = tmp;
 	}
 }

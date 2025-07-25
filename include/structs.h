@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 17:04:06 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:27:52 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_shell
 	t_cmd		*commands;
 	int			exitstat;
 	int			exitcode;
-	pid_t		*pids;
 	int			pid_count;
 	bool		in_heredoc;
 	int			stdin_backup;
