@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/25 17:02:26 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:53:48 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ int	init_newcmd(t_cmd **new_cmd, t_token *token)
 		(*new_cmd)->argv = NULL;
 	else
 		(*new_cmd)->argv = malloc(sizeof(char *) * ((*new_cmd)->argc + 1));
-	if (!(*new_cmd)->argv)
-	{
-		free(*new_cmd);
-		return (1);
-	}
+	(*new_cmd)->next = NULL;
 	return (0);
 }
 
@@ -57,9 +53,6 @@ int	add_to_argv(t_cmd **new_cmd, char *value)
 	(*new_cmd)->argv[(*new_cmd)->i] = NULL;
 	return (0);
 }
-
-// t_redirect **head;
-// t_redirect **redirects;
 
 int	add_to_redirect(t_redirect **redir, t_token **tokens)
 {
@@ -72,7 +65,8 @@ int	add_to_redirect(t_redirect **redir, t_token **tokens)
 		return (1);
 	new_redir->type = redirect_type((*tokens)->type);
 	*tokens = (*tokens)->next;
-	if ((*tokens)->type == T_WORD && new_redir->type == REDIR_HEREDOC)
+	if (((*tokens)->type == T_WORD || ((*tokens)->type == T_DOLLAR))
+		&& new_redir->type == REDIR_HEREDOC)
 		new_redir->delimiter = (*tokens)->value;
 	else if ((*tokens)->type == T_WORD)
 		new_redir->file = (*tokens)->value;
@@ -86,20 +80,8 @@ int	add_to_redirect(t_redirect **redir, t_token **tokens)
 			last_redir = last_redir->next;
 		last_redir->next = new_redir;
 	}
-	printf("add_to_redirect çıktık \n");
-
 	return (0);
 }
-	// if (!(*head))
-	// {
-	// 	*head = new_redir;
-	// 	*redirects = new_redir;
-	// }
-	// else
-	// {
-	// 	(*redirects)->next = new_redir;
-	// 	*redirects = (*redirects)->next;
-	// }
 	
 t_redirect	*init_redirect()
 {
@@ -112,7 +94,6 @@ t_redirect	*init_redirect()
 	redir->delimiter = NULL;
 	redir->should_be_expand = false;
 	redir->next = NULL;
-
 	return (redir);
 }
 
@@ -134,20 +115,6 @@ int	add_cmd(t_cmd **cmd, t_cmd *new_cmd)
 	}
 	return (0);
 }
-
-// t_cmd	*init_cmd(t_redirect *redir, char **argv)
-// {
-// 	t_cmd	*cmd;
-
-// 	cmd = malloc(sizeof(t_cmd));
-// 	if (!cmd)
-// 		return (NULL);
-// 	cmd->argv = argv;
-// 	cmd->redirects = redir;
-// 	cmd->next = NULL;
-
-// 	return (cmd);
-// }
 
 void	free_redirlist(t_redirect *redir)
 {
