@@ -6,20 +6,19 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 21:14:29 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:27:38 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-int	is_it_over(t_redirect *redir, int fd[2], char *line)
+int	is_it_over(t_redirect *redir, char *line)
 {
-	if (!line)
+	if (!line || !redir || !redir->delimiter)
 		return (0);
 	if (ft_strcmp(line, redir->delimiter) == 0)
 	{
 		free(line);
-		close(fd[1]);
 		return (1);
 	}
 	return (0);

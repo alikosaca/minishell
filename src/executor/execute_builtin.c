@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 17:25:03 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:30:17 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(t_cmd *cmd)
 {
-	if (!cmd || !cmd->argv)
+	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
 	else if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (1);

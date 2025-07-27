@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 21:13:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:11:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 			break ;
 		if (!line)
 			break ;
-		if (is_it_over(redir, fd, line))
+		if (is_it_over(redir, line))
 			break ;
 		should_be_expand(redir, line);
 		print_line(fd, line);
