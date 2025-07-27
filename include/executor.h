@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 21:14:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:02:45 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int			setup_redir(t_shell *shell, t_cmd *cmd);
 int			restore_std_fds(t_shell *shell);
 int 		restore_doc_fds(t_shell *shell, int fd[2], bool should_dup);
 
-int			is_it_over(t_redirect *redir, int fd[2], char *line);
+// int			is_it_over(t_redirect *redir, int fd[2], char *line);
+int				is_it_over(t_redirect *redir, char *line);
+
 void		print_line(int fd[2], char *line);
 void		should_be_expand(t_redirect *redir, char *line);
 

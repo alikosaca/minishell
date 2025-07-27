@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 20:58:25 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:52:50 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	is_external(t_shell *shell, t_cmd *cmd)
 {
 	char	*path;
 
-	if (!cmd || !cmd->argv)
+	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (0);
 	path = find_cmd_path(shell, cmd->argv[0]);
 	if (!path)
@@ -70,5 +70,6 @@ int	exec_external(t_shell *shell, t_cmd *cmd)
 		return (cmd_err(shell, "fork", strerror(errno), 254));
 	else if (pid == 0)
 		return (child(shell, cmd));
+	printf("sa\n");
 	return (parent(shell, pid));
 }
