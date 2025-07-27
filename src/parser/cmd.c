@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/27 13:53:48 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/27 20:19:02 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	add_to_redirect(t_redirect **redir, t_token **tokens)
 		new_redir->delimiter = (*tokens)->value;
 	else if ((*tokens)->type == T_WORD)
 		new_redir->file = (*tokens)->value;
-	else if ((*tokens)->type == T_DOLLAR)
-		new_redir->should_be_expand = true;
 	if (!(*redir))
 		*redir = new_redir;
 	else
@@ -92,7 +90,6 @@ t_redirect	*init_redirect()
 		return (NULL);
 	redir->file = NULL;
 	redir->delimiter = NULL;
-	redir->should_be_expand = false;
 	redir->next = NULL;
 	return (redir);
 }
