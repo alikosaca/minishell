@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/27 20:19:02 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 11:49:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ int	add_to_argv(t_cmd **new_cmd, char *value)
 	return (0);
 }
 
+static void	set_redir_values(t_redirect **redir, t_token *tokens, bool stat)
+{
+	if (stat && (tokens->type == T_WORD || tokens->type == T_DOLLAR))
+	{
+		(*redir)->delimiter = tokens->value;
+		(*redir)->should_be_expand = true;
+	}
+	else if (stat)
+		(*redir)->delimiter = tokens->value;
+	else
+		(*redir)->file = tokens->value;
+}
+
 int	add_to_redirect(t_redirect **redir, t_token **tokens)
 {
 	t_redirect	*new_redir;
@@ -65,11 +78,10 @@ int	add_to_redirect(t_redirect **redir, t_token **tokens)
 		return (1);
 	new_redir->type = redirect_type((*tokens)->type);
 	*tokens = (*tokens)->next;
-	if (((*tokens)->type == T_WORD || ((*tokens)->type == T_DOLLAR))
-		&& new_redir->type == REDIR_HEREDOC)
-		new_redir->delimiter = (*tokens)->value;
-	else if ((*tokens)->type == T_WORD)
-		new_redir->file = (*tokens)->value;
+	if (new_redir->type == REDIR_HEREDOC)
+		set_redir_values(&new_redir, *tokens, true);
+	else
+		set_redir_values(&new_redir, *tokens, false);
 	if (!(*redir))
 		*redir = new_redir;
 	else
@@ -90,6 +102,7 @@ t_redirect	*init_redirect()
 		return (NULL);
 	redir->file = NULL;
 	redir->delimiter = NULL;
+	redir->should_be_expand = false;
 	redir->next = NULL;
 	return (redir);
 }

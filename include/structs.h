@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/27 20:18:35 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 12:49:56 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_redirect
 	t_redirect_type		type;
 	char				*file;
 	char				*delimiter;
+	bool				should_be_expand;
 	struct s_redirect	*next;
 }	t_redirect;
 
