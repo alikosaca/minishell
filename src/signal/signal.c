@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:48:41 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 19:55:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:26:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ void	sigint_handler(int sig)
 	(void)sig;
 	g_sig = 130;
 	g_shell_ptr->exitcode = g_sig;
-	if (g_shell_ptr->exitcode == 130)
+	printf("\n");
+	if (g_shell_ptr->heredoc)
 	{
 		rl_replace_line("", 0);
-		printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+	{
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}

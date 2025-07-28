@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/27 12:27:38 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:25:57 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ void	print_line(int fd[2], char *line)
 	free(line);
 }
 
-void	should_be_expand(t_redirect *redir, char *line)
+void	should_be_expand(t_shell *shell, t_redirect *redir, char **line)
 {
+	char	*temp;
+
 	if (redir->should_be_expand)
-		ft_strdup(line); // for now.
-	else
-		ft_strdup(line); // for now.
+	{
+		temp = expand_dollar(shell, *line);
+		free(*line);
+		*line = temp;
+	}
 }
 
 t_redirect	*get_last_redir(t_redirect *redir)

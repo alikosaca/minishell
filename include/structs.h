@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/28 12:49:56 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:36:13 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ typedef struct s_shell
 	t_env		*envlist;
 	t_token		*tokens;
 	t_cmd		*commands;
-	int			exitstat;
+	bool		heredoc;
 	int			exitcode;
-	int			pid_count;
-	bool		in_heredoc;
 	int			stdin_backup;
 	int			stdout_backup;
 }	t_shell;

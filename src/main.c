@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 21:13:01 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:24:49 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ static void	process_input(t_shell *shell)
 
 static void	loop(t_shell *shell)
 {
+	setup_signals(shell);
 	while (true)
 	{
-		setup_signals(shell);
+		g_sig = 0;
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{

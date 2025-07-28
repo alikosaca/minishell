@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/27 11:11:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:26:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,55 @@ static int	redir_append(t_shell *shell, t_redirect *redir)
 	return (0);
 }
 
-int redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
+void	child_heredoc(t_shell *shell, t_redirect *redir, int *fd)
 {
-	int		fd[2];
 	char	*line;
 
-	if (pipe(fd) == -1)
-		return (cmd_err(shell, "pipe", strerror(errno), 1));
-	while (true)
+	signal(SIGINT, SIG_DFL);
+	close(fd[0]);
+	while (1)
 	{
 		line = readline(PS2);
-		if (shell->exitcode == 130)
-			break ;
 		if (!line)
 			break ;
+		if (shell->exitcode == 130)
+		{
+			if (line)
+				free(line);
+			break ;
+			exit(shell->exitcode);
+		}
 		if (is_it_over(redir, line))
 			break ;
-		should_be_expand(redir, line);
+		should_be_expand(shell, redir, &line);
 		print_line(fd, line);
+	}
+	close(fd[1]);
+	exit(0);
+}
+
+int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
+{
+	int		fd[2];
+	pid_t	pid;
+	int		status;
+
+	if (!redir || pipe(fd) == -1)
+		return (cmd_err(shell, "pipe", strerror(errno), 1));
+	shell->heredoc = true;
+	pid = fork();
+	if (pid == -1)
+		return (cmd_err(shell, "fork", strerror(errno), 1));
+	if (pid == 0)
+		child_heredoc(shell, redir, fd);
+	close(fd[1]);
+	shell->heredoc = false;
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		shell->exitcode = 130;
+		close(fd[0]);
+		return (shell->exitcode);
 	}
 	return (restore_doc_fds(shell, fd, should_dup));
 }
