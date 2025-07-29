@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/28 21:26:22 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/29 23:05:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,23 @@ void	child_heredoc(t_shell *shell, t_redirect *redir, int *fd)
 {
 	char	*line;
 
+	line = NULL;
 	signal(SIGINT, SIG_DFL);
 	close(fd[0]);
 	while (1)
 	{
+		printf("exitcode: %d\n", shell->exitcode);
 		line = readline(PS2);
 		if (!line)
 			break ;
+		printf("exitcode: %d\n", shell->exitcode);
 		if (shell->exitcode == 130)
 		{
 			if (line)
 				free(line);
 			break ;
-			exit(shell->exitcode);
 		}
+		printf("line: %s\n", line);
 		if (is_it_over(redir, line))
 			break ;
 		should_be_expand(shell, redir, &line);
@@ -78,6 +81,33 @@ void	child_heredoc(t_shell *shell, t_redirect *redir, int *fd)
 	exit(0);
 }
 
+// int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
+// {
+// 	int		fd[2];
+// 	pid_t	pid;
+// 	int		status;
+
+// 	if (!redir || pipe(fd) == -1)
+// 		return (cmd_err(shell, "pipe", strerror(errno), 1));
+// 	shell->heredoc = true;
+// 	pid = fork();
+// 	if (pid == -1)
+// 		return (cmd_err(shell, "fork", strerror(errno), 1));
+// 	if (pid == 0)
+// 		child_heredoc(shell, redir, fd);
+// 	close(fd[1]);
+// 	shell->heredoc = false;
+// 	printf("random status: %d\n", status);
+// 	waitpid(pid, &status, 0);
+// 	printf("heredoc status: %d\n", status);
+// 	if (WIFSIGNALED(status))
+// 	{
+// 		shell->exitcode = 130;
+// 		close(fd[0]);
+// 		return (shell->exitcode);
+// 	}
+// 	return (restore_doc_fds(shell, fd, should_dup));
+// }
 int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 {
 	int		fd[2];
@@ -94,11 +124,17 @@ int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 		child_heredoc(shell, redir, fd);
 	close(fd[1]);
 	shell->heredoc = false;
+	// printf("random status: %d\n", status);
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
+	// printf("heredoc status: %d\n", status);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 	{
 		shell->exitcode = 130;
-		close(fd[0]);
+		shell->skip_prompt = true;
+		printf("\n");
+		rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_redisplay();
 		return (shell->exitcode);
 	}
 	return (restore_doc_fds(shell, fd, should_dup));

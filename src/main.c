@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/28 21:24:49 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/29 23:04:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	process_input(t_shell *shell)
 		return ;
 	shell->tokens = expansion(shell, shell->tokens);
 	if (!shell->tokens)
-	return ;
+		return ;
 	shell->commands = parser(shell->tokens);
 	if (!shell->commands)
 		return ;
@@ -32,7 +32,13 @@ static void	loop(t_shell *shell)
 	setup_signals(shell);
 	while (true)
 	{
-		g_sig = 0;
+		printf("skip: %d\n", shell->skip_prompt);
+		printf("kac kere\n");
+		if (shell->skip_prompt)
+		{
+			shell->skip_prompt = false;
+			continue;
+		}
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
