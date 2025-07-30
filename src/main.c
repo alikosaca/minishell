@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/29 23:04:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:35:23 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ static void	loop(t_shell *shell)
 	setup_signals(shell);
 	while (true)
 	{
-		printf("skip: %d\n", shell->skip_prompt);
-		printf("kac kere\n");
-		if (shell->skip_prompt)
-		{
-			shell->skip_prompt = false;
-			continue;
-		}
+		// if (shell->skip_prompt)
+		// {
+		// 	shell->skip_prompt = false;
+		// 	continue;
+		// }
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
