@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 13:38:19 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:02:48 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	process_quote(t_token **tokens, char **input)
 	{
 		start = *input;
 		value = handle_quote(input);
-		if (input && (**input == '\'' || **input == '"' || ft_isalnum(**input)) )
+		if (input && (**input == '\'' || **input == '"' 
+			|| ft_isalnum(**input) || **input == '$'))
 			merge = true;
 		if (!value)
 		{
@@ -98,8 +99,6 @@ int	process_quote(t_token **tokens, char **input)
 	return (0);
 }
 
-		// if (**input && value && (**input != ' ' || **input != '\t'))
-		// 	merge = true;
 int	process_dollar_or_word(t_token **tokens, char **input)
 {
 	char	*value;
