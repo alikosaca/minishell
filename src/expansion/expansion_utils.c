@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/20 18:01:00 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:40:22 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,28 @@ char	*expand_dollar(t_shell *shell, char *str)
 		return (ft_itoa(shell->exitcode));
 	value = get_env_value(shell->envlist, str);
 	if (!value)
-		return (ft_strdup(""));
+		return (NULL);
 	return (ft_strdup(value));
 }
 
 // static int	var_len(char *str)
 // {
-// 	int	i;
-
-// 	if (!str)
-// 		return (0);
-// 	if (*str == '?')
-// 		return (1);
-// 	i = 0;
-// 	while (str[i])
-// 		i++;
-// 	return (i);
-// }
-
-
-// static int	var_len(char *str)
-// {
+	// 	int	i;
+	
+	// 	if (!str)
+	// 		return (0);
+	// 	if (*str == '?')
+	// 		return (1);
+	// 	i = 0;
+	// 	while (str[i])
+	// 		i++;
+	// 	return (i);
+	// }
+	
+	// ft_strdup();
+	
+	// static int	var_len(char *str)
+	// {
 // 	int	i;
 
 // 	if (!str)
