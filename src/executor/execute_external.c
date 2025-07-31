@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/30 18:35:12 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/31 12:41:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	is_external(t_shell *shell, t_cmd *cmd)
 	char	*path;
 
 	if (!cmd || !cmd->argv || !cmd->argv[0]
-		|| (cmd->argv[0][0] == '.' && cmd->argv[0][1] == '\0'))
+		|| ft_strcmp(cmd->argv[0], ".") == 0
+		|| ft_strcmp(cmd->argv[0], "..") == 0)
 		return (0);
 	path = find_cmd_path(shell, cmd->argv[0]);
 	if (!path)
