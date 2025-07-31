@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/30 16:35:23 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/31 12:39:51 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ static void	process_input(t_shell *shell)
 
 static void	loop(t_shell *shell)
 {
-	setup_signals(shell);
+	setup_signals();
 	while (true)
 	{
-		// if (shell->skip_prompt)
-		// {
-		// 	shell->skip_prompt = false;
-		// 	continue;
-		// }
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
 			printf("exit\n");
 			break ;
+		}
+		if (g_sig == 130 && shell->heredoc == false) // shell->input[0] == '\0'
+		{
+			shell->exitcode = 130;
+			g_sig = 0;
+			// continue ;
 		}
 		if ((*shell->input))
 			add_history(shell->input);

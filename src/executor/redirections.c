@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/30 16:36:10 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/07/31 12:43:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ void	child_heredoc(t_shell *shell, t_redirect *redir, int *fd)
 			break ;
 		if (is_it_over(redir, line))
 			break ;
+		if (g_sig == 130)
+		{
+			shell->heredoc = false;
+			shell->exitcode = g_sig;
+			g_sig = 0;
+			break ;
+		}
 		should_be_expand(shell, redir, &line);
 		print_line(fd, line);
 	}
@@ -89,11 +96,10 @@ int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 	close(fd[1]);
 	waitpid(pid, &status, 0);
 	shell->heredoc = false;
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	if (g_sig == 130) // || (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 	{
-		shell->exitcode = 130;
-		// shell->skip_prompt = true;
-
+		shell->exitcode = g_sig;
+		g_sig = 0;
 		close(fd[0]);
 		return (shell->exitcode);
 	}
@@ -119,6 +125,8 @@ int setup_redir(t_shell *shell, t_cmd *cmd)
 		 	shell->exitcode = redir_append(shell, redir);
 		else if (redir->type == REDIR_HEREDOC)
 			shell->exitcode = redir_heredoc(shell, redir, redir == last);
+		if (shell->exitcode == 130)
+			return (shell->exitcode);
 		redir = redir->next;
 	}
 	return (shell->exitcode);
