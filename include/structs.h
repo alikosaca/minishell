@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/29 22:54:00 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/31 13:45:46 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ typedef struct s_shell
 	t_env		*envlist;
 	t_token		*tokens;
 	t_cmd		*commands;
-	bool		heredoc;
-	bool		skip_prompt;
 	int			exitcode;
 	int			stdin_backup;
 	int			stdout_backup;

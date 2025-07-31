@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 12:43:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/07/31 13:46:21 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	child_heredoc(t_shell *shell, t_redirect *redir, int *fd)
 			break ;
 		if (g_sig == 130)
 		{
-			shell->heredoc = false;
 			shell->exitcode = g_sig;
 			g_sig = 0;
 			break ;
@@ -87,7 +86,7 @@ int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 
 	if (!redir || pipe(fd) == -1)
 		return (cmd_err(shell, "pipe", strerror(errno), 1));
-	shell->heredoc = true;
+	heredoc_signals();
 	pid = fork();
 	if (pid == -1)
 		return (cmd_err(shell, "fork", strerror(errno), 1));
@@ -95,8 +94,8 @@ int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 		child_heredoc(shell, redir, fd);
 	close(fd[1]);
 	waitpid(pid, &status, 0);
-	shell->heredoc = false;
-	if (g_sig == 130) // || (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	interactive_signals();
+	if (g_sig == 130)
 	{
 		shell->exitcode = g_sig;
 		g_sig = 0;
