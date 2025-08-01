@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 15:30:50 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 00:59:56 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	init_newcmd(t_cmd **new_cmd, t_token *token);
 
 //t_cmd	*init_cmd(t_redirect *redir, char **argv);
 
-void	free_redirlist(t_redirect *redir);
-void	free_cmdlist(t_cmd *cmd);
+void	free_redirlist(t_redirect **redir);
+void	free_cmdlist(t_cmd **cmd);
 
 
 t_cmd	*parser(t_token *tokens);

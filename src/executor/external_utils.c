@@ -6,24 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/11 00:33:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 00:54:26 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
-
-static void	free_split(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);	
-		i++;
-	}
-	free(arr);
-}
 
 static char	*find_full_path(char **paths, char *cmd)
 {
@@ -38,16 +25,16 @@ static char	*find_full_path(char **paths, char *cmd)
 	{
 		temp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(temp, cmd);
-		free(temp);
+		_free(&temp);
 		if (access(path, X_OK) == 0)
 		{
-			free_split(paths);
+			__free(&paths);
 			return (path);
 		}
-		free(path);
+		_free(&path);
 		i++;
 	}
-	free_split(paths);
+	__free(&paths);
 	return (NULL);
 }
 

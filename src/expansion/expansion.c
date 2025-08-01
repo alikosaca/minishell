@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/28 12:51:25 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 00:53:52 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 	else if (token->type == T_DOUBLE_QUOTE)
 		expanded = expand_dquote(shell, token->value);
 	if (expanded)
-		free(token->value);
+		_free(&token->value);
 	token->value = expanded;
 }
 

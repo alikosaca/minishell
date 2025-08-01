@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 12:29:43 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:58:42 by yaycicek         ###   ########.fr       */
+/*   Created: 2025/08/02 00:28:52 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/08/02 00:38:50 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/utils.h"
 
-void	cleanup(t_shell *shell)
+void	_free(char **ptr)
 {
-	if (shell->input)
-		_free(&shell->input);
-	if (shell->envlist)
-		free_envlist(&shell->envlist);
-	if (shell->tokens)
-		free_tokenlist(&shell->tokens);
-	if (shell->commands)
-		free_cmdlist(&shell->commands);
-	close(shell->stdin_backup);
-	close(shell->stdout_backup);
+	if (!ptr || !(*ptr))
+		return ;
+	free((*ptr));
+	(*ptr) = NULL;	
+}
+
+void	__free(char ***ptr)
+{
+	int	i;
+
+	if (!ptr || !(*ptr))
+		return ;
+	i = 0;
+	while ((*ptr)[i])
+	{
+		_free(&(*ptr)[i]);
+		i++;
+	}
+	free((*ptr));
+	(*ptr) = NULL;
 }

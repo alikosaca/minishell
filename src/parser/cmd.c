@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/31 14:42:03 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 00:59:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,28 @@ t_redirect	*init_redirect()
 	return (redir);
 }
 
-void	free_redirlist(t_redirect *redir)
+void	free_redirlist(t_redirect **redir)
 {
 	t_redirect	*tmp;
 
-	while (redir)
+	while ((*redir))
 	{
-		tmp = redir->next;
-		free(redir);
-		redir = tmp;
+		tmp = (*redir)->next;
+		free((*redir));
+		(*redir) = tmp;
 	}
 }
 
-void	free_cmdlist(t_cmd *cmd)
+void	free_cmdlist(t_cmd **cmd)
 {
 	t_cmd	*tmp;
 
-	while (cmd)
+	while ((*cmd))
 	{
-		tmp = cmd->next;
-		if (cmd->redirects)
-			free_redirlist(cmd->redirects);
-		free(cmd);
-		cmd = tmp;
+		tmp = (*cmd)->next;
+		if ((*cmd)->redirects)
+			free_redirlist(&(*cmd)->redirects);
+		free((*cmd));
+		(*cmd) = tmp;
 	}
 }

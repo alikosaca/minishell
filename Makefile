@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+         #
+#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/07/31 14:43:47 by akosaca          ###   ########.fr        #
+#    Updated: 2025/08/02 00:28:47 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SIGNAL_SRC   = \
                $(SIGNAL_DIR)/signal.c
 UTILS_SRC    = \
                $(UTILS_DIR)/error.c \
+               $(UTILS_DIR)/free.c
 
 SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
                $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)

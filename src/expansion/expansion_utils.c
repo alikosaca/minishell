@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/01 19:12:02 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 00:53:58 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	result = ft_strjoin(s1, s2);
-	free(s1);
+	_free(&s1);
 	return (result);
 }
 
@@ -70,7 +70,7 @@ char	*expand_dollar(t_shell *shell, char *str)
 	if (!var_name)
 		var_name = ft_strdup("");
 	fp = ft_strjoin_free(fp, var_name);
-	free(var_name);
+	_free(&var_name);
 	return (fp);
 }
 
@@ -93,8 +93,8 @@ static char	*add_dquote(char *ret, char *part)
 	char	*tmp;
 
 	tmp = ft_strjoin(ret, part);
-	free(ret);
-	free(part);
+	_free(&ret);
+	_free(&part);
 
 	return (tmp);
 }

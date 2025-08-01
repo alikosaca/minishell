@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/01 19:19:30 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 00:57:02 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ char	*handle_dollar(char **input)
 	if (dolar != NULL)
 	{
 		char *temp = ft_strjoin(dolar, result);
-		free(dolar);
-        free(result);
+		_free(&dolar);
+        _free(&result);
         return (temp);
 	}
 	return (result);

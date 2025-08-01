@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 13:57:53 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 00:37:46 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static void	loop(t_shell *shell)
 		if ((*shell->input))
 			add_history(shell->input);
 		process_input(shell);
-		free(shell->input);
-		shell->input = NULL;
+		_free(&shell->input);
 	}
 }
 

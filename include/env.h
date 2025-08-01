@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 17:28:29 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 00:43:41 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include "structs.h"
 # include "../libft/libft.h"
+# include "utils.h"
 
 t_env	*create_env_node(char *key, char *value, bool exported);
 void	add_sys_env(t_env **envlist, char *envstr);
@@ -32,7 +33,6 @@ char	*get_env_value(t_env *envlist, char *key);
 int		count_exported_env(t_env *envlist);
 char	*create_envstr(char *key, char *value);
 char	**env_to_arr(t_env *envlist);
-void	free_env_arr(char **env_arr);
 
 int		env(t_env *envlist, char **argv);
 

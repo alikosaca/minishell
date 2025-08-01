@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/24 13:04:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 00:41:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*create_envstr(char *key, char *value)
 	if (!tmp)
 		return (NULL);
 	ret = ft_strjoin(tmp, value);
-	free(tmp);
+	_free(&tmp);
 	return (ret);
 }
 
@@ -61,26 +61,11 @@ char	**env_to_arr(t_env *envlist)
 			env_arr[i] = create_envstr(tmp->key, tmp->value);
 			if (!env_arr[i])
 			{
-				free_env_arr(env_arr);
+				__free(&env_arr);
 				return (NULL);
 			}
 		}
 		tmp = tmp->next;
 	}
 	return (env_arr);
-}
-
-void	free_env_arr(char **env_arr)
-{
-	int	i;
-
-	if (!env_arr)
-		return ;
-	i = 0;
-	while (env_arr[i])
-	{
-		free(env_arr[i]);
-		i++;
-	}
-	free(env_arr);
 }

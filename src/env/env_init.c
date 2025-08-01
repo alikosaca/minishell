@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 17:25:41 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 00:55:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 		node->value = ft_strdup(value);
 		if (!node->value)
 		{
-			free(node->key);
+			_free(&node->key);
 			free(node);
 			return (NULL);
 		}
@@ -58,8 +58,8 @@ void	add_sys_env(t_env **envlist, char *envstr)
 		ft_strlcpy(key, envstr, equal - envstr + 1);
 		key[equal - envstr] = '\0';
 		add_env(envlist, key, value, true);
-		free(key);
-		free(value);
+		_free(&key);
+		_free(&value);
 	}
 	else
 	{
@@ -87,13 +87,9 @@ void	free_envlist(t_env **envlist)
 	while ((*envlist))
 	{
 		tmp = (*envlist)->next;
-		free((*envlist)->key);
-		(*envlist)->key = NULL;
+		_free(&(*envlist)->key);
 		if ((*envlist)->value)
-		{
-			free((*envlist)->value);
-			(*envlist)->value = NULL;
-		}
+			_free(&(*envlist)->value);
 		free((*envlist));
 		(*envlist) = tmp;
 	}
