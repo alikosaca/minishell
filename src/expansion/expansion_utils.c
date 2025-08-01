@@ -6,18 +6,29 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 21:18:34 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/01 19:12:02 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/expansion.h"
 
-static char *find_process(char *str, int *i)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	int		status;
-	char	*res;
-	char	*tmp;
+	char *result;
 
+	if (!s1 || !s2)
+		return (NULL);
+	result = ft_strjoin(s1, s2);
+	free(s1);
+	return (result);
+}
+
+static char	*find_process(char *str, int *i)
+{
+	char	*res;
+	int		status;
+
+	(*i) = 0;
 	res = ft_strdup("");
 	status = 0;
 	while (str[(*i)] == '$')
@@ -26,87 +37,42 @@ static char *find_process(char *str, int *i)
 		(*i)++;
 		if (status == 2)
 		{
-			tmp = ft_strjoin(res, "42");
-			free(res);
-			res = tmp;
+			res = ft_strjoin_free(res, "42");
 			status = 0;
 		}
 	}
-	if (status == 1)
-	{
-		tmp = ft_strjoin(res, "$");
-		free(res);
-		res = tmp;
-	}
+	 if (status == 1 && !str[(*i)])
+		res = ft_strjoin_free(res, "$");
 	return (res);
 }
 
 char	*expand_dollar(t_shell *shell, char *str)
 {
-	char	*value;
+
 	char	*fp;
-	//char	*tmp;
 	int		i;
 	int		start;
-	char *var_name;
-	char *env_val;
+	char	*var_name;
 
 	if (!shell || !str)
 		return (NULL);
-	i = 0;
 	fp = find_process(str, &i);
 	if (!str[i])
 		return (fp);
 	if (str[i] == '?')
-	{
-		value = ft_itoa(shell->exitcode);
+		return (ft_itoa(shell->exitcode));
+	start = i;
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
-	}
-	else
-	{
-		start = i;
-		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-			i++;
-		var_name = ft_substr(str, start, i - start);
-		env_val = get_env_value(shell->envlist, var_name);
-		value = ft_strdup(env_val ? env_val : "");
-		free(var_name);
-	}
-	fp = ft_strjoin(fp, value);
-	//free(fp);
-	free(value);
+	var_name = ft_substr(str, start, i - start);
+	if (start % 2 != 0)
+		var_name = get_env_value(shell->envlist, var_name);
+	if (!var_name)
+		var_name = ft_strdup("");
+	fp = ft_strjoin_free(fp, var_name);
+	free(var_name);
 	return (fp);
 }
-
-// static int	var_len(char *str)
-// {
-	// 	int	i;
-	
-	// 	if (!str)
-	// 		return (0);
-	// 	if (*str == '?')
-	// 		return (1);
-	// 	i = 0;
-	// 	while (str[i])
-	// 		i++;
-	// 	return (i);
-	// }
-	
-	// ft_strdup();
-	
-	// static int	var_len(char *str)
-	// {
-// 	int	i;
-
-// 	if (!str)
-// 		return (0);
-// 	if (*str == '?')
-// 		return (1);
-// 	i = 0;
-// 	while (str[i] )
-// 		i++;
-// 	return (i);
-// }
 
 static int	env_len(char *str)
 {
@@ -122,27 +88,6 @@ static int	env_len(char *str)
 	return (i);
 }
 
-static char	*get_var_value(t_shell *shell, char *str, int *i)
-{
-	char	*env;
-	char	*val;
-
-	if (str[*i] == '?')
-	{
-		(*i)++;
-		return (ft_itoa(shell->exitcode));
-	}
-	env = ft_substr(str, *i, env_len(&str[*i]));
-	*i += ft_strlen(env);
-	val = get_env_value(shell->envlist, env);
-	if (!val)
-		val = ft_strdup("");
-	else
-		val = ft_strdup(val);
-	free(env);
-
-	return (val);
-}
 static char	*add_dquote(char *ret, char *part)
 {
 	char	*tmp;
@@ -181,3 +126,24 @@ char	*expand_dquote(t_shell *shell, char *str)
 	return (ret);
 }
 
+char	*get_var_value(t_shell *shell, char *str, int *i)
+{
+	char	*env;
+	char	*val;
+
+	if (str[*i] == '?')
+	{
+		(*i)++;
+		return (ft_itoa(shell->exitcode));
+	}
+	env = ft_substr(str, *i, env_len(&str[*i]));
+	*i += ft_strlen(env);
+	val = get_env_value(shell->envlist, env);
+	if (!val)
+		val = ft_strdup("");
+	else
+		val = ft_strdup(val);
+	free(env);
+
+	return (val);
+}
