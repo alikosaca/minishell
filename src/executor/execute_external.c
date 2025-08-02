@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 12:41:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:47:51 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	is_external(t_shell *shell, t_cmd *cmd)
 		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
 		return (0);
 	}
+	_free(&path);
 	return (1);
 }
 

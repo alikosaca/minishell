@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/07 16:30:14 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:50:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define PROMPT "minishell$ "
 
-int		init_shell(t_shell *shell, char **envp);
+int		init_shell(t_shell *shell);
 void	cleanup(t_shell *shell);
 
 #endif
