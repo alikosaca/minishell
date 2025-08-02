@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:54:52 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 20:01:27 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,12 @@ static char	*handle_dollar(char **input)
 
 	start = *input;
 	len = 1;
-	if ((**input && !((ft_isalpha(**input) || 
-		**input == '_' || **input == '?'))) || (!**input))
-		return (NULL);
-	else
+	(*input)++;
+	len++;
+	while (**input && (ft_isalnum(**input) || **input == '_'))
 	{
 		(*input)++;
 		len++;
-		while (**input && (ft_isalnum(**input) || **input == '_'))
-		{
-			(*input)++;
-			len++;
-		}
 	}
 	if (!(**input && (ft_isalnum(**input) || **input == '_')))
 		len--;
@@ -99,9 +93,12 @@ char	*process_dollar(char **input)
 	if (!dollar)
 		return (NULL);
 	*input += i;
+	if ((**input && !((ft_isalpha(**input) || 
+		**input == '_' || **input == '?'))) || (!**input))
+		return (dollar);
 	result = handle_dollar(input);
 	if (!result)
-		return (dollar);
+		return (NULL);
 	if (dollar)
 	{
 		char *temp = ft_strjoin(dollar, result);

@@ -6,40 +6,44 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:59:50 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 20:13:53 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/expansion.h"
 
-static char	*find_process(char *str, int *i)
+static char	*find_process(char *str, int *i, int *count)
 {
 	char	*res;
 	int		status;
+	int		pos;
 
-	(*i) = 0;
+	(*count) = 0;
 	res = ft_strdup("");
 	status = 0;
-	while (str[(*i)] == '$')
+	pos = (*i);
+	while (str[pos] == '$')
 	{
 		status++;
-		(*i)++;
+		pos++;
+		(*count)++;
 		if (status == 2)
 		{
-			res = ft_strjoin_free(res, "42");
+			res = ft_strjoin_free_first(res, "42");
 			status = 0;
 		}
 	}
-	if (status == 1 && !str[(*i)])
-		res = ft_strjoin_free(res, "$");
+	if (status == 1 && !str[pos])
+		res = ft_strjoin_free_first(res, "$");
+	(*i) += (*count);
 	return (res);
 }
 
-static char	*env_value_handle(t_shell *shell, char *var_value, int start)
+static char	*env_value_handle(t_shell *shell, char *var_value, int *count)
 {
 	char	*env_value;
 
-	if (start % 2 != 0 || start == 0)
+	if ((*count) % 2 != 0 || (*count) == 0)
 	{
 		env_value = get_env_value(shell->envlist, var_value);
 		if (!env_value)
@@ -48,34 +52,35 @@ static char	*env_value_handle(t_shell *shell, char *var_value, int start)
 			return (ft_strdup(env_value));
 	}
 	else
-		return (ft_strdup(""));
+		return (ft_strdup(var_value));
 }
 
-char	*expand_dollar(t_shell *shell, char *str)
+char	*expand_dollar(t_shell *shell, char *str, int *i)
 {
 	char	*fp;
-	int		i;
 	int		start;
 	char	*var_value;
 	char	*env_value;
+	int		count;
 
 	if (!shell || !str)
 		return (NULL);
-	fp = find_process(str, &i);
-	if (!str[i])
+	fp = find_process(str, i, &count);
+	if (!str[*i])
 		return (fp);
-	if (str[i] == '?')
+	if (str[*i] == '?')
 	{
 		_free(&fp);
+		(*i)++;
 		return (ft_itoa(shell->exitcode));
 	}
-	start = i;
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-		i++;
-	var_value = ft_substr(str, start, i - start);
- 	env_value = env_value_handle(shell, var_value, start);
+	start = (*i);
+	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
+		(*i)++;
+	var_value = ft_substr(str, start, (*i) - start);
+ 	env_value = env_value_handle(shell, var_value, &count);
 	_free(&var_value);
-	fp = ft_strjoin_free(fp, env_value);
+	fp = ft_strjoin_free_first(fp, env_value);
 	_free(&env_value);
 	return (fp);
 }
@@ -94,42 +99,52 @@ static int	env_len(char *str)
 	return (i);
 }
 
-static char	*add_dquote(char *ret, char *part)
+static char	*ft_strjoin_free_both(char *s1, char *s2)
 {
-	char	*tmp;
+	char	*result;
 
-	tmp = ft_strjoin(ret, part);
-	_free(&ret);
-	_free(&part);
+	if (!s1 || !s2)
+		return (NULL);
+	result = ft_strjoin(s1, s2);
+	_free(&s1);
+	_free(&s2);
 
-	return (tmp);
+	return (result);
 }
+/*
+	if (str[i + 1] && (ft_isalnum(str[i + 1]) || str[i + 1] == '_' || str[i + 1] == '?'))
+		part = expand_dollar(shell, str, &i);
+	else
+	{
+		part = ft_strdup("$");
+		i++;
+	}
+*/
 char	*expand_dquote(t_shell *shell, char *str)
 {
 	int		i;
 	int		start;
-	char	*ret;
+	char	*res;
 	char	*part;
 
 	i = 0;
-	ret = ft_strdup("");
+	res = ft_strdup("");
 	while (str[i] && str[i] != '"')
 	{
 		if (str[i] == '$')
 		{
-			i++;
-			part = get_var_value(shell, str, &i);
+			part = expand_dollar(shell, str, &i);
 		}
 		else
 		{
 			start = i;
-			while (str[i] && str[i] != '$')
+			while (str[i] && str[i] != '$' && str[i] != '"')
 				i++;
 			part = ft_substr(str, start, i - start);
 		}
-		ret = add_dquote(ret, part);
+		res = ft_strjoin_free_both(res, part);
 	}
-	return (ret);
+	return (res);
 }
 
 char	*get_var_value(t_shell *shell, char *str, int *i)

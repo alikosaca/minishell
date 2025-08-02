@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:54:14 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 17:47:53 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ void	print_line(int fd[2], char *line)
 void	should_be_expand(t_shell *shell, t_redirect *redir, char **line)
 {
 	char	*temp;
+	int		i;
 
+	i = 0;
 	if (redir->should_be_expand)
 	{
-		temp = expand_dollar(shell, *line);
+		temp = expand_dollar(shell, *line, &i);
 		_free(line);
 		*line = temp;
 	}

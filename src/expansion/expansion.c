@@ -6,21 +6,18 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:59:45 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 18:04:14 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/expansion.h"
 
-char	*ft_strjoin_free(char *s1, char *s2)
+char	*ft_strjoin_free_first(char *s1, char *s2)
 {
 	char	*result;
 
 	if (!s1 || !s2)
-	{
-		printf("nulladımm\n");
 		return (NULL);
-	}
 	result = ft_strjoin(s1, s2);
 	if (s1)
 		_free(&s1);
@@ -30,12 +27,14 @@ char	*ft_strjoin_free(char *s1, char *s2)
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
 	char	*expanded;
+	int		i;
 
+	i = 0;
 	expanded = NULL;
 	if (!shell || !token)
 		return ;
 	if (token->type == T_DOLLAR)
-		expanded = expand_dollar(shell, token->value);
+		expanded = expand_dollar(shell, token->value, &i);
 	else if (token->type == T_DOUBLE_QUOTE)
 		expanded = expand_dquote(shell, token->value);
 	if (expanded)
