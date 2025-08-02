@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:37:46 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 12:57:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	t_shell	*const	shell = &(t_shell){0};
 
-	init_shell(shell, envp);
+	if (init_shell(shell, envp))
+		return (1);
 	loop(shell);
 	cleanup(shell);
 	rl_clear_history();

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 12:19:18 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 12:52:28 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	builtin_export(t_shell *shell, char **argv)
 		if (is_valid_identifier(argv[i]))
 		{
 			shell->exitcode = 0;
-			add_sys_env(&(shell->envlist), argv[i]);
+			if (!add_sys_env(&(shell->envlist), argv[i]))
+				return (1);
 		}
 		else
 			return (cmd_err(shell, "export", ERR_NOT_A_VALID_IDENT, 1));

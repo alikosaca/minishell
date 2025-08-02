@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:55:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 12:57:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,44 +40,45 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 	return (node);
 }
 
-void	add_sys_env(t_env **envlist, char *envstr)
+void	*add_sys_env(t_env **envlist, char *envstr)
 {
 	char	*key;
 	char	*equal;
 	char	*value;
 
 	key = NULL;
-	equal = NULL;
 	value = NULL;
-
 	equal = ft_strchr(envstr, '=');
 	if (equal)
 	{
-		key = malloc(equal - envstr + 1);
+		key = ft_substr(envstr, 0, equal - envstr);
 		value = ft_strdup(equal + 1);
-		ft_strlcpy(key, envstr, equal - envstr + 1);
-		key[equal - envstr] = '\0';
-		add_env(envlist, key, value, true);
+		if (!add_env(envlist, key, value, true))
+			return (NULL);
 		_free(&key);
 		_free(&value);
 	}
 	else
 	{
 		key = envstr;
-		add_env(envlist, key, value, true);
+		if (!add_env(envlist, key, value, true))
+			return (NULL);
 	}
+	return ((void *)1);
 }
 
-void	init_envlist(t_env **envlist, char **envp)
+void	*init_envlist(t_env **envlist, char **envp)
 {
 	int		i;
 
 	i = 0;
 	while (envp[i])
 	{
-		add_sys_env(envlist, envp[i]);
+		if (!add_sys_env(envlist, envp[i]))
+			return (NULL);
 		i++;
 	}
+	return ((void *)1);
 }
 
 void	free_envlist(t_env **envlist)

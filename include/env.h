@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:43:41 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 12:55:55 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "utils.h"
 
 t_env	*create_env_node(char *key, char *value, bool exported);
-void	add_sys_env(t_env **envlist, char *envstr);
-void	init_envlist(t_env **envlist, char **envp);
+void	*add_sys_env(t_env **envlist, char *envstr);
+void	*init_envlist(t_env **envlist, char **envp);
 void	free_envlist(t_env **envlist);
 
 t_env	*add_env(t_env **envlist, char *key, char *value, bool exported);

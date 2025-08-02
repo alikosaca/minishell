@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:15:49 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/05 12:13:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 12:57:14 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static int	update_pwd_vars(t_shell *shell)
 		return (cmd_err(shell, "cd", strerror(errno), 1)); // check!
 	pwd = find_env(shell->envlist, "PWD");
 	if (pwd)
-		add_env(&(shell->envlist), "OLDPWD", pwd->value, true);
-	add_env(&(shell->envlist), "PWD", newpwd, true);
+		if (!add_env(&(shell->envlist), "OLDPWD", pwd->value, true))
+			return (1);
+	if (!add_env(&(shell->envlist), "PWD", newpwd, true))
+		return (1);
 	return (0);
 }
 

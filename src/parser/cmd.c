@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/02 00:59:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:07:58 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	init_newcmd(t_cmd **new_cmd, t_token *token)
 	if ((*new_cmd)->argc == 0)
 		(*new_cmd)->argv = NULL;
 	else
+	{
 		(*new_cmd)->argv = malloc(sizeof(char *) * ((*new_cmd)->argc + 1));
+		if (!(*new_cmd)->argv)
+			return (1);
+	}
 	(*new_cmd)->next = NULL;
 	return (0);
 }
