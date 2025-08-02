@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 14:59:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 19:34:42 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	loop(t_shell *shell)
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
-			
 			printf("exit\n");
 			break ;
 		}
@@ -62,9 +61,13 @@ int	main(int argc, char **argv, char **envp)
 	if (init_shell(shell))
 		return (1);
 	if (!init_envlist(&shell->envlist, envp))
+	{
+		free_envlist(&shell->envlist);
 		return (1);
+	}
 	loop(shell);
 	cleanup(shell);
+	clear_history();
 	rl_clear_history();
 	return (shell->exitcode);
 }
