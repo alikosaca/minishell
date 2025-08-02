@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/06/24 15:01:53 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 13:54:49 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,18 @@ int	check_e_sequence(char *input)
 		|| *input == '(' || *input == ')')
 		return (1);
 	return (0);
+}
+int	is_word_delimiter(char c)
+{
+	return (
+		ft_isspace(c)
+		|| c == '|'
+		|| c == '<'
+		|| c == '>'
+		|| c == '\''
+		|| c == '"'
+		|| c == '$'
+		|| c == '\0'
+		|| check_e_sequence(&c)
+	);
 }

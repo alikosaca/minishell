@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:57:02 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:54:52 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,42 +42,32 @@ char	*handle_quote(char **input)
 static char	*get_len_dollar(char *input, int *i)
 {
 	char	*res;
-	int		start_pos;
 
-	start_pos = (*i) - 1;
+	(*i)++;
+	if (input[(*i)] != '$')
+		return (ft_strdup("$"));
 	while (input[(*i)] == '$')
 		(*i)++;
-	res = malloc(sizeof(char) * ((*i - start_pos) + 1));
+	res = malloc(sizeof(char) * (*i));
 	if (!res)
 		return (NULL);
-	ft_memcpy(res, input+start_pos, (*i - start_pos) + 1);
-	res[*i - start_pos] = '\0';
+	ft_memcpy(res, input, (*i));
+	res[*i] = '\0';
 
 	return (res);
 }
 
-char	*handle_dollar(char **input)
+static char	*handle_dollar(char **input)
 {
-	int		len;
-	char	*start;
 	char	*result;
-	int		i;
-	char	*dolar;
+	char	*start;
+	int		len;
 
-	dolar = NULL;
-	i = 0;
-	(*input)++;
-	if ((!**input))
-		return (ft_strdup("$"));
-	else if (**input == '$')
-		dolar = get_len_dollar(*input, &i);	
-	*input += i;
 	start = *input;
 	len = 1;
-	if (**input && !((ft_isalpha(**input) || **input == '_' || **input == '?')))
+	if ((**input && !((ft_isalpha(**input) || 
+		**input == '_' || **input == '?'))) || (!**input))
 		return (NULL);
-	else if ((!**input))
-		return (dolar);
 	else
 	{
 		(*input)++;
@@ -88,34 +78,38 @@ char	*handle_dollar(char **input)
 			len++;
 		}
 	}
-	result = malloc(len + 1);
+	if (!(**input && (ft_isalnum(**input) || **input == '_')))
+		len--;
+	result = ft_substr(start, 0, len);
 	if (!result)
 		return (NULL);
-	ft_memcpy(result, start, len);
-	result[len] = '\0';
-	if (dolar != NULL)
-	{
-		char *temp = ft_strjoin(dolar, result);
-		_free(&dolar);
-        _free(&result);
-        return (temp);
-	}
 	return (result);
 }
 
-static int	is_word_delimiter(char c)
+char	*process_dollar(char **input)
 {
-	return (
-		ft_isspace(c)
-		|| c == '|'
-		|| c == '<'
-		|| c == '>'
-		|| c == '\''
-		|| c == '"'
-		|| c == '$'
-		|| c == '\0'
-		|| check_e_sequence(&c)
-	);
+	char	*result;
+	char	*dollar;
+	int		i;
+
+	result = NULL;
+	dollar = NULL;
+	i = 0;
+	dollar = get_len_dollar(*input, &i);
+	if (!dollar)
+		return (NULL);
+	*input += i;
+	result = handle_dollar(input);
+	if (!result)
+		return (dollar);
+	if (dollar)
+	{
+		char *temp = ft_strjoin(dollar, result);
+		_free(&dollar);
+		_free(&result);
+		return (temp);
+	}
+	return (result);
 }
 
 char	*handle_word(char **input)

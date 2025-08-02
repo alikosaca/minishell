@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/30 14:02:48 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/02 13:09:58 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	process_errors(t_token **tokens, char **input)
 	if (len > 0)
 	{
 		value = malloc(len + 1);
+		if (!value)
+			return (0);
 		ft_memcpy(value, *input, len);
 		value[len] = '\0';
 		add_token(tokens, create_token(T_ERROR, value, false));
@@ -107,7 +109,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 	merge = false;
 	if (**input == '$')
 	{
-		value = handle_dollar(input);
+		value = process_dollar(input);
 		if (**input && value && (**input != ' '))
 			merge = true;
 		if (!value)

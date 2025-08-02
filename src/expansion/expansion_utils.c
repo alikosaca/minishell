@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:53:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:59:50 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../include/expansion.h"
-
-char	*ft_strjoin_free(char *s1, char *s2)
-{
-	char *result;
-
-	if (!s1 || !s2)
-		return (NULL);
-	result = ft_strjoin(s1, s2);
-	_free(&s1);
-	return (result);
-}
+#include "../../include/expansion.h"
 
 static char	*find_process(char *str, int *i)
 {
@@ -41,18 +30,34 @@ static char	*find_process(char *str, int *i)
 			status = 0;
 		}
 	}
-	 if (status == 1 && !str[(*i)])
+	if (status == 1 && !str[(*i)])
 		res = ft_strjoin_free(res, "$");
 	return (res);
 }
 
+static char	*env_value_handle(t_shell *shell, char *var_value, int start)
+{
+	char	*env_value;
+
+	if (start % 2 != 0 || start == 0)
+	{
+		env_value = get_env_value(shell->envlist, var_value);
+		if (!env_value)
+			return (ft_strdup(""));
+		else
+			return (ft_strdup(env_value));
+	}
+	else
+		return (ft_strdup(""));
+}
+
 char	*expand_dollar(t_shell *shell, char *str)
 {
-
 	char	*fp;
 	int		i;
 	int		start;
-	char	*var_name;
+	char	*var_value;
+	char	*env_value;
 
 	if (!shell || !str)
 		return (NULL);
@@ -60,17 +65,18 @@ char	*expand_dollar(t_shell *shell, char *str)
 	if (!str[i])
 		return (fp);
 	if (str[i] == '?')
+	{
+		_free(&fp);
 		return (ft_itoa(shell->exitcode));
+	}
 	start = i;
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
-	var_name = ft_substr(str, start, i - start);
-	if (start % 2 != 0)
-		var_name = get_env_value(shell->envlist, var_name);
-	if (!var_name)
-		var_name = ft_strdup("");
-	fp = ft_strjoin_free(fp, var_name);
-	_free(&var_name);
+	var_value = ft_substr(str, start, i - start);
+ 	env_value = env_value_handle(shell, var_value, start);
+	_free(&var_value);
+	fp = ft_strjoin_free(fp, env_value);
+	_free(&env_value);
 	return (fp);
 }
 

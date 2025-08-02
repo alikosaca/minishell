@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:53:52 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/02 13:59:45 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/expansion.h"
+
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*result;
+
+	if (!s1 || !s2)
+	{
+		printf("nulladımm\n");
+		return (NULL);
+	}
+	result = ft_strjoin(s1, s2);
+	if (s1)
+		_free(&s1);
+	return (result);
+}
 
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
