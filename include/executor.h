@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/28 21:25:07 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/04 18:42:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # define PS2 "> "
 # define ERR_CMD_NOT_FOUND "command not found"
+# define ERR_IS_A_DIR "Is a directory"
 
 int			executor(t_shell *shell, t_cmd *cmd);
 

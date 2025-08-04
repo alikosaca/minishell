@@ -6,29 +6,39 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 15:47:51 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/04 19:01:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
+#include <sys/stat.h>
 
 static int	child(t_shell *shell, t_cmd *cmd)
 {
-	char	*path;
-	char	**envp;
+    char		*path;
+    char		**envp;
+    struct stat	st;
 
-	path = find_cmd_path(shell, cmd->argv[0]);
-	if (!path)
-		return (1);
-	envp = env_to_arr(shell->envlist);
-	if (!envp)
-		return (1);
-	execve(path, cmd->argv, envp);
-	if (errno == EACCES || errno == ENOEXEC)
-		return (cmd_err(shell, NULL, strerror(errno), 126));
-	else if (errno == ENOENT)
-		return (cmd_err(shell, NULL, strerror(errno), 127));
-	return (0);
+    path = NULL;
+    path = find_cmd_path(shell, cmd->argv[0]);
+    if (!path)
+        exit(cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127));
+    if (stat(path, &st) == 0)
+        if (S_ISDIR(st.st_mode))
+		{
+			_free(&path);
+            exit(cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126));
+		}
+    envp = env_to_arr(shell->envlist);
+    if (!envp)
+        exit(1);
+    execve(path, cmd->argv, envp);
+	_free(&path);
+    if (errno == EACCES || errno == ENOEXEC)
+        exit(cmd_err(shell, cmd->argv[0], strerror(errno), 126));
+    else if (errno == ENOENT)
+        exit(cmd_err(shell, cmd->argv[0], strerror(errno), 127));
+    exit(cmd_err(shell, cmd->argv[0], strerror(errno), shell->exitcode));
 }
 
 static int	parent(t_shell *shell, pid_t pid)
