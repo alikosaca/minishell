@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/25 17:03:24 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:36:39 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	check_pipe(t_token *token)
 int	syntax(t_shell *shell, t_token *token)
 {
 	if (token->type == T_PIPE)
-		return(lx_err(shell, token->value));
+		return (lx_err(shell, token->value));
 	if (token && token->next && !token->next->next)
 	{
 		if (token->type == T_PIPE)

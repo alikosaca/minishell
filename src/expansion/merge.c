@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/02 00:56:35 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:29:41 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ t_token	*handle_merge(t_token *token)
 	token->next = NULL;
 	free(token);
 	token = NULL;
-
 	return (merge);
 }
-
 
 void	check_merge(t_token **token)
 {
@@ -46,10 +44,8 @@ void	check_merge(t_token **token)
 
 	if (!token || !*token)
 		return ;
-
 	prev = NULL;
 	current = *token;
-	
 	while (current && current->next)
 	{
 		if (current->merge)
@@ -58,7 +54,7 @@ void	check_merge(t_token **token)
 			if (prev)
 				prev->next = merged;
 			else
-				*token = merged;		
+				*token = merged;
 			current = merged;
 		}
 		else
@@ -68,34 +64,3 @@ void	check_merge(t_token **token)
 		}
 	}
 }
-
-
-
-
-
-
-
-// void	check_merge(t_token **token)
-// {
-// 	t_token	*merge;
-// 	t_token	*bf_token;
-
-// 	if (!(*token) || !(*token)->next)
-// 		return ;
-
-// 	merge = NULL;
-// 	bf_token = NULL;
-// 	while (*token && (*token)->next)
-// 	{
-// 		if ((*token)->next->merge)
-// 			bf_token = *token;
-// 		if ((*token)->merge)
-// 		{
-// 			merge = handle_merge(*token);
-// 			bf_token->next = merge;
-// 			*token = merge;
-// 		}
-// 		else
-// 			*token = (*token)->next;
-// 	}
-// }

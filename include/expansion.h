@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:44:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 18:04:18 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:34:03 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 t_token	*expansion(t_shell *shell, t_token *tokens);
 
 char	*ft_strjoin_free_first(char *s1, char *s2);
+char	*ft_strjoin_free_both(char *s1, char *s2);
 char	*expand_dollar(t_shell *shell, char *str, int *i);
 char	*expand_dquote(t_shell *shell, char *str);
-char	*get_var_value(t_shell *shell, char *str, int *i);
 
 void	check_merge(t_token **token);
 

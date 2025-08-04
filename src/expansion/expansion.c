@@ -6,23 +6,11 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 18:04:14 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:32:06 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../include/expansion.h"
-
-char	*ft_strjoin_free_first(char *s1, char *s2)
-{
-	char	*result;
-
-	if (!s1 || !s2)
-		return (NULL);
-	result = ft_strjoin(s1, s2);
-	if (s1)
-		_free(&s1);
-	return (result);
-}
+#include "../../include/expansion.h"
 
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
@@ -62,6 +50,7 @@ static void	change_token_type(t_token *token)
 	else if (token->type == T_DOLLAR)
 		token->type = T_WORD;
 }
+
 t_token	*expansion(t_shell *shell, t_token *tokens)
 {
 	t_token	*cur;
@@ -69,7 +58,6 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 	if (!shell || !tokens)
 		return (NULL);
 	cur = tokens;
-
 	while (cur)
 	{
 		if (cur->type == T_HEREDOC && cur->next)

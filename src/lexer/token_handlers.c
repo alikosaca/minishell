@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 20:01:27 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:47:25 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static char	*get_len_dollar(char *input, int *i)
 		return (NULL);
 	ft_memcpy(res, input, (*i));
 	res[*i] = '\0';
-
 	return (res);
 }
 
@@ -84,6 +83,7 @@ char	*process_dollar(char **input)
 {
 	char	*result;
 	char	*dollar;
+	char	*temp;
 	int		i;
 
 	result = NULL;
@@ -93,7 +93,7 @@ char	*process_dollar(char **input)
 	if (!dollar)
 		return (NULL);
 	*input += i;
-	if ((**input && !((ft_isalpha(**input) || 
+	if ((**input && !((ft_isalpha(**input) || \
 		**input == '_' || **input == '?'))) || (!**input))
 		return (dollar);
 	result = handle_dollar(input);
@@ -101,9 +101,7 @@ char	*process_dollar(char **input)
 		return (NULL);
 	if (dollar)
 	{
-		char *temp = ft_strjoin(dollar, result);
-		_free(&dollar);
-		_free(&result);
+		temp = ft_strjoin_free_both(dollar, result);
 		return (temp);
 	}
 	return (result);

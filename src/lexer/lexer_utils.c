@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:54:49 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:34:58 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	check_e_sequence(char *input)
 		return (1);
 	return (0);
 }
+
 int	is_word_delimiter(char c)
 {
 	return (

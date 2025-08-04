@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/02 13:55:12 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:43:27 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "structs.h"
 # include "utils.h"
 # include "structs.h"
+# include "expansion.h"
 # include "../libft/libft.h"
 
 t_token	*lexer(t_shell *shell, char *input);

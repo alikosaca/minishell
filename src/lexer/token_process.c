@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:09:58 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 14:52:40 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	process_errors(t_token **tokens, char **input)
 	}
 	return (0);
 }
-
 
 int	process_redirection(t_token **tokens, char **input)
 {
@@ -84,8 +83,8 @@ int	process_quote(t_token **tokens, char **input)
 	{
 		start = *input;
 		value = handle_quote(input);
-		if (input && (**input == '\'' || **input == '"' 
-			|| ft_isalnum(**input) || **input == '$'))
+		if (input && (**input == '\'' || **input == '"'
+				|| ft_isalnum(**input) || **input == '$'))
 			merge = true;
 		if (!value)
 		{
@@ -116,14 +115,14 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 			add_token(tokens, create_token(T_ERROR, "$", merge));
 		else
 			add_token(tokens, create_token(T_DOLLAR, value, merge));
-		return (1);
 	}
 	else
 	{
 		value = handle_word(input);
 		if (!value)
 			return (0);
-		if (**input == '$' || ft_isalnum(**input) || **input == '\'' || **input == '"')
+		if (**input == '$' || ft_isalnum(**input)
+			|| **input == '\'' || **input == '"')
 			merge = true;
 		add_token(tokens, create_token(T_WORD, value, merge));
 	}
