@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/04 15:40:46 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 21:25:23 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*env_value_handle(t_shell *shell, char *var_value, int *count)
 {
 	char	*env_value;
 
-	if ((*count) % 2 != 0 || (*count) == 0)
+	if ((*count) % 2 != 0 || (*count) != 0)
 	{
 		env_value = get_env_value(shell->envlist, var_value);
 		if (!env_value)
@@ -110,7 +110,10 @@ char	*expand_dollar(t_shell *shell, char *str, int *i)
 	{
 		_free(&fp);
 		(*i)++;
-		return (ft_strjoin_index(ft_itoa(shell->exitcode), str, (*i)));
+		if (str[*i] == ' ')
+			return (ft_itoa(shell->exitcode));
+		else
+			return (ft_strjoin_index(ft_itoa(shell->exitcode), str, (*i)));
 	}
 	start = (*i);
 	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
