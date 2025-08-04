@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/04 14:50:36 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 15:40:46 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*expand_dollar(t_shell *shell, char *str, int *i)
 	{
 		_free(&fp);
 		(*i)++;
-		return (ft_itoa(shell->exitcode));
+		return (ft_strjoin_index(ft_itoa(shell->exitcode), str, (*i)));
 	}
 	start = (*i);
 	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))

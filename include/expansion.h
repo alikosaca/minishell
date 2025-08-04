@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:44:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 14:34:03 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/04 15:40:40 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	check_merge(t_token **token);
 
 t_token	*create_token(t_token_type type, char *value, bool merge);
 
+size_t	ft_strlen_index(const char *s, int i);
+char	*ft_strjoin_index(char const *s1, char const *s2, int i);
 
 #endif
