@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_utlis.c                                        :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 14:37:34 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/31 14:42:08 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/05 13:44:59 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	argc_len(t_token *token)
 	while (token && token->type != T_PIPE)
 	{
 		if (is_redirect(token->type) && token->next)
-			token = token->next->next;
+				token = token->next->next;
+		else if (ft_strlen(token->value) == 0)
+			token = token->next;
 		else
 		{
 			token = token->next;
@@ -32,9 +34,12 @@ int	argc_len(t_token *token)
 
 int	add_to_argv(t_cmd **new_cmd, char *value)
 {
-	(*new_cmd)->argv[(*new_cmd)->i] = value;
-	(*new_cmd)->i++;
-	(*new_cmd)->argv[(*new_cmd)->i] = NULL;
+	if (ft_strlen(value) != 0)
+	{
+		(*new_cmd)->argv[(*new_cmd)->i] = value;
+		(*new_cmd)->i++;
+		(*new_cmd)->argv[(*new_cmd)->i] = NULL;
+	}
 	return (0);
 }
 
