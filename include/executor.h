@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 18:42:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:21:31 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			is_builtin(t_cmd *cmd);
 int			exec_builtin(t_shell *shell, t_cmd *cmd);
 
 int			exec_external(t_shell *shell, t_cmd *cmd);
-int			is_external(t_shell *shell, t_cmd *cmd);
 
 char		*find_cmd_path(t_shell *shell, char *cmd);
 

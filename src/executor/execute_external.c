@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 19:01:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:24:18 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	child(t_shell *shell, t_cmd *cmd)
 
     path = NULL;
     path = find_cmd_path(shell, cmd->argv[0]);
-    if (!path)
+    if (!path || !ft_strcmp(cmd->argv[0], ".."))
         exit(cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127));
     if (stat(path, &st) == 0)
         if (S_ISDIR(st.st_mode))
@@ -56,28 +56,12 @@ static int	parent(t_shell *shell, pid_t pid)
 	return (1);
 }
 
-int	is_external(t_shell *shell, t_cmd *cmd)
-{
-	char	*path;
-
-	if (!cmd || !cmd->argv || !cmd->argv[0]
-		|| ft_strcmp(cmd->argv[0], ".") == 0
-		|| ft_strcmp(cmd->argv[0], "..") == 0)
-		return (0);
-	path = find_cmd_path(shell, cmd->argv[0]);
-	if (!path)
-	{
-		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
-		return (0);
-	}
-	_free(&path);
-	return (1);
-}
-
 int	exec_external(t_shell *shell, t_cmd *cmd)
 {
 	pid_t	pid;
 
+	if (!ft_strcmp(cmd->argv[0], "."))
+		return (2);
 	pid = fork();
 	if (pid == -1)
 		return (cmd_err(shell, "fork", strerror(errno), 254));

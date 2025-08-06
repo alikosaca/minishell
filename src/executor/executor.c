@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/27 19:42:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:55:56 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	executor(t_shell *shell, t_cmd *cmd)
 	{
 		if (is_builtin(cmd))
 			shell->exitcode = exec_builtin(shell, cmd);
-		else if (is_external(shell, cmd))
+		else
 			shell->exitcode = exec_external(shell, cmd);
 	}
 	if (restore_std_fds(shell))
