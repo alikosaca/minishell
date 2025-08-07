@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:29:43 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:58:42 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/07 15:06:57 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/utils.h"
 
 void	cleanup(t_shell *shell)
 {

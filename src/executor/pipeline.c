@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/06 12:23:49 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/07 16:40:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 		close(pipefd[1]);
 	}
 	if (is_builtin(cmd))
-		exit(exec_builtin(shell, cmd));
+		shell->exitcode = exec_builtin(shell, cmd);
 	else
-		exit(exec_external(shell, cmd));
-	exit(1);
+		shell->exitcode = exec_external(shell, cmd);
+	cleanup(shell);
+	exit(shell->exitcode);
 }
 
 static int	parent(int in_fd, int pipefd[2], t_cmd *cmd)

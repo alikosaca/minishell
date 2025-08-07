@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 00:32:06 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/07 15:08:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <string.h>
 # include <errno.h>
 # include "structs.h"
+# include "env.h"
+# include "lexer.h"
+# include "parser.h"
 # include "../libft/libft.h"
 
 # define BASH "bash"
@@ -29,5 +32,7 @@ int		lx_err(t_shell *shell, char *sep);
 
 void	_free(char **ptr);
 void	__free(char ***ptr);
+
+void	cleanup(t_shell *shell);
 
 #endif
