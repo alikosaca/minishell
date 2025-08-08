@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/07 16:39:57 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/08 12:54:04 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ static void	child(t_shell *shell, t_cmd *cmd)
     path = find_cmd_path(shell, cmd->argv[0]);
     if (!path || !ft_strcmp(cmd->argv[0], ".."))
 	{
+		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
 		cleanup(shell);
-        exit(cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127));
+        exit(shell->exitcode);
 	}
     else if (stat(path, &st) == 0)
         if (S_ISDIR(st.st_mode))
 		{
+			cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
 			_free(&path);
 			cleanup(shell);
-            exit(cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126));
+            exit(shell->exitcode);
 		}
     envp = env_to_arr(shell->envlist);
     execve(path, cmd->argv, envp);
