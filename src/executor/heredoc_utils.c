@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 21:34:48 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/08 20:26:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	should_be_expand(t_shell *shell, t_redirect *redir, char **line)
 t_redirect	*get_last_redir(t_redirect *redir)
 {
 	t_redirect	*last;
-	
+
+	last = NULL;
 	while (redir)
 	{
 		if (redir->type == REDIR_HEREDOC)
