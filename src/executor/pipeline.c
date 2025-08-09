@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 17:56:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 19:19:38 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
 	}
-	if (setup_redir(shell, cmd))
-		exit(shell->exitcode);
 	if (cmd->argv)
 	{
 		if (is_builtin(cmd))
