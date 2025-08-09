@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/02 13:07:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 20:00:06 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_newcmd(t_cmd **new_cmd, t_token *token)
 	return (0);
 }
 
-t_redirect	*init_redirect()
+t_redirect	*init_redirect(void)
 {
 	t_redirect	*redir;
 
@@ -67,6 +67,7 @@ void	free_cmdlist(t_cmd **cmd)
 		tmp = (*cmd)->next;
 		if ((*cmd)->redirects)
 			free_redirlist(&(*cmd)->redirects);
+		__free((void ***)&(*cmd)->argv);
 		free((*cmd));
 		(*cmd) = tmp;
 	}

@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:29 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/11 11:23:55 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 19:59:05 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_pipe(t_token_type type)
 
 t_redirect_type	redirect_type(t_token_type type)
 {
-	t_redirect_type redirect_type;
+	t_redirect_type	redirect_type;
 
 	redirect_type = 0;
 	if (type == T_REDIRECT_IN)

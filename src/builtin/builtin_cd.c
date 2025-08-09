@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:15:49 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 12:57:14 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 20:00:40 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	update_pwd_vars(t_shell *shell)
 	t_env	*pwd;
 
 	if (!getcwd(newpwd, sizeof(newpwd)))
-		return (cmd_err(shell, "cd", strerror(errno), 1)); // check!
+		return (cmd_err(shell, "cd", strerror(errno), 1));
 	pwd = find_env(shell->envlist, "PWD");
 	if (pwd)
 		if (!add_env(&(shell->envlist), "OLDPWD", pwd->value, true))
