@@ -6,13 +6,31 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/04 21:25:23 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 17:44:12 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/expansion.h"
 
-static char	*handle_dquote(t_shell *shell, char *str, int *i)
+bool	check_expand_condition(char *str, int *i, bool is_word)
+{
+	if (is_word)
+	{
+		if (str[*i])
+			return (true);
+		else
+			return (false);
+	}
+	else
+	{
+		if (str[*i] && str[*i] != '"')
+			return (true);
+		else
+			return (false);
+	}
+}	
+
+char	*parse_dollar(t_shell *shell, char *str, int *i)
 {
 	char	*part;
 
@@ -25,31 +43,6 @@ static char	*handle_dquote(t_shell *shell, char *str, int *i)
 		(*i)++;
 	}
 	return (part);
-}
-
-char	*expand_dquote(t_shell *shell, char *str)
-{
-	int		i;
-	int		start;
-	char	*res;
-	char	*part;
-
-	i = 0;
-	res = ft_strdup("");
-	while (str[i] && str[i] != '"')
-	{
-		if (str[i] == '$')
-			part = handle_dquote(shell, str, &i);
-		else
-		{
-			start = i;
-			while (str[i] && str[i] != '$' && str[i] != '"')
-				i++;
-			part = ft_substr(str, start, i - start);
-		}
-		res = ft_strjoin_free_both(res, part);
-	}
-	return (res);
 }
 
 static char	*find_process(char *str, int *i, int *count)
@@ -83,7 +76,7 @@ static char	*env_value_handle(t_shell *shell, char *var_value, int *count)
 {
 	char	*env_value;
 
-	if ((*count) % 2 != 0 || (*count) != 0)
+	if ((*count) % 2 != 0)
 	{
 		env_value = get_env_value(shell->envlist, var_value);
 		if (!env_value)
@@ -107,14 +100,7 @@ char	*expand_dollar(t_shell *shell, char *str, int *i)
 	if (!str[*i])
 		return (fp);
 	if (str[*i] == '?')
-	{
-		_free(&fp);
-		(*i)++;
-		if (str[*i] == ' ')
-			return (ft_itoa(shell->exitcode));
-		else
-			return (ft_strjoin_index(ft_itoa(shell->exitcode), str, (*i)));
-	}
+		return (handle_question_mark(shell, fp, i, count));
 	start = (*i);
 	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
 		(*i)++;

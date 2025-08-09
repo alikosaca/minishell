@@ -6,25 +6,48 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 14:32:06 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 17:44:33 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/expansion.h"
 
+static char	*expand_token(t_shell *shell, char *str, bool is_word)
+{
+	int		i;
+	int		start;
+	char	*res;
+	char	*part;
+
+	i = 0;
+	res = ft_strdup("");
+	while (check_expand_condition(str, &i, is_word))
+	{
+		if (str[i] == '$')
+			part = parse_dollar(shell, str, &i);
+		else
+		{
+			start = i;
+			while (check_expand_condition(str, &i, is_word) && str[i] != '$')
+				i++;
+			part = ft_substr(str, start, i - start);
+		}
+		res = ft_strjoin_free_both(res, part);
+	}
+	return (res);
+}
+
 static void	handle_expansion(t_shell *shell, t_token *token)
 {
 	char	*expanded;
-	int		i;
 
-	i = 0;
 	expanded = NULL;
 	if (!shell || !token)
 		return ;
 	if (token->type == T_DOLLAR)
-		expanded = expand_dollar(shell, token->value, &i);
+		expanded = expand_token(shell, token->value, true);
 	else if (token->type == T_DOUBLE_QUOTE)
-		expanded = expand_dquote(shell, token->value);
+		expanded = expand_token(shell, token->value, false);
 	if (expanded)
 		_free(&token->value);
 	token->value = expanded;

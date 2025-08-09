@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 15:41:09 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 17:41:54 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,14 @@ char	*ft_strjoin_index(char const *s1, char const *s2, int i)
 	ft_memcpy(join + s1_len, join2, s2_len);
 	join[total_len] = '\0';
 	return (join);
+}
+
+char	*handle_question_mark(t_shell *shell, char *fp, int *i, int count)
+{
+	(*i)++;
+	if (count % 2 == 1)
+		fp = ft_strjoin_free_first(fp, ft_itoa(shell->exitcode));
+	else
+		fp = ft_strjoin_free_first(fp, "?");
+	return (fp);
 }
