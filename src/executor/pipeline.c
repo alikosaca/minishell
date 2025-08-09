@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:01:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:56:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ static int	wait_all_children(t_shell *shell, pid_t *pids, int child_count)
 			break ;
 		if (child_count - 1 == i)
 		{
-			if (WIFEXITED(status))
-				shell->exitcode = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
+			if (WIFSIGNALED(status))
+			{
+				if (WTERMSIG(status) == SIGINT)
+					printf("\n");
 				shell->exitcode = 128 + WTERMSIG(status);
+			}
+			else if (WIFEXITED(status))
+				shell->exitcode = WEXITSTATUS(status);
 		}
 		i++;
 	}
@@ -36,6 +40,7 @@ static int	wait_all_children(t_shell *shell, pid_t *pids, int child_count)
 
 static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 {
+	signal(SIGINT, SIG_DFL);
 	if (in_fd != STDIN_FILENO)
 	{
 		dup2(in_fd, STDIN_FILENO);
@@ -72,6 +77,24 @@ static int	parent(int in_fd, int pipefd[2], t_cmd *cmd)
 	return (STDIN_FILENO);
 }
 
+static pid_t	create_process(t_shell *shell, t_cmd *cmd, int pipefd[2])
+{
+	pid_t	pid;
+
+	if (cmd->next && pipe(pipefd) == -1)
+	{
+		cmd_err(shell, "pipe", strerror(errno), 1);
+		return (-1);
+	}
+	pid = fork();
+	if (pid == -1)
+	{
+		cmd_err(shell, "fork", strerror(errno), 1);
+		return (-1);
+	}
+	return (pid);
+}
+
 int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 {
 	int		pipefd[2];
@@ -80,21 +103,21 @@ int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 	pid_t	pid;
 	pid_t	pids[30898];
 
+	signal(SIGINT, SIG_IGN);
 	child_count = 0;
 	in_fd = STDIN_FILENO;
 	while (cmd)
 	{
-		if (cmd->next && pipe(pipefd) == -1)
-			return (cmd_err(shell, "pipe", strerror(errno), 1));
-		pid = fork();
+		pid = create_process(shell, cmd, pipefd);
 		if (pid == -1)
-			return (cmd_err(shell, "fork", strerror(errno), 1));
+			return (1);
 		if (pid == 0)
 			child(shell, cmd, in_fd, pipefd);
-		pids[child_count] = pid;
+		pids[child_count++] = pid;
 		in_fd = parent(in_fd, pipefd, cmd);
-		child_count++;
 		cmd = cmd->next;
 	}
-	return (wait_all_children(shell, pids, child_count));
+	wait_all_children(shell, pids, child_count);
+	interactive_signals();
+	return (shell->exitcode);
 }

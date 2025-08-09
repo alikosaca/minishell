@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:00:07 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:55:34 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	child(t_shell *shell, t_cmd *cmd)
 	char		**envp;
 	struct stat	st;
 
+	signal(SIGINT, SIG_DFL);
 	path = find_cmd_path(shell, cmd->argv[0]);
 	if (!path || !ft_strcmp(cmd->argv[0], ".."))
 	{
@@ -56,10 +57,19 @@ static int	parent(pid_t pid)
 	status = 0;
 	if (waitpid(pid, &status, 0) == -1)
 		return (1);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+			printf("\n");
+		interactive_signals();
 		return (128 + WTERMSIG(status));
+	}
+	if (WIFEXITED(status))
+	{
+		interactive_signals();
+		return (WEXITSTATUS(status));
+	}
+	interactive_signals();
 	return (1);
 }
 
@@ -67,6 +77,7 @@ int	exec_external(t_shell *shell, t_cmd *cmd)
 {
 	pid_t	pid;
 
+	signal(SIGINT, SIG_IGN);
 	if (!ft_strcmp(cmd->argv[0], "."))
 		return (2);
 	pid = fork();
