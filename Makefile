@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/08/07 15:06:40 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/08/09 15:20:41 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,7 @@ BUILTIN_DIR  = $(SRC_DIR)/builtin
 SIGNAL_DIR   = $(SRC_DIR)/signal
 UTILS_DIR    = $(SRC_DIR)/utils
 
-MAIN_SRC     = $(SRC_DIR)/main.c \
-               $(SRC_DIR)/init.c
+MAIN_SRC     = $(SRC_DIR)/main.c
 LEXER_SRC    = \
                $(LEXER_DIR)/lexer.c \
                $(LEXER_DIR)/lexer_utils.c \
@@ -50,13 +49,15 @@ PARSER_SRC   = \
 	           $(PARSER_DIR)/parser.c \
                $(PARSER_DIR)/parser_utils.c \
                $(PARSER_DIR)/cmd.c \
-               $(PARSER_DIR)/cmd_utils.c
+               $(PARSER_DIR)/cmd_utils.c \
+			   $(PARSER_DIR)/redir.c
 EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/executor.c \
                $(EXECUTOR_DIR)/execute_builtin.c \
                $(EXECUTOR_DIR)/execute_external.c \
                $(EXECUTOR_DIR)/external_utils.c \
                $(EXECUTOR_DIR)/redirections.c \
+               $(EXECUTOR_DIR)/heredoc.c \
                $(EXECUTOR_DIR)/restore.c \
                $(EXECUTOR_DIR)/heredoc_utils.c \
                $(EXECUTOR_DIR)/pipeline.c
@@ -75,9 +76,10 @@ BUILTIN_SRC  = \
 SIGNAL_SRC   = \
                $(SIGNAL_DIR)/signal.c
 UTILS_SRC    = \
-               $(UTILS_DIR)/error.c \
+               $(UTILS_DIR)/init.c \
                $(UTILS_DIR)/free.c \
-               $(UTILS_DIR)/cleanup.c
+               $(UTILS_DIR)/cleanup.c \
+               $(UTILS_DIR)/error.c
 
 SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
                $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)

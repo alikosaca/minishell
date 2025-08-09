@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/06 11:55:56 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:00:31 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	executor(t_shell *shell, t_cmd *cmd)
 			shell->exitcode = exec_external(shell, cmd);
 	}
 	if (restore_std_fds(shell))
-			return (shell->exitcode);
+		return (shell->exitcode);
 	return (shell->exitcode);
 }

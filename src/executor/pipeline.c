@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/08 12:46:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:01:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,14 @@ static int	wait_all_children(t_shell *shell, pid_t *pids, int child_count)
 	i = 0;
 	while (i < child_count)
 	{
-		printf("child: %d\n", pids[i]);
 		if (waitpid(pids[i], &status, 0) == -1)
 			break ;
 		if (child_count - 1 == i)
 		{
-			printf("last child: %d\n", pids[i]);
 			if (WIFEXITED(status))
-					shell->exitcode = WEXITSTATUS(status);
-				else if (WIFSIGNALED(status))
-					shell->exitcode = 128 + WTERMSIG(status);
+				shell->exitcode = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				shell->exitcode = 128 + WTERMSIG(status);
 		}
 		i++;
 	}
@@ -49,10 +47,15 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
 	}
-	if (is_builtin(cmd))
-		shell->exitcode = exec_builtin(shell, cmd);
-	else
-		shell->exitcode = exec_external(shell, cmd);
+	if (setup_redir(shell, cmd))
+		exit(shell->exitcode);
+	if (cmd->argv)
+	{
+		if (is_builtin(cmd))
+			shell->exitcode = exec_builtin(shell, cmd);
+		else
+			shell->exitcode = exec_external(shell, cmd);
+	}
 	cleanup(shell);
 	exit(shell->exitcode);
 }

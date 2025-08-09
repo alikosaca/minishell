@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 00:28:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:03:20 by yaycicek         ###   ########.fr       */
+/*   Created: 2025/08/08 21:45:25 by yaycicek          #+#    #+#             */
+/*   Updated: 2025/08/09 15:04:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "../../include/parser.h"
 
-void	_free(char **ptr)
+t_redirect	*get_last_redir(t_redirect *redir)
 {
-	if (!ptr || !(*ptr))
-		return ;
-	free((*ptr));
-	(*ptr) = NULL;
-}
+	t_redirect	*last;
 
-void	__free(char ***ptr)
-{
-	int	i;
-
-	if (!ptr || !(*ptr))
-		return ;
-	i = 0;
-	while ((*ptr)[i])
+	last = NULL;
+	while (redir)
 	{
-		_free(&(*ptr)[i]);
-		i++;
+		if (redir->type == REDIR_HEREDOC)
+			last = redir;
+		redir = redir->next;
 	}
-	free((*ptr));
-	(*ptr) = NULL;
+	return (last);
 }

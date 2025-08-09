@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:25:58 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 13:18:48 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 14:27:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/utils.h"
 
 int	init_shell(t_shell *shell)
 {
