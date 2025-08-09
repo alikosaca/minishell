@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:00:46 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:36:20 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static char	*find_full_path(char **paths, char *cmd)
 	{
 		temp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(temp, cmd);
-		_free(&temp);
+		_free((void **)&temp);
 		if (access(path, X_OK) == 0)
 		{
-			__free(&paths);
+			__free((void ***)&paths);
 			return (path);
 		}
-		_free(&path);
+		_free((void **)&path);
 		i++;
 	}
-	__free(&paths);
+	__free((void ***)&paths);
 	return (NULL);
 }
 

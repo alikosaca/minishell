@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 12:57:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:40:17 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 	node->key = ft_strdup(key);
 	if (!node->key)
 	{
-		free(node);
+		_free((void **)&node);
 		return (NULL);
 	}
 	if (value)
@@ -30,8 +30,8 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 		node->value = ft_strdup(value);
 		if (!node->value)
 		{
-			_free(&node->key);
-			free(node);
+			_free((void **)&node->key);
+			_free((void **)&node);
 			return (NULL);
 		}
 	}
@@ -55,8 +55,8 @@ void	*add_sys_env(t_env **envlist, char *envstr)
 		value = ft_strdup(equal + 1);
 		if (!add_env(envlist, key, value, true))
 			return (NULL);
-		_free(&key);
-		_free(&value);
+		_free((void **)&key);
+		_free((void **)&value);
 	}
 	else
 	{
@@ -88,9 +88,9 @@ void	free_envlist(t_env **envlist)
 	while ((*envlist))
 	{
 		tmp = (*envlist)->next;
-		_free(&(*envlist)->key);
+		_free((void **)&(*envlist)->key);
 		if ((*envlist)->value)
-			_free(&(*envlist)->value);
+			_free((void **)&(*envlist)->value);
 		free((*envlist));
 		(*envlist) = tmp;
 	}

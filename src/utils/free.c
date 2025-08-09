@@ -6,13 +6,13 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 00:28:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:03:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:35:18 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 
-void	_free(char **ptr)
+void	_free(void **ptr)
 {
 	if (!ptr || !(*ptr))
 		return ;
@@ -20,7 +20,7 @@ void	_free(char **ptr)
 	(*ptr) = NULL;
 }
 
-void	__free(char ***ptr)
+void	__free(void ***ptr)
 {
 	int	i;
 

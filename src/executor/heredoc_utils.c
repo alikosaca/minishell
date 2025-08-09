@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 14:37:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:29:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_it_over(t_redirect *redir, char *line)
 		return (0);
 	if (ft_strcmp(line, redir->delimiter) == 0)
 	{
-		_free(&line);
+		_free((void **)&line);
 		return (1);
 	}
 	return (0);
@@ -69,7 +69,7 @@ void	should_be_expand(t_shell *shell, t_redirect *redir, char **line)
 			temp = handle_non_dollar(*line, &i);
 		res = ft_strjoin_free_first(res, temp);
 	}
-	_free(line);
+	_free((void **)line);
 	*line = res;
 }
 
@@ -77,5 +77,5 @@ void	print_line(int fd[2], char *line)
 {
 	write(fd[1], line, ft_strlen(line));
 	write(fd[1], "\n", 1);
-	_free(&line);
+	_free((void **)&line);
 }

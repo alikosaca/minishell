@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 01:01:35 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:41:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_env	*add_env(t_env **envlist, char *key, char *value, bool exported)
 		if (value)
 		{
 			if (node->value)
-				_free(&node->value);
+				_free((void **)&node->value);
 			node->value = ft_strdup(value);
 		}
 		node->exported = exported;
@@ -69,10 +69,9 @@ void	remove_env(t_env **envlist, char *key)
 				prev->next = cur->next;
 			else
 				(*envlist) = cur->next;
-			_free(&cur->key);
-			_free(&cur->value);
-			free(cur);
-			cur = NULL;
+			_free((void **)&cur->key);
+			_free((void **)&cur->value);
+			_free((void **)&cur);
 			return ;
 		}
 		prev = cur;

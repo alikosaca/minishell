@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 14:36:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:24:35 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 int		init_shell(t_shell *shell);
 
-void	_free(char **ptr);
-void	__free(char ***ptr);
+void	_free(void **ptr);
+void	__free(void ***ptr);
 
 void	cleanup(t_shell *shell);
 

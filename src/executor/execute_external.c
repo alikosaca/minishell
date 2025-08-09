@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 17:55:34 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:36:15 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	child_exec_error(t_shell *shell, char *path, char **envp)
 		cmd_err(shell, path, strerror(errno), 126);
 	else if (errno == ENOENT)
 		cmd_err(shell, path, strerror(errno), 127);
-	_free(&path);
-	__free(&envp);
+	_free((void **)&path);
+	__free((void ***)&envp);
 	cleanup(shell);
 	exit(shell->exitcode);
 }
@@ -41,7 +41,7 @@ static void	child(t_shell *shell, t_cmd *cmd)
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
 		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
-		_free(&path);
+		_free((void **)&path);
 		cleanup(shell);
 		exit(shell->exitcode);
 	}

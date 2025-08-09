@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 17:44:33 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 18:30:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	handle_expansion(t_shell *shell, t_token *token)
 	else if (token->type == T_DOUBLE_QUOTE)
 		expanded = expand_token(shell, token->value, false);
 	if (expanded)
-		_free(&token->value);
+		_free((void **)&token->value);
 	token->value = expanded;
 }
 

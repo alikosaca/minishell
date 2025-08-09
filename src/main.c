@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 19:34:42 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:27:02 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	loop(t_shell *shell)
 		if ((*shell->input))
 			add_history(shell->input);
 		process_input(shell);
-		_free(&shell->input);
+		_free((void **)&shell->input);
 	}
 }
 

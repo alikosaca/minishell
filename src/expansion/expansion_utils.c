@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 17:41:54 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 18:30:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_strjoin_free_both(char *s1, char *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	result = ft_strjoin(s1, s2);
-	_free(&s1);
-	_free(&s2);
+	_free((void **)&s1);
+	_free((void **)&s2);
 	return (result);
 }
 
@@ -32,7 +32,7 @@ char	*ft_strjoin_free_first(char *s1, char *s2)
 		return (NULL);
 	result = ft_strjoin(s1, s2);
 	if (s1)
-		_free(&s1);
+		_free((void **)&s1);
 	return (result);
 }
 

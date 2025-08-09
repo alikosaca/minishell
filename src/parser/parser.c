@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/31 14:07:16 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 18:44:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	process_command(t_cmd **cmd, t_token *token)
 		if (token && token->type == T_PIPE)
 			token = token->next;
 	}
-	// if (status)
-	// 	free_cmdlist((*cmd));
 }
 
 t_cmd	*parser(t_token *tokens)

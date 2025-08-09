@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_proccess.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 17:44:12 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/09 18:30:06 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ char	*expand_dollar(t_shell *shell, char *str, int *i)
 		(*i)++;
 	var_value = ft_substr(str, start, (*i) - start);
 	env_value = env_value_handle(shell, var_value, &count);
-	_free(&var_value);
+	_free((void **)&var_value);
 	fp = ft_strjoin_free_first(fp, env_value);
-	_free(&env_value);
+	_free((void **)&env_value);
 	return (fp);
 }

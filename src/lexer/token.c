@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:36:47 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/02 00:57:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:34:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_tokenlist(t_token **tokens)
 	{
 		tmp = (*tokens)->next;
 		if ((*tokens)->value)
-			_free(&(*tokens)->value);
+			_free((void **)&(*tokens)->value);
 		free((*tokens));
 		(*tokens) = tmp;
 	}
