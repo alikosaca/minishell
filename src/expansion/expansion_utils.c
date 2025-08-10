@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:30:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 12:00:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,13 @@ char	*ft_strjoin_index(char const *s1, char const *s2, int i)
 
 char	*handle_question_mark(t_shell *shell, char *fp, int *i, int count)
 {
+	char	*add;
+
 	(*i)++;
 	if (count % 2 == 1)
-		fp = ft_strjoin_free_first(fp, ft_itoa(shell->exitcode));
+		add = ft_itoa(shell->exitcode);
 	else
-		fp = ft_strjoin_free_first(fp, "?");
+		add = ft_strdup("?");
+	fp = ft_strjoin_free_both(fp, add);
 	return (fp);
 }
