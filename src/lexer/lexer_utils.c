@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 14:34:58 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/10 15:49:43 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ int	is_word_delimiter(char c)
 		|| c == '\0'
 		|| check_e_sequence(&c)
 	);
+}
+
+bool	is_merge(char **input, char *result, bool is_dollar)
+{
+	if (is_dollar)
+		if (**input && *result && (**input != ' '))
+			return (true);
+		else
+			return (false);
+	else
+		if (**input == '$' || ft_isalnum(**input)
+			|| **input == '\'' || **input == '"')
+			return (true);
+		else
+			return (false);		
 }
