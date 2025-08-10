@@ -6,13 +6,13 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:01:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:41:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:27:06 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/env.h"
 
-void	add_env_to_end(t_env **envlist, t_env *node)
+static void	add_env_to_end(t_env **envlist, t_env *node)
 {
 	t_env	*tmp;
 

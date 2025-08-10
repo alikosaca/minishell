@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:16:25 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 15:02:42 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:46:04 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "../../include/executor.h"
 
 int	restore_std_fds(t_shell *shell)
 {

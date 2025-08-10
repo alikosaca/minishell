@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:47:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 18:18:17 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 12:38:47 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include <string.h>
 # include <errno.h>
 # include <linux/limits.h>
+
 # include "structs.h"
-# include "env.h"
 # include "utils.h"
+# include "env.h"
 
 # define ERR_HOME_NOT_SET "HOME not set"
 # define ERR_TOO_MANY_ARGS "too many arguments"

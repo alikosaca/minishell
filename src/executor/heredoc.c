@@ -6,13 +6,13 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 20:51:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/08 21:37:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:25:40 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-void	child_heredoc(t_shell *shell, t_redirect *redir, int fd[2])
+void	c_heredoc(t_shell *shell, t_redirect *redir, int fd[2])
 {
 	char	*line;
 
@@ -40,7 +40,7 @@ void	child_heredoc(t_shell *shell, t_redirect *redir, int fd[2])
 	exit(0);
 }
 
-int	parent_heredoc(t_shell *shell, pid_t pid, int fd[2], bool should_dup)
+int	p_heredoc(t_shell *shell, pid_t pid, int fd[2], bool should_dup)
 {
 	int	status;
 

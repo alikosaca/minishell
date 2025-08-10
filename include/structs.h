@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:26:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 13:45:46 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/10 13:36:07 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,6 @@
 
 # include <fcntl.h>
 # include <stdbool.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	bool			exported;
-	struct s_env	*next;
-}	t_env;
 
 typedef enum e_token_type
 {
@@ -38,14 +30,6 @@ typedef enum e_token_type
 	T_ERROR
 }	t_token_type;
 
-typedef struct s_token
-{
-	t_token_type	type;
-	char			*value;
-	bool			merge;
-	struct s_token	*next;
-}	t_token;
-
 typedef enum e_redirect_type
 {
 	REDIR_IN,
@@ -53,6 +37,22 @@ typedef enum e_redirect_type
 	REDIR_APPEND,
 	REDIR_HEREDOC
 }	t_redirect_type;
+
+typedef struct s_env
+{
+	char				*key;
+	char				*value;
+	bool				exported;
+	struct s_env		*next;
+}	t_env;
+
+typedef struct s_token
+{
+	t_token_type		type;
+	char				*value;
+	bool				merge;
+	struct s_token		*next;
+}	t_token;
 
 typedef struct s_redirect
 {
@@ -72,17 +72,16 @@ typedef struct s_cmd
 	struct s_cmd		*next;
 }	t_cmd;
 
-
 typedef struct s_shell
 {
-	char		*prompt;
-	char		*input;
-	t_env		*envlist;
-	t_token		*tokens;
-	t_cmd		*commands;
-	int			exitcode;
-	int			stdin_backup;
-	int			stdout_backup;
+	char				*prompt;
+	char				*input;
+	t_env				*envlist;
+	t_token				*tokens;
+	t_cmd				*commands;
+	int					exitcode;
+	int					stdin_backup;
+	int					stdout_backup;
 }	t_shell;
 
 #endif

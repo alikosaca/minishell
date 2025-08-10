@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 12:55:55 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 12:38:41 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "structs.h"
+
 # include "../libft/libft.h"
+# include "structs.h"
 # include "utils.h"
 
 t_env	*create_env_node(char *key, char *value, bool exported);

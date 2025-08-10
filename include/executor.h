@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 14:55:22 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:45:33 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,44 @@
 
 # include <readline/readline.h>
 
-# include <string.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdlib.h>
+# include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+
 # include "structs.h"
 # include "utils.h"
-# include "signal.h"
 # include "expansion.h"
 # include "builtin.h"
+# include "signal.h"
 
 # define PS2 "> "
+
 # define ERR_CMD_NOT_FOUND "command not found"
 # define ERR_IS_A_DIR "Is a directory"
 
 int			executor(t_shell *shell, t_cmd *cmd);
 
+int			setup_redir(t_shell *shell, t_cmd *cmd);
+
+void		c_heredoc(t_shell *shell, t_redirect *redir, int fd[2]);
+int			p_heredoc(t_shell *shell, pid_t pid, int fd[2], bool should_dup);
+int			is_it_over(t_redirect *redir, char *line);
+void		should_be_expand(t_shell *shell, t_redirect *redir, char **line);
+void		print_line(int fd[2], char *line);
+
 int			is_builtin(t_cmd *cmd);
 int			exec_builtin(t_shell *shell, t_cmd *cmd);
 
 int			exec_external(t_shell *shell, t_cmd *cmd);
-
 char		*find_cmd_path(t_shell *shell, char *cmd);
 
-int			setup_redir(t_shell *shell, t_cmd *cmd);
-
-void		child_heredoc(t_shell *shell, t_redirect *redir, int fd[2]);
-int			parent_heredoc(t_shell *shell, pid_t pid, int fd[2],
-				bool should_dup);
+int			exec_pipeline(t_shell *shell, t_cmd *cmd);
 
 int			restore_std_fds(t_shell *shell);
 int			restore_doc_fds(t_shell *shell, int fd[2], bool should_dup);
-
-int			is_it_over(t_redirect *redir, char *line);
-
-void		print_line(int fd[2], char *line);
-void		should_be_expand(t_shell *shell, t_redirect *redir, char **line);
-
-t_redirect	*get_last_redir(t_redirect *redir);
-
-int			exec_pipeline(t_shell *shell, t_cmd *cmd);
 
 #endif
