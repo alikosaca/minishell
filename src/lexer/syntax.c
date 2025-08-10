@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/08 16:03:14 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:09:40 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_word_like(t_token_type type)
 
 static int	check_pipe(t_token *token)
 {
-	if (token->type == T_PIPE && token->next->type == T_PIPE)
+	if (token->type == T_PIPE && token->next && token->next->type == T_PIPE)
 		return (1);
 	else
 		return (0);
@@ -38,7 +38,7 @@ static int	check_pipe(t_token *token)
 
 int	syntax(t_shell *shell, t_token *token)
 {
-	if (!shell->tokens)
+	if (!token || !token->value)
 		return (1);
 	if (token->type == T_PIPE)
 		return (lx_err(shell, token->value));
