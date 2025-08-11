@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 14:26:38 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:56:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,27 @@ static void	child_exec_error(t_shell *shell, char *path, char **envp)
 	exit(shell->exitcode);
 }
 
+static void	execute_cmd(t_shell *shell, char *path, char **argv, char **envp)
+{
+	execve(path, argv, envp);
+	child_exec_error(shell, path, envp);
+}
+
 static void	child(t_shell *shell, t_cmd *cmd)
 {
-	char		*path;
-	char		**envp;
-	struct stat	st;
+	char	*path;
+	char	**envp;
 
 	signal(SIGINT, SIG_DFL);
 	if (setup_redir(shell, cmd))
+	{
+		cleanup(shell);
 		exit(shell->exitcode);
+	}
 	path = find_cmd_path(shell, cmd->argv[0]);
-	if (!path || !ft_strcmp(cmd->argv[0], ".."))
-	{
-		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
-		cleanup(shell);
-		exit(shell->exitcode);
-	}
-	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
-	{
-		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
-		_free((void **)&path);
-		cleanup(shell);
-		exit(shell->exitcode);
-	}
+	validate_cmd_path(shell, cmd, path);
 	envp = env_to_arr(shell->envlist);
-	execve(path, cmd->argv, envp);
-	child_exec_error(shell, path, envp);
+	execute_cmd(shell, path, cmd->argv, envp);
 }
 
 static int	parent(pid_t pid)

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:36:20 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:55:41 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,23 @@ char	*find_cmd_path(t_shell *shell, char *cmd)
 	if (!path)
 		return (NULL);
 	return (path);
+}
+
+void	validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path)
+{
+	struct stat	st;
+
+	if (!path || !ft_strcmp(cmd->argv[0], ".."))
+	{
+		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
+	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
+	{
+		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
+		_free((void **)&path);
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
 }
