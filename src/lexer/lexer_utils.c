@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 15:49:43 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/11 11:57:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ bool	is_merge(char **input, char *result, bool is_dollar)
 	if (is_dollar)
 		if (**input && *result && (**input != ' '))
 			return (true);
-		else
-			return (false);
 	else
+		return (false);
+	else
+	{
 		if (**input == '$' || ft_isalnum(**input)
 			|| **input == '\'' || **input == '"')
 			return (true);
 		else
-			return (false);		
+			return (false);
+	}
 }

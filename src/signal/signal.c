@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:48:41 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/31 13:49:08 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/11 11:58:24 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 volatile sig_atomic_t	g_sig = 0;
 
-static void	sigint_handler(int sig)	
+static void	sigint_handler(int sig)
 {
 	(void)sig;
 	g_sig = 130;
@@ -26,9 +26,9 @@ static void	sigint_handler(int sig)
 
 static void	sigint_heredoc_handler(int sig)
 {
-    (void)sig;
-    g_sig = 130;
-    printf("\n");
+	(void)sig;
+	g_sig = 130;
+	printf("\n");
 }
 
 void	interactive_signals(void)
@@ -39,6 +39,6 @@ void	interactive_signals(void)
 
 void	heredoc_signals(void)
 {
-    signal(SIGINT, sigint_heredoc_handler);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_heredoc_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

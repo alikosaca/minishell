@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 17:18:12 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/11 11:57:45 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 		value = handle_word(input);
 		merge = is_merge(input, value, true);
 		if (!value)
-			return (0); //! Could it cause problems in the future?
+			return (0);
 		add_token(tokens, create_token(T_WORD, value, merge));
 		free(value);
 	}
