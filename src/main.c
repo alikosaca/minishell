@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 12:23:03 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:23:18 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	loop(t_shell *shell)
 	interactive_signals();
 	while (true)
 	{
-		shell->input = readline(shell->prompt);
+		if (isatty(STDIN_FILENO))
+			shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
 			printf("exit\n");
@@ -67,6 +68,5 @@ int	main(void)
 	loop(shell);
 	cleanup(shell);
 	clear_history();
-	rl_clear_history();
 	return (shell->exitcode);
 }
