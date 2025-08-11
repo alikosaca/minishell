@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 11:57:45 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:38:14 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	process_errors(t_token **tokens, char **input)
 		value[len] = '\0';
 		add_token(tokens, create_token(T_ERROR, value, false));
 		*input += len;
+		free(value);
 		return (1);
 	}
 	return (0);
@@ -95,6 +96,7 @@ int	process_quote(t_token **tokens, char **input)
 			add_token(tokens, create_token(T_SINGLE_QUOTE, value, merge));
 		else
 			add_token(tokens, create_token(T_DOUBLE_QUOTE, value, merge));
+		free(value);
 		return (1);
 	}
 	return (0);
@@ -120,11 +122,11 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 	else
 	{
 		value = handle_word(input);
-		merge = is_merge(input, value, true);
+		merge = is_merge(input, value, false);
 		if (!value)
 			return (0);
 		add_token(tokens, create_token(T_WORD, value, merge));
-		free(value);
 	}
+	free(value);
 	return (1);
 }

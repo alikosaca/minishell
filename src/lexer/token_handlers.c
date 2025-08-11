@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/04 14:47:25 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/11 20:29:51 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*get_len_dollar(char *input, int *i)
 		return (ft_strdup("$"));
 	while (input[(*i)] == '$')
 		(*i)++;
-	res = malloc(sizeof(char) * (*i));
+	res = malloc(sizeof(char) * (*i) + 1);
 	if (!res)
 		return (NULL);
 	ft_memcpy(res, input, (*i));

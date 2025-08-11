@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 11:57:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 20:18:37 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	is_word_delimiter(char c)
 bool	is_merge(char **input, char *result, bool is_dollar)
 {
 	if (is_dollar)
-		if (**input && *result && (**input != ' '))
+		if (**input && *result && (**input != ' ' && **input != '|'))
 			return (true);
 	else
 		return (false);
 	else
 	{
 		if (**input == '$' || ft_isalnum(**input)
-			|| **input == '\'' || **input == '"')
+			|| **input == '\'' || **input == '"' )
 			return (true);
 		else
 			return (false);
