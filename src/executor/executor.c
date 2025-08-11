@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 14:19:16 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:59:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	executor(t_shell *shell, t_cmd *cmd)
 {
 	if (!shell || !cmd)
 		return (0);
-	if (setup_redir(shell, cmd))
-		return (shell->exitcode);
+	if (!cmd->argv)
+		if (setup_redir(shell, cmd))
+			return (shell->exitcode);
 	if (cmd->argv && !cmd->next)
 	{
 		if (is_builtin(cmd))

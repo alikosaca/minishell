@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 13:25:52 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:06:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	setup_redir(t_shell *shell, t_cmd *cmd)
 		return (0);
 	redir = cmd->redirects;
 	last = get_last_redir(redir);
-	while (redir)
+	while (redir && shell->exitcode == 0)
 	{
 		if (redir->type == REDIR_IN)
 			shell->exitcode = redir_in(shell, redir);

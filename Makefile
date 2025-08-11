@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/08/09 17:55:17 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/08/11 15:34:21 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/heredoc.c \
                $(EXECUTOR_DIR)/restore.c \
                $(EXECUTOR_DIR)/heredoc_utils.c \
-               $(EXECUTOR_DIR)/pipeline.c
+               $(EXECUTOR_DIR)/pipeline.c \
+               $(EXECUTOR_DIR)/pipeline_utils.c
 ENV_SRC      = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \

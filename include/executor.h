@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 13:45:33 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:33:58 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int			exec_external(t_shell *shell, t_cmd *cmd);
 char		*find_cmd_path(t_shell *shell, char *cmd);
 
 int			exec_pipeline(t_shell *shell, t_cmd *cmd);
+pid_t		create_process(t_shell *shell, t_cmd *cmd, int pipefd[2]);
+int			wait_all_children(t_shell *shell, pid_t *pids, int child_count);
 
 int			restore_std_fds(t_shell *shell);
 int			restore_doc_fds(t_shell *shell, int fd[2], bool should_dup);
