@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:55:41 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:45:09 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ static char	*find_full_path(char **paths, char *cmd)
 
 char	*find_cmd_path(t_shell *shell, char *cmd)
 {
-	char	**paths;
 	char	*path;
+	char	**paths;
 
+	path = NULL;
+	paths = NULL;
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	path = get_env_value(shell->envlist, "PATH");
@@ -70,6 +72,13 @@ void	validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path)
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
 		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
+		_free((void **)&path);
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
+	if (access(path, X_OK) != 0)
+	{
+		cmd_err(shell, cmd->argv[0], strerror(errno), 126);
 		_free((void **)&path);
 		cleanup(shell);
 		exit(shell->exitcode);

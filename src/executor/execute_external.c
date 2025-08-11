@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:56:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:40:52 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	child(t_shell *shell, t_cmd *cmd)
 	char	*path;
 	char	**envp;
 
+	path = NULL;
+	envp = NULL;
 	signal(SIGINT, SIG_DFL);
 	if (setup_redir(shell, cmd))
 	{
@@ -67,7 +69,7 @@ static int	parent(pid_t pid)
 		return (WEXITSTATUS(status));
 	}
 	interactive_signals();
-	return (1);
+	return (0);
 }
 
 int	exec_external(t_shell *shell, t_cmd *cmd)
