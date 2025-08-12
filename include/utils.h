@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 11:20:01 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:28:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define BASH "bash"
 # define ERR_SYNTAX "syntax error near unexpected token"
+# define ERR_NO_SUCH_FILE_OR_DIR "No such file or directory"
 
 int		init_shell(t_shell *shell);
 

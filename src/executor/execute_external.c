@@ -6,28 +6,19 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 21:40:52 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:25:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-static void	child_exec_error(t_shell *shell, char *path, char **envp)
+static void	execute_cmd(t_shell *shell, char *path, char **argv, char **envp)
 {
-	if (errno == EACCES || errno == ENOEXEC)
-		cmd_err(shell, path, strerror(errno), 126);
-	else if (errno == ENOENT)
-		cmd_err(shell, path, strerror(errno), 127);
+	execve(path, argv, envp);
 	_free((void **)&path);
 	__free((void ***)&envp);
 	cleanup(shell);
 	exit(shell->exitcode);
-}
-
-static void	execute_cmd(t_shell *shell, char *path, char **argv, char **envp)
-{
-	execve(path, argv, envp);
-	child_exec_error(shell, path, envp);
 }
 
 static void	child(t_shell *shell, t_cmd *cmd)

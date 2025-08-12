@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:03:04 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 11:22:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:17:54 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 int	cmd_err(t_shell *shell, char *cmd, char *msg, int ret)
 {
 	if (ret != 127)
+	{
+		ft_putstr_fd(BASH, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
+	if (ret == 127 && ft_strcmp(msg, ERR_NO_SUCH_FILE_OR_DIR) == 0)
 	{
 		ft_putstr_fd(BASH, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);

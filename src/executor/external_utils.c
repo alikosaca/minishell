@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 21:45:09 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:09:47 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ void	validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path)
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
 		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
+		_free((void **)&path);
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
+	if (access(path, F_OK) != 0)
+	{
+		cmd_err(shell, cmd->argv[0], strerror(errno), 127);
 		_free((void **)&path);
 		cleanup(shell);
 		exit(shell->exitcode);
