@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 12:40:51 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 11:20:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	__free(void ***ptr);
 void	cleanup(t_shell *shell);
 
 int		cmd_err(t_shell *shell, char *cmd, char *msg, int ret);
+int		exp_err(t_shell *shell, char *arg, char *msg, int ret);
 int		lx_err(t_shell *shell, char *sep);
 
 #endif
