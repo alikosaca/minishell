@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 00:28:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:35:18 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 10:16:17 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	__free(void ***ptr)
 	i = 0;
 	while ((*ptr)[i])
 	{
-		_free(&(*ptr)[i]);
+		_free((void **)&(*ptr)[i]);
 		i++;
 	}
 	free((*ptr));
