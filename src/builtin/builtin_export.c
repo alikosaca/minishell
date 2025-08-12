@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/02 12:52:28 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/12 10:35:18 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	is_valid_identifier(char *arg)
 	if (!ft_isalpha(arg[0]) && arg[0] != '_')
 		return (0);
 	i = 1;
-	while (arg[i] && (equal_sign == NULL || &arg[i] < equal_sign))
+	while (arg[i] && (!equal_sign || &arg[i] < equal_sign))
 	{
 		if (!ft_isalnum(arg[i]) && arg[i] != '_')
 			return (0);
