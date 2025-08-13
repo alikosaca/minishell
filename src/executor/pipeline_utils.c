@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:33:36 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 23:39:08 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ pid_t	create_process(t_shell *shell, t_cmd *cmd, int pipefd[2])
 	pid = fork();
 	if (pid == -1)
 	{
-		cmd_err(shell, "fork", strerror(errno), 1);
+		cmd_err(shell, "fork", strerror(errno), 254);
 		return (-1);
 	}
 	return (pid);

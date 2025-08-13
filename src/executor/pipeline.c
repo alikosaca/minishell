@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:34:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 23:39:28 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 	{
 		pid = create_process(shell, cmd, pipefd);
 		if (pid == -1)
-			return (1);
+			return (shell->exitcode);
 		if (pid == 0)
 			child(shell, cmd, in_fd, pipefd);
 		pids[child_count++] = pid;

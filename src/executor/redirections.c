@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:06:23 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 23:42:40 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
 	heredoc_signals();
 	pid = fork();
 	if (pid == -1)
-		return (cmd_err(shell, "fork", strerror(errno), 1));
+		return (cmd_err(shell, "fork", strerror(errno), 254));
 	if (pid == 0)
 		c_heredoc(shell, redir, fd);
 	return (p_heredoc(shell, pid, fd, should_dup));
