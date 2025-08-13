@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 20:51:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 13:25:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/14 00:06:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	c_heredoc(t_shell *shell, t_redirect *redir, int fd[2])
 	line = NULL;
 	signal(SIGINT, SIG_DFL);
 	close(fd[0]);
-	while (1)
+	while (true)
 	{
 		line = readline(PS2);
 		if (!line)
