@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 15:09:47 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:26:33 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,35 +59,35 @@ char	*find_cmd_path(t_shell *shell, char *cmd)
 	return (path);
 }
 
+static void	clean_and_exit(t_shell *shell, t_cmd *cmd, char *msg, int exc)
+{
+	cmd_err(shell, cmd->argv[0], msg, exc);
+	cleanup(shell);
+	exit(shell->exitcode);
+}
+
 void	validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path)
 {
 	struct stat	st;
 
 	if (!path || !ft_strcmp(cmd->argv[0], ".."))
 	{
-		cmd_err(shell, cmd->argv[0], ERR_CMD_NOT_FOUND, 127);
-		cleanup(shell);
+		clean_and_exit(shell, cmd, ERR_CMD_NOT_FOUND, 127);
 		exit(shell->exitcode);
 	}
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
-		cmd_err(shell, cmd->argv[0], ERR_IS_A_DIR, 126);
 		_free((void **)&path);
-		cleanup(shell);
-		exit(shell->exitcode);
+		clean_and_exit(shell, cmd, ERR_IS_A_DIR, 126);
 	}
 	if (access(path, F_OK) != 0)
 	{
-		cmd_err(shell, cmd->argv[0], strerror(errno), 127);
 		_free((void **)&path);
-		cleanup(shell);
-		exit(shell->exitcode);
+		clean_and_exit(shell, cmd, strerror(errno), 127);
 	}
 	if (access(path, X_OK) != 0)
 	{
-		cmd_err(shell, cmd->argv[0], strerror(errno), 126);
 		_free((void **)&path);
-		cleanup(shell);
-		exit(shell->exitcode);
+		clean_and_exit(shell, cmd, strerror(errno), 126);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 11:54:24 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:36:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static char	*handle_dollar(t_shell *shell, char *line, int *i)
 {
 	char	*temp;
 
-	if (line[*i + 1] && (ft_isalnum(line[*i + 1]) || line[*i + 1] == '_' || \
-		line[*i + 1] == '?' || line[*i + 1] == '$'))
+	if (line[*i + 1] && (ft_isalnum(line[*i + 1]) || line[*i + 1] == '_'
+			|| line[*i + 1] == '?' || line[*i + 1] == '$'))
 		temp = expand_dollar(shell, line, i);
 	else
 	{

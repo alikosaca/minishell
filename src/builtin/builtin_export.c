@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 14:00:16 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:32:05 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	builtin_export(t_shell *shell, char **argv)
 		else
 		{
 			ret = 1;
-			exp_err(shell, argv[i], ERR_NOT_A_VALID_IDENT, 1);	
+			exp_err(shell, argv[i], ERR_NOT_A_VALID_IDENT, 1);
 		}
 		i++;
 	}

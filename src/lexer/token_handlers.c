@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 20:29:51 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/13 18:34:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ char	*process_dollar(char **input)
 	if (!dollar)
 		return (NULL);
 	*input += i;
-	if ((**input && !((ft_isalpha(**input) || \
-		**input == '_' || **input == '?'))) || (!**input))
+	if ((**input && !((ft_isalpha(**input) || **input == '_'
+					|| **input == '?'))) || (!**input))
 		return (dollar);
 	result = handle_dollar(input);
 	if (!result)

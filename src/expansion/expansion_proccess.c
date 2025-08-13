@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 18:30:06 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:35:28 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ bool	check_expand_condition(char *str, int *i, bool is_word)
 		else
 			return (false);
 	}
-}	
+}
 
 char	*parse_dollar(t_shell *shell, char *str, int *i)
 {
 	char	*part;
 
-	if (str[(*i) + 1] && (ft_isalnum(str[(*i) + 1]) || \
-		str[(*i) + 1] == '_' || str[(*i) + 1] == '?' || str[(*i) + 1] == '$'))
+	if (str[(*i) + 1] && (ft_isalnum(str[(*i) + 1])
+			|| str[(*i) + 1] == '_' || str[(*i) + 1] == '?'
+			|| str[(*i) + 1] == '$'))
 		part = expand_dollar(shell, str, i);
 	else
 	{
