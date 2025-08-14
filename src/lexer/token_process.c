@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 14:30:57 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/14 17:41:01 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	process_quote(t_token **tokens, char **input)
 	{
 		start = *input;
 		value = handle_quote(input);
-		if (input && is_merge(input, value))
+		if (input && is_merge(input))
 			merge = true;
 		if (!value)
 		{
@@ -109,7 +109,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 	if (**input == '$')
 	{
 		value = process_dollar(input);
-		merge = is_merge(input, value);
+		merge = is_merge(input);
 		if (!value)
 			add_token(tokens, create_token(T_ERROR, "$", merge));
 		else
@@ -121,7 +121,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 	else
 	{
 		value = handle_word(input);
-		merge = is_merge(input, value);
+		merge = is_merge(input);
 		if (!value)
 			return (0);
 		add_token(tokens, create_token(T_WORD, value, merge));
