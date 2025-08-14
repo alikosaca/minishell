@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/10 17:18:24 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/14 14:31:19 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*lexer(t_shell *shell, char *input);
 void	skip_whitespace(char **input);
 int		check_e_sequence(char *input);
 int		is_word_delimiter(char c);
-bool	is_merge(char **input, char *result, bool is_dollar);
+bool	is_merge(char **input, char *result);
 
 t_token	*create_token(t_token_type type, char *value, bool merge);
 void	add_token(t_token **tokens, t_token *new_token);
