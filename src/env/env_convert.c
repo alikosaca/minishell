@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 13:21:54 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:15:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,24 @@ char	**env_to_arr(t_env *envlist)
 	int		i;
 	int		count;
 	char	**env_arr;
-	t_env	*tmp;
 
 	count = count_exported_env(envlist);
 	env_arr = malloc(sizeof(char *) * (count + 1));
 	if (!env_arr)
 		return (NULL);
 	i = -1;
-	tmp = envlist;
-	while (tmp && ++i < count)
+	while (envlist && ++i < count)
 	{
-		if (tmp->exported && tmp->value)
+		if (envlist->exported && envlist->value)
 		{
-			env_arr[i] = create_envstr(tmp->key, tmp->value);
+			env_arr[i] = create_envstr(envlist->key, envlist->value);
 			if (!env_arr[i])
 			{
 				__free((void ***)&env_arr);
 				return (NULL);
 			}
 		}
-		tmp = tmp->next;
+		envlist = envlist->next;
 	}
 	env_arr[i] = NULL;
 	return (env_arr);
