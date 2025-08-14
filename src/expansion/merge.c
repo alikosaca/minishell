@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 18:42:37 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/14 16:27:30 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_token	*handle_merge(t_token *token)
 		_free((void **)&token->value);
 	if (token->next->value)
 		_free((void **)&token->next->value);
+	_free((void **)&val);
 	_free((void **)&token->next);
 	_free((void **)&token);
 	return (merge);
