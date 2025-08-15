@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 15:09:40 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/15 03:23:07 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ int	syntax(t_shell *shell, t_token *token)
 	if (token->type == T_PIPE)
 		return (lx_err(shell, token->value));
 	if (token && token->next && !token->next->next)
-	{
-		if (token->type == T_PIPE)
-			return (lx_err(shell, token->value));
-		else if (token->next->type == T_PIPE)
+		if (token->next->type == T_PIPE)
 			return (lx_err(shell, token->next->value));
-	}
 	while (token)
 	{
 		if (token->type == T_ERROR || check_pipe(token))
