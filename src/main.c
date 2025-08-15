@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 20:09:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:55:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ static void	loop(t_shell *shell)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	extern char		**environ;
 	t_shell *const	shell = &(t_shell){0};
 
+	(void)argc;
+	(void)argv;
 	if (init_shell(shell))
 		return (1);
-	if (!init_envlist(&shell->envlist, environ))
+	if (!init_envlist(&shell->envlist, envp))
 	{
 		free_envlist(&shell->envlist);
 		return (1);

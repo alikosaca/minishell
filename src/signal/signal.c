@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:48:41 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 11:58:24 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:41:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	sigint_heredoc_handler(int sig)
 {
 	(void)sig;
 	g_sig = 130;
-	printf("\n");
+	write(1, "\n", 1);
+	close(STDIN_FILENO);
 }
 
 void	interactive_signals(void)

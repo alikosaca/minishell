@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 15:55:55 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:49:19 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,20 @@
 # define ERR_IS_A_DIR "Is a directory"
 
 int			executor(t_shell *shell, t_cmd *cmd);
+int			exec_cmd(t_shell *shell, t_cmd *cmd);
 
 int			setup_redir(t_shell *shell, t_cmd *cmd);
+int			prepare_heredocs_for_cmd(t_shell *shell, t_redirect *redir);
 
 void		c_heredoc(t_shell *shell, t_redirect *redir, int fd[2]);
-int			p_heredoc(t_shell *shell, pid_t pid, int fd[2], bool should_dup);
+int			p_heredoc(t_shell *shell, pid_t pid, int fd[2]);
 int			is_it_over(t_redirect *redir, char *line);
 void		should_be_expand(t_shell *shell, t_redirect *redir, char **line);
 void		print_line(int fd[2], char *line);
+
+int			redir_in(t_shell *shell, t_redirect *redir);
+int			redir_out(t_shell *shell, t_redirect *redir);
+int			redir_append(t_shell *shell, t_redirect *redir);
 
 int			is_builtin(t_cmd *cmd);
 int			exec_builtin(t_shell *shell, t_cmd *cmd);
@@ -56,6 +62,5 @@ pid_t		create_process(t_shell *shell, t_cmd *cmd, int pipefd[2]);
 int			wait_all_children(t_shell *shell, pid_t *pids, int child_count);
 
 int			restore_std_fds(t_shell *shell);
-int			restore_doc_fds(t_shell *shell, int fd[2], bool should_dup);
 
 #endif

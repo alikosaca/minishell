@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 00:05:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 12:40:07 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/15 01:45:12 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int				add_to_argv(t_cmd **args, char *value);
 int				add_to_redirect(t_redirect **redir, t_token **tokens);
 int				add_cmd(t_cmd **cmd, t_cmd *new_cmd);
 
-t_redirect		*get_last_redir(t_redirect *redir);
+t_redirect		*get_last_input_redir(t_redirect *redir);
 
 #endif

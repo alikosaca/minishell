@@ -6,19 +6,22 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 23:39:28 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:17:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-static void	setup_child_io(t_cmd *cmd, int in_fd, int pipefd[2])
+static void	setup_child_io(t_cmd *cmd, int in_fd, int pipefd[2],
+						bool skip_stdin)
 {
-	if (in_fd != STDIN_FILENO)
+	if (!skip_stdin && in_fd != STDIN_FILENO)
 	{
 		dup2(in_fd, STDIN_FILENO);
 		close(in_fd);
 	}
+	else if (skip_stdin && in_fd != STDIN_FILENO)
+		close(in_fd);
 	if (cmd->next)
 	{
 		close(pipefd[0]);
@@ -27,28 +30,17 @@ static void	setup_child_io(t_cmd *cmd, int in_fd, int pipefd[2])
 	}
 }
 
-static int	execute_cmd(t_shell *shell, t_cmd *cmd)
-{
-	if (cmd->argv)
-	{
-		if (is_builtin(cmd))
-			return (exec_builtin(shell, cmd));
-		else
-			return (exec_external(shell, cmd));
-	}
-	return (0);
-}
-
 static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 {
+	bool		has_input_redir;
+	t_redirect	*last_in;
+
 	signal(SIGINT, SIG_DFL);
-	setup_child_io(cmd, in_fd, pipefd);
-	if (setup_redir(shell, cmd))
-	{
-		cleanup(shell);
-		exit(shell->exitcode);
-	}
-	shell->exitcode = execute_cmd(shell, cmd);
+	last_in = get_last_input_redir(cmd->redirects);
+	has_input_redir = (last_in && (last_in->type == REDIR_IN
+				|| (last_in->type == REDIR_HEREDOC && last_in->hdoc_fd >= 0)));
+	setup_child_io(cmd, in_fd, pipefd, has_input_redir);
+	shell->exitcode = exec_cmd(shell, cmd);
 	cleanup(shell);
 	exit(shell->exitcode);
 }
@@ -71,7 +63,7 @@ int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 	int		in_fd;
 	int		child_count;
 	pid_t	pid;
-	pid_t	pids[30898];
+	pid_t	pids[30848];
 
 	signal(SIGINT, SIG_IGN);
 	child_count = 0;
@@ -87,6 +79,8 @@ int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 		in_fd = parent(in_fd, pipefd, cmd);
 		cmd = cmd->next;
 	}
+	if (in_fd != STDIN_FILENO)
+		close(in_fd);
 	wait_all_children(shell, pids, child_count);
 	interactive_signals();
 	return (shell->exitcode);

@@ -42,6 +42,7 @@ t_redirect	*init_redirect(void)
 	redir->file = NULL;
 	redir->delimiter = NULL;
 	redir->should_be_expand = false;
+	redir->hdoc_fd = -1;
 	redir->next = NULL;
 	return (redir);
 }
@@ -53,6 +54,8 @@ void	free_redirlist(t_redirect **redir)
 	while ((*redir))
 	{
 		tmp = (*redir)->next;
+		if ((*redir)->hdoc_fd >= 0)
+			close((*redir)->hdoc_fd);
 		free((*redir));
 		(*redir) = tmp;
 	}

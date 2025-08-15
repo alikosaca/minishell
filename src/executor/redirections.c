@@ -6,86 +6,71 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 23:42:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/15 01:55:35 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/executor.h"
 
-static int	redir_in(t_shell *shell, t_redirect *redir)
+static int	handle_input_redir(t_shell *shell, t_redirect *redir)
 {
-	int	fd;
+	return (redir_in(shell, redir));
+}
 
-	fd = open(redir->file, O_RDONLY);
-	if (fd == -1)
-		return (cmd_err(shell, redir->file, strerror(errno), 1));
-	if (dup2(fd, STDIN_FILENO) == -1)
-		return (cmd_err(shell, "dup2", strerror(errno), 1));
-	close(fd);
+static int	handle_heredoc_redir(t_shell *shell, t_redirect *redir,
+							t_redirect *last_input)
+{
+	if (redir == last_input)
+	{
+		if (dup2(redir->hdoc_fd, STDIN_FILENO) == -1)
+		{
+			close(redir->hdoc_fd);
+			return (cmd_err(shell, "dup2", strerror(errno), 1));
+		}
+		close(redir->hdoc_fd);
+		redir->hdoc_fd = -1;
+	}
+	else if (redir->hdoc_fd >= 0)
+	{
+		close(redir->hdoc_fd);
+		redir->hdoc_fd = -1;
+	}
 	return (0);
 }
 
-static int	redir_out(t_shell *shell, t_redirect *redir)
+static int	handle_output_redir(t_shell *shell, t_redirect *redir)
 {
-	int	fd;
-
-	fd = open(redir->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd == -1)
-		return (cmd_err(shell, redir->file, strerror(errno), 1));
-	if (dup2(fd, STDOUT_FILENO) == -1)
-		return (cmd_err(shell, "dup2", strerror(errno), 1));
-	close(fd);
+	if (redir->type == REDIR_OUT)
+		return (redir_out(shell, redir));
+	else if (redir->type == REDIR_APPEND)
+		return (redir_append(shell, redir));
 	return (0);
 }
 
-static int	redir_append(t_shell *shell, t_redirect *redir)
+static int	process_single_redirect(t_shell *shell, t_redirect *redir,
+								t_redirect *last_input)
 {
-	int	fd;
-
-	fd = open(redir->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	if (fd == -1)
-		return (cmd_err(shell, redir->file, strerror(errno), 1));
-	if (dup2(fd, STDOUT_FILENO) == -1)
-		return (cmd_err(shell, "dup2", strerror(errno), 1));
-	close(fd);
+	if (redir->type == REDIR_IN)
+		return (handle_input_redir(shell, redir));
+	else if (redir->type == REDIR_HEREDOC)
+		return (handle_heredoc_redir(shell, redir, last_input));
+	else if (redir->type == REDIR_OUT || redir->type == REDIR_APPEND)
+		return (handle_output_redir(shell, redir));
 	return (0);
-}
-
-static int	redir_heredoc(t_shell *shell, t_redirect *redir, bool should_dup)
-{
-	int		fd[2];
-	pid_t	pid;
-
-	if (pipe(fd) == -1)
-		return (cmd_err(shell, "pipe", strerror(errno), 1));
-	heredoc_signals();
-	pid = fork();
-	if (pid == -1)
-		return (cmd_err(shell, "fork", strerror(errno), 254));
-	if (pid == 0)
-		c_heredoc(shell, redir, fd);
-	return (p_heredoc(shell, pid, fd, should_dup));
 }
 
 int	setup_redir(t_shell *shell, t_cmd *cmd)
 {
 	t_redirect	*redir;
-	t_redirect	*last;
+	t_redirect	*last_input;
 
 	if (!cmd || !cmd->redirects)
 		return (0);
+	last_input = get_last_input_redir(cmd->redirects);
 	redir = cmd->redirects;
-	last = get_last_redir(redir);
 	while (redir && shell->exitcode == 0)
 	{
-		if (redir->type == REDIR_IN)
-			shell->exitcode = redir_in(shell, redir);
-		else if (redir->type == REDIR_OUT)
-			shell->exitcode = redir_out(shell, redir);
-		else if (redir->type == REDIR_APPEND)
-			shell->exitcode = redir_append(shell, redir);
-		else if (redir->type == REDIR_HEREDOC)
-			shell->exitcode = redir_heredoc(shell, redir, redir == last);
+		shell->exitcode = process_single_redirect(shell, redir, last_input);
 		if (shell->exitcode == 130)
 			return (shell->exitcode);
 		redir = redir->next;

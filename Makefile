@@ -6,7 +6,7 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/08/11 15:34:21 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/08/15 01:46:02 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,15 +53,17 @@ PARSER_SRC   = \
 			   $(PARSER_DIR)/redir.c
 EXECUTOR_SRC = \
                $(EXECUTOR_DIR)/executor.c \
+               $(EXECUTOR_DIR)/heredoc.c \
+               $(EXECUTOR_DIR)/heredoc_prepare.c \
+               $(EXECUTOR_DIR)/heredoc_utils.c \
+               $(EXECUTOR_DIR)/redirections.c \
+               $(EXECUTOR_DIR)/redirections_files.c \
                $(EXECUTOR_DIR)/execute_builtin.c \
                $(EXECUTOR_DIR)/execute_external.c \
                $(EXECUTOR_DIR)/external_utils.c \
-               $(EXECUTOR_DIR)/redirections.c \
-               $(EXECUTOR_DIR)/heredoc.c \
-               $(EXECUTOR_DIR)/restore.c \
-               $(EXECUTOR_DIR)/heredoc_utils.c \
                $(EXECUTOR_DIR)/pipeline.c \
-               $(EXECUTOR_DIR)/pipeline_utils.c
+               $(EXECUTOR_DIR)/pipeline_utils.c \
+               $(EXECUTOR_DIR)/restore.c
 ENV_SRC      = \
                $(ENV_DIR)/env_init.c \
                $(ENV_DIR)/env_utils.c \

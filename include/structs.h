@@ -60,6 +60,7 @@ typedef struct s_redirect
 	char				*file;
 	char				*delimiter;
 	bool				should_be_expand;
+	int					hdoc_fd;
 	struct s_redirect	*next;
 }	t_redirect;
 
