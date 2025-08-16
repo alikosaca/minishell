@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 02:17:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:46:46 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 	bool		has_input_redir;
 	t_redirect	*last_in;
 
-	signal(SIGINT, SIG_DFL);
+	sig_dfl();
 	last_in = get_last_input_redir(cmd->redirects);
 	has_input_redir = (last_in && (last_in->type == REDIR_IN
 				|| (last_in->type == REDIR_HEREDOC && last_in->hdoc_fd >= 0)));

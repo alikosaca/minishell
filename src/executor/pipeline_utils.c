@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 23:39:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:01:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	wait_all_children(t_shell *shell, pid_t *pids, int child_count)
 			{
 				if (WTERMSIG(status) == SIGINT)
 					printf("\n");
+				else if (WTERMSIG(status) == SIGQUIT)
+					ft_putendl_fd(MSG_SIGQUIT, STDERR_FILENO);
 				shell->exitcode = 128 + WTERMSIG(status);
 			}
 			else if (WIFEXITED(status))

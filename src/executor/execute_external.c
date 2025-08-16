@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 15:25:23 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:55:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	child(t_shell *shell, t_cmd *cmd)
 
 	path = NULL;
 	envp = NULL;
-	signal(SIGINT, SIG_DFL);
+	sig_dfl();
 	if (setup_redir(shell, cmd))
 	{
 		cleanup(shell);
@@ -51,6 +51,8 @@ static int	parent(pid_t pid)
 	{
 		if (WTERMSIG(status) == SIGINT)
 			printf("\n");
+		else if (WTERMSIG(status) == SIGQUIT)
+			ft_putendl_fd(MSG_SIGQUIT, STDERR_FILENO);
 		interactive_signals();
 		return (128 + WTERMSIG(status));
 	}
