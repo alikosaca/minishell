@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 17:41:01 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 17:11:53 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	process_errors(t_token **tokens, char **input)
 		value[len] = '\0';
 		add_token(tokens, create_token(T_ERROR, value, false));
 		*input += len;
-		free(value);
+		_free((void **)&value);
 		return (1);
 	}
 	return (0);
@@ -95,7 +95,7 @@ int	process_quote(t_token **tokens, char **input)
 			add_token(tokens, create_token(T_SINGLE_QUOTE, value, merge));
 		else
 			add_token(tokens, create_token(T_DOUBLE_QUOTE, value, merge));
-		free(value);
+		_free((void **)&value);
 		return (1);
 	}
 	return (0);
@@ -115,7 +115,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 		else
 		{
 			add_token(tokens, create_token(T_DOLLAR, value, merge));
-			free(value);
+			_free((void **)&value);
 		}
 	}
 	else
@@ -125,7 +125,7 @@ int	process_dollar_or_word(t_token **tokens, char **input)
 		if (!value)
 			return (0);
 		add_token(tokens, create_token(T_WORD, value, merge));
-		free(value);
+		_free((void **)&value);
 	}
 	return (1);
 }
