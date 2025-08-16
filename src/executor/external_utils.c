@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:23:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 18:26:33 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 09:45:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path)
 {
 	struct stat	st;
 
-	if (!path || !ft_strcmp(cmd->argv[0], ".."))
+	if (!path || (path && !ft_strcmp(cmd->argv[0], "..")))
 	{
+		_free((void **)&path);
 		clean_and_exit(shell, cmd, ERR_CMD_NOT_FOUND, 127);
-		exit(shell->exitcode);
 	}
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
