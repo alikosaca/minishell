@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:43:53 by akosaca           #+#    #+#             */
-/*   Updated: 2025/07/02 18:05:57 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:08:59 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ t_token	*lexer(t_shell *shell, char *input)
 	tokens = NULL;
 	process_tokens(input, &tokens);
 	if (syntax(shell, tokens) == 2)
+	{
+		free_tokenlist(&tokens);
 		return (NULL);
+	}
 	return (tokens);
 }
