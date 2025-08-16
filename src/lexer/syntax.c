@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:35:26 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 03:23:07 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:00 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include "lexer.h"
 
 static int	is_redir(t_token_type type)
 {

@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 12:00:44 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:07:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/expansion.h"
+#include "expansion.h"
 
 char	*ft_strjoin_free_both(char *s1, char *s2)
 {

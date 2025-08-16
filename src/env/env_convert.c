@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 20:15:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:03:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/env.h"
+#include "env.h"
 
 int	count_exported_env(t_env *envlist)
 {

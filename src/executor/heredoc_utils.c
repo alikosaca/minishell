@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 18:36:01 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:30 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 int	is_it_over(t_redirect *redir, char *line)
 {

@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 01:55:35 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:55 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 static int	handle_input_redir(t_shell *shell, t_redirect *redir)
 {

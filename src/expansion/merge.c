@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/14 16:27:30 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:07:42 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/expansion.h"
+#include "expansion.h"
 
 t_token	*handle_merge(t_token *token)
 {

@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 10:46:46 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:46 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 static void	setup_child_io(t_cmd *cmd, int in_fd, int pipefd[2],
 						bool skip_stdin)

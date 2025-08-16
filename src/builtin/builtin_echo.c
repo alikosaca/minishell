@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:20:14 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/07/02 16:46:43 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:02:54 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtin.h"
+#include "builtin.h"
 
 static bool	is_n_option(char *arg)
 {

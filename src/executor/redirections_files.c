@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 23:30:00 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 01:56:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:50 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 int	redir_in(t_shell *shell, t_redirect *redir)
 {

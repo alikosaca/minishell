@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 00:28:52 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 10:16:17 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:09:55 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "utils.h"
 
 void	_free(void **ptr)
 {

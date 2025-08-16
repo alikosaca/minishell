@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:29:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/14 15:52:37 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:02:59 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtin.h"
+#include "builtin.h"
 
 int	builtin_exit(t_shell *shell, char **argv)
 {

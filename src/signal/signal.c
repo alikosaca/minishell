@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:48:41 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 11:00:41 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:14:36 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/signal.h"
+#include "sig.h"
 
 volatile sig_atomic_t	g_sig = 0;
 

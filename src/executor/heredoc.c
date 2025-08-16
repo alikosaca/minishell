@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 20:51:28 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 02:30:39 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:34 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 void	c_heredoc(t_shell *shell, t_redirect *redir, int fd[2])
 {

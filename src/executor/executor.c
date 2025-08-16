@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 17:57:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:13 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 static int	prepare_all_heredocs(t_shell *shell, t_cmd *cmd)
 {

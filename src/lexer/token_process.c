@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:41:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 17:11:53 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:12 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include "lexer.h"
 
 int	process_errors(t_token **tokens, char **input)
 {

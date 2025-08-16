@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 11:22:50 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:14:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "utils.h"
 # include "expansion.h"
 # include "builtin.h"
-# include "signal.h"
+# include "sig.h"
 
 # define PS2 "> "
 

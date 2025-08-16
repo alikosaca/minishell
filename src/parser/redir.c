@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 21:45:25 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 01:44:58 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:44 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "parser.h"
 
 t_redirect	*get_last_input_redir(t_redirect *redir)
 {

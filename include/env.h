@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:09:33 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 12:38:41 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:01:16 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "structs.h"
 # include "utils.h"
 

@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 12:48:48 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/13 18:35:28 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:07:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/expansion.h"
+#include "expansion.h"
 
 bool	check_expand_condition(char *str, int *i, bool is_word)
 {

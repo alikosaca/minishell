@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 11:01:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:39 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 pid_t	create_process(t_shell *shell, t_cmd *cmd, int pipefd[2])
 {

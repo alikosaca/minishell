@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:38:30 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/13 18:34:25 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:05 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include "lexer.h"
 
 char	*handle_quote(char **input)
 {

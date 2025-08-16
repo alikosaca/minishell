@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:23:35 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/14 17:40:44 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:01:55 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "structs.h"
 # include "utils.h"
 # include "expansion.h"

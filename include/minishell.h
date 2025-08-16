@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:46:03 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/10 13:32:15 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:14:11 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "executor.h"
 # include "env.h"
 # include "builtin.h"
-# include "signal.h"
+# include "sig.h"
 # include "utils.h"
 
 # define PROMPT "minishell$ "

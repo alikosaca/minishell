@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:15:55 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 20:00:06 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "parser.h"
 
 int	init_newcmd(t_cmd **new_cmd, t_token *token)
 {

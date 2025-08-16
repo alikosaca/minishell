@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:00:02 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/11 14:44:37 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:04:04 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/executor.h"
+#include "executor.h"
 
 int	is_builtin(t_cmd *cmd)
 {

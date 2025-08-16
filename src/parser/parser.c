@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 19:42:08 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:40 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "parser.h"
 
 static void	process_command(t_cmd **cmd, t_token *token)
 {

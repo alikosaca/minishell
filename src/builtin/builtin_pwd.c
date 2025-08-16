@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 12:41:08 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/12 10:35:31 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:03:12 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtin.h"
+#include "builtin.h"
 
 int	builtin_pwd(t_shell *shell)
 {

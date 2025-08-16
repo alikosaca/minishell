@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:29:43 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:37:31 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:09:48 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "utils.h"
 
 void	cleanup(t_shell *shell)
 {

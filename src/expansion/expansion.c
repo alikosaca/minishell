@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/09 18:30:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:07:39 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/expansion.h"
+#include "expansion.h"
 
 static char	*expand_token(t_shell *shell, char *str, bool is_word)
 {

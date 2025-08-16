@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 14:37:34 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/09 19:59:30 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:26 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "parser.h"
 
 int	argc_len(t_token *token)
 {

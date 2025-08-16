@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 02:55:00 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:10:03 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static void	process_input(t_shell *shell)
 {

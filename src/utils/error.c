@@ -6,11 +6,11 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 11:03:04 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 11:32:34 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:09:51 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "utils.h"
 
 int	cmd_err(t_shell *shell, char *cmd, char *msg, int ret)
 {
