@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/15 02:49:19 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:22:50 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # define ERR_CMD_NOT_FOUND "command not found"
 # define ERR_IS_A_DIR "Is a directory"
+# define ERR_FILENAME_REQUIRED "filename argument required"
+# define ERR_DOT_SYNTAX ". filename [arguments]"
 
 int			executor(t_shell *shell, t_cmd *cmd);
 int			exec_cmd(t_shell *shell, t_cmd *cmd);
