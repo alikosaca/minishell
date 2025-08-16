@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 09:41:05 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:37:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	executor(t_shell *shell, t_cmd *cmd)
 	shell->exitcode = 0;
 	if (prepare_all_heredocs(shell, cmd))
 		return (shell->exitcode);
-	if (cmd->argv && !cmd->next)
+	if (!cmd->argv && cmd->redirects)
+		return (setup_redir(shell, cmd));
+	else if (cmd->argv && !cmd->next)
 		return (exec_cmd(shell, cmd));
 	else if (cmd->argv && cmd->next)
 		shell->exitcode = exec_pipeline(shell, cmd);
