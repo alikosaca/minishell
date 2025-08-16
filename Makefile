@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/08/16 20:59:00 by yaycicek         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME         = minishell
 
 CC           = cc
@@ -90,17 +78,25 @@ SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_S
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR)
 
 $(NAME): $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(READLINE) -o $(NAME)
+	@printf "\033[32m$(NAME) has been created!\033[0m\n"
+	@sleep 1
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@sleep 0.5
+	@printf "\033[33m$(NAME) was cleaned!\033[0m\n"
+	@sleep 0.5
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(RM) $(NAME)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(RM) $(NAME)
+	@sleep 0.5
+	@printf "\033[31mall $(NAME) removed!\033[0m\n"
+	@sleep 0.5
 
 re: fclean all
 
