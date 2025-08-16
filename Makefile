@@ -6,14 +6,14 @@
 #    By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 00:00:00 by yaycicek          #+#    #+#              #
-#    Updated: 2025/08/15 01:46:02 by yaycicek         ###   ########.fr        #
+#    Updated: 2025/08/16 20:59:00 by yaycicek         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME         = minishell
 
 CC           = cc
-CFLAGS       = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR)
+CFLAGS       = -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIBFT_DIR)
 READLINE     = -lreadline
 RM           = rm -f
 
