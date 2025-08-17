@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:35:34 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/17 14:45:05 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/17 19:47:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_word_delimiter(char c)
 
 bool	is_merge(char **input)
 {
-	if (**input && (**input != ' ' && **input != '|'))
+	if (!ft_strchr("<|> ", **input))
 		return (true);
 	else
 		return (false);
