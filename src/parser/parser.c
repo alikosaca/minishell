@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 07:54:15 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/16 21:08:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/17 14:44:10 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ static void	process_command(t_cmd **cmd, t_token *token)
 	t_cmd		*new_cmd;
 
 	status = 0;
-	new_cmd = NULL;
 	while (token && !status)
 	{
 		status = init_newcmd(&new_cmd, token);
+		while (token && ft_strlen(token->value) == 0)
+			token = token->next;
 		while (token && token->type != T_PIPE && !status)
 		{
 			if (token->type == T_WORD)
