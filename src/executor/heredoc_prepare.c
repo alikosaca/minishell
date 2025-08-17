@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 21:15:00 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:24 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:07:33 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	prepare_heredocs_for_cmd(t_shell *shell, t_redirect *redir)
 	t_redirect	*rd;
 
 	rd = redir;
-	while (rd && shell->exitcode == 0)
+	while (rd)
 	{
 		if (rd->type == REDIR_HEREDOC)
 		{

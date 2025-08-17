@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:46 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:08:53 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int	exec_pipeline(t_shell *shell, t_cmd *cmd)
 		in_fd = parent(in_fd, pipefd, cmd);
 		cmd = cmd->next;
 	}
-	if (in_fd != STDIN_FILENO)
-		close(in_fd);
 	wait_all_children(shell, pids, child_count);
 	interactive_signals();
 	return (shell->exitcode);

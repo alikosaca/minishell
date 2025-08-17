@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:13 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:07:07 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int	prepare_all_heredocs(t_shell *shell, t_cmd *cmd)
 
 int	exec_cmd(t_shell *shell, t_cmd *cmd)
 {
-	if (!cmd->argv)
-		return (setup_redir(shell, cmd));
 	if (is_builtin(cmd))
 		shell->exitcode = exec_builtin(shell, cmd);
 	else
