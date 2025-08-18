@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/18 16:16:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:36:56 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,28 @@ static void	setup_child_io(t_cmd *cmd, int in_fd, int pipefd[2],
 	}
 }
 
+static void	exec_cmd_for_pipeline(t_shell *shell, t_cmd *cmd)
+{
+	char	*path;
+	char	**envp;
+
+	path = NULL;
+	envp = NULL;
+	if (setup_redir(shell, cmd))
+	{
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
+	path = find_cmd_path(shell, cmd->argv[0]);
+	validate_cmd_path(shell, cmd, path);
+	envp = env_to_arr(shell->envlist);
+	execve(path, cmd->argv, envp);
+	_free((void **)&path);
+	__free((void ***)&envp);
+	cleanup(shell);
+	exit(shell->exitcode);
+}
+
 static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 {
 	bool		has_input_redir;
@@ -50,7 +72,10 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 		cleanup(shell);
 		exit(0);
 	}
-	shell->exitcode = exec_cmd(shell, cmd);
+	if (is_builtin(cmd))
+		shell->exitcode = exec_builtin(shell, cmd);
+	else
+		exec_cmd_for_pipeline(shell, cmd);
 	cleanup(shell);
 	exit(shell->exitcode);
 }
