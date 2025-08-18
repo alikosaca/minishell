@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:20:14 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:02:54 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 14:14:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool	is_n_option(char *arg)
 {
 	int	i;
 
+	if (arg[0] == '\0')
+		return (false);
 	if (!arg && arg[0] != '-')
 		return (false);
 	i = 1;
