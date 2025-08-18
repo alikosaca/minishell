@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:42:55 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:55 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 21:29:52 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ static int	handle_heredoc_redir(t_shell *shell, t_redirect *redir,
 			close(redir->hdoc_fd);
 			return (cmd_err(shell, "dup2", strerror(errno), 1));
 		}
-		close(redir->hdoc_fd);
-		redir->hdoc_fd = -1;
-	}
-	else if (redir->hdoc_fd >= 0)
-	{
 		close(redir->hdoc_fd);
 		redir->hdoc_fd = -1;
 	}
