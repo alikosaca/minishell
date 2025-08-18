@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/18 14:45:44 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:57 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ static void	change_token_type(t_token *token)
 		token->type = T_WORD;
 	else if (token->type == T_DOLLAR && token->value[0] != '\0')
 		token->type = T_WORD;
-
-
 }
 
 t_token	*expansion(t_shell *shell, t_token *tokens)

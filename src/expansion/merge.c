@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/18 15:20:44 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:45 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_token	*handle_merge(t_token *token)
 		_free((void **)&token->value);
 	if (token->next->value)
 		_free((void **)&token->next->value);
-	if (val )
 	_free((void **)&val);
 	_free((void **)&token->next);
 	_free((void **)&token);
