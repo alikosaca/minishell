@@ -6,17 +6,31 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:36:09 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:03:38 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:28:09 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-t_env	*create_env_node(char *key, char *value, bool exported)
+static t_env	*alloc_env_node(void)
 {
 	t_env	*node;
 
 	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	node->key = NULL;
+	node->value = NULL;
+	node->exported = true;
+	node->next = NULL;
+	return (node);
+}
+
+t_env	*create_env_node(char *key, char *value, bool exported)
+{
+	t_env	*node;
+
+	node = alloc_env_node();
 	if (!node)
 		return (NULL);
 	node->key = ft_strdup(key);
@@ -35,8 +49,9 @@ t_env	*create_env_node(char *key, char *value, bool exported)
 			return (NULL);
 		}
 	}
+	else
+		node->value = NULL;
 	node->exported = exported;
-	node->next = NULL;
 	return (node);
 }
 
