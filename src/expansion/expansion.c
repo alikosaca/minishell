@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:07:39 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 14:45:44 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ static void	change_token_type(t_token *token)
 		token->type = T_WORD;
 	else if (token->type == T_DOUBLE_QUOTE)
 		token->type = T_WORD;
-	else if (token->type == T_DOLLAR)
+	else if (token->type == T_DOLLAR && token->value[0] != '\0')
 		token->type = T_WORD;
+
+
 }
 
 t_token	*expansion(t_shell *shell, t_token *tokens)

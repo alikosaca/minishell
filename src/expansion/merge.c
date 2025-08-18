@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/16 21:07:42 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:20:44 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ t_token	*handle_merge(t_token *token)
 	bool	new_merge;
 	char	*val;
 
+	if (token->type == T_DOLLAR && !token->next)
+	{
+		token->type = T_WORD;
+		return (token);
+	}	
 	val = ft_strjoin(token->value, token->next->value);
 	new_merge = token->next->merge;
 	merge = create_token(T_WORD, val, new_merge);
@@ -29,6 +34,7 @@ t_token	*handle_merge(t_token *token)
 		_free((void **)&token->value);
 	if (token->next->value)
 		_free((void **)&token->next->value);
+	if (val )
 	_free((void **)&val);
 	_free((void **)&token->next);
 	_free((void **)&token);
@@ -45,9 +51,9 @@ void	check_merge(t_token **token)
 		return ;
 	prev = NULL;
 	current = *token;
-	while (current && current->next)
+	while (current && (current->type == T_DOLLAR || current->next))
 	{
-		if (current->merge)
+		if (current->merge || current->type == T_DOLLAR)
 		{
 			merged = handle_merge(current);
 			if (prev)
