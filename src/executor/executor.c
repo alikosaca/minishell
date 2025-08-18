@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:50:12 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/17 18:49:15 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:45:51 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,22 @@ int	executor(t_shell *shell, t_cmd *cmd)
 	shell->exitcode = 0;
 	if (prepare_all_heredocs(shell, cmd))
 		return (shell->exitcode);
-	if (!cmd->argv && cmd->redirects)
-	{
-		if (setup_redir(shell, cmd))
-		{
-			if (restore_std_fds(shell))
-				return (shell->exitcode);
-			return (shell->exitcode);
-		}
-	}
-	else if (cmd->argv && !cmd->next)
-		return (exec_cmd(shell, cmd));
-	else if (cmd->argv && cmd->next)
+	if (cmd->next)
 		shell->exitcode = exec_pipeline(shell, cmd);
+	else
+	{
+		if (!cmd->argv && cmd->redirects)
+		{
+			if (setup_redir(shell, cmd))
+			{
+				if (restore_std_fds(shell))
+					return (shell->exitcode);
+				return (shell->exitcode);
+			}
+		}
+		else if (cmd->argv)
+			return (exec_cmd(shell, cmd));
+	}
 	if (restore_std_fds(shell))
 		return (shell->exitcode);
 	return (shell->exitcode);
