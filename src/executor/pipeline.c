@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/17 17:08:53 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:16:32 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static void	child(t_shell *shell, t_cmd *cmd, int in_fd, int pipefd[2])
 	has_input_redir = (last_in && (last_in->type == REDIR_IN
 				|| (last_in->type == REDIR_HEREDOC && last_in->hdoc_fd >= 0)));
 	setup_child_io(cmd, in_fd, pipefd, has_input_redir);
+	if (!cmd->argv)
+	{
+		if (setup_redir(shell, cmd))
+		{
+			cleanup(shell);
+			exit(shell->exitcode);
+		}
+		cleanup(shell);
+		exit(0);
+	}
 	shell->exitcode = exec_cmd(shell, cmd);
 	cleanup(shell);
 	exit(shell->exitcode);
