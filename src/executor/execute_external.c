@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:08 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:36:07 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	exec_external(t_shell *shell, t_cmd *cmd)
 		cmd_err(shell, cmd->argv[0], ERR_DOT_SYNTAX, 2);
 		return (shell->exitcode);
 	}
+	if (!ft_strcmp(cmd->argv[0], "\0"))
+		return (cmd_err(shell, "''", ERR_CMD_NOT_FOUND, 127));
 	pid = fork();
 	if (pid == -1)
 		return (cmd_err(shell, "fork", strerror(errno), 254));
