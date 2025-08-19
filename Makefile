@@ -75,6 +75,11 @@ UTILS_SRC    = \
 SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) \
                $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)
 
+GREEN        = \e[92m
+YELLOW       = \e[94m
+RED          = \e[91m
+RESET        = \e[0m
+
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
@@ -82,21 +87,16 @@ $(LIBFT):
 
 $(NAME): $(SRCS)
 	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(READLINE) -o $(NAME)
-	@printf "\033[32m$(NAME) has been created!\033[0m\n"
-	@sleep 1
+	@printf "$(GREEN)$(NAME) has been created!$(RESET)\n"
 
 clean:
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
-	@sleep 0.5
-	@printf "\033[33m$(NAME) was cleaned!\033[0m\n"
-	@sleep 0.5
+	@printf "$(YELLOW)$(NAME) has been cleaned!$(RESET)\n"
 
 fclean: clean
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 	@$(RM) $(NAME)
-	@sleep 0.5
-	@printf "\033[31mall $(NAME) removed!\033[0m\n"
-	@sleep 0.5
+	@printf "$(RED)$(NAME) has been removed!$(RESET)\n"
 
 re: fclean all
 
