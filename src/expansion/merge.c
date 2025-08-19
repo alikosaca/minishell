@@ -6,11 +6,22 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/19 14:01:05 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/19 14:24:04 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
+
+static t_token	*is_dollar(t_token *token)
+{
+	t_token	*merge;
+
+	merge = token->next;
+	if (token->value)
+		_free((void **)&token->value);
+	_free((void **)&token);
+	return (merge);
+}
 
 t_token	*handle_merge(t_token *token)
 {
@@ -18,21 +29,8 @@ t_token	*handle_merge(t_token *token)
 	bool	new_merge;
 	char	*val;
 
-	// if (token->type == T_DOLLAR)
-	// {
-	// 	merge = token->next;
-		
-	// 	_free((void **)&token);
-	// 	return (merge);
-	// }
 	if (token->type == T_DOLLAR)
-	{
-		merge = token->next;
-		if (token->value)
-			_free((void **)&token->value);
-		_free((void **)&token);
-		return (merge);
-	}
+		return (is_dollar(token));
 	val = ft_strjoin(token->value, token->next->value);
 	new_merge = token->next->merge;
 	merge = create_token(T_WORD, val, new_merge);
