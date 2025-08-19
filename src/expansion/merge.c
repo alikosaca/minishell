@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/18 16:05:45 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/19 13:11:50 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ t_token	*handle_merge(t_token *token)
 	bool	new_merge;
 	char	*val;
 
-	if (token->type == T_DOLLAR && !token->next)
+	if (token->type == T_DOLLAR)
 	{
-		token->type = T_WORD;
-		return (token);
-	}	
+		merge = token->next;
+		_free((void **)&token);
+		return (merge);
+	}
 	val = ft_strjoin(token->value, token->next->value);
 	new_merge = token->next->merge;
 	merge = create_token(T_WORD, val, new_merge);
