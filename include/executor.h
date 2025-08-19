@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:43:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/17 17:02:52 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:04:22 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ char		*find_cmd_path(t_shell *shell, char *cmd);
 void		validate_cmd_path(t_shell *shell, t_cmd *cmd, char *path);
 
 int			exec_pipeline(t_shell *shell, t_cmd *cmd);
+
 pid_t		create_process(t_shell *shell, t_cmd *cmd, int pipefd[2]);
+void		check_invalid(t_shell *shell, t_cmd *cmd);
 void		wait_all_children(t_shell *shell, pid_t *pids, int child_count);
 
 int			restore_std_fds(t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/17 17:15:03 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:03:54 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ pid_t	create_process(t_shell *shell, t_cmd *cmd, int pipefd[2])
 		return (-1);
 	}
 	return (pid);
+}
+
+void	check_invalid(t_shell *shell, t_cmd *cmd)
+{
+	if (!ft_strcmp(cmd->argv[0], "."))
+	{
+		cmd_err(shell, cmd->argv[0], ERR_FILENAME_REQUIRED, 0);
+		cmd_err(shell, cmd->argv[0], ERR_DOT_SYNTAX, 2);
+	}
+	else if (!ft_strcmp(cmd->argv[0], "\0"))
+		cmd_err(shell, "''", ERR_CMD_NOT_FOUND, 127);
+	if (shell->exitcode == 2 || shell->exitcode == 127)
+	{
+		cleanup(shell);
+		exit(shell->exitcode);
+	}
 }
 
 void	wait_all_children(t_shell *shell, pid_t *pids, int child_count)

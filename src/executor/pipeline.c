@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 19:55:37 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/18 19:36:56 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:11:02 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	exec_cmd_for_pipeline(t_shell *shell, t_cmd *cmd)
 	char	*path;
 	char	**envp;
 
-	path = NULL;
-	envp = NULL;
+	check_invalid(shell, cmd);
 	if (setup_redir(shell, cmd))
 	{
 		cleanup(shell);
