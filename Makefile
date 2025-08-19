@@ -76,7 +76,7 @@ SRCS         = $(MAIN_SRC) $(LEXER_SRC) $(EXPAND_SRC) $(PARSER_SRC) $(EXECUTOR_S
                $(ENV_SRC) $(BUILTIN_SRC) $(SIGNAL_SRC) $(UTILS_SRC)
 
 GREEN        = \e[92m
-YELLOW       = \e[94m
+BLUE         = \e[94m
 RED          = \e[91m
 RESET        = \e[0m
 
@@ -91,7 +91,7 @@ $(NAME): $(SRCS)
 
 clean:
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
-	@printf "$(YELLOW)$(NAME) has been cleaned!$(RESET)\n"
+	@printf "$(BLUE)$(NAME) has been cleaned!$(RESET)\n"
 
 fclean: clean
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
