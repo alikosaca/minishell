@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 00:16:20 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:07:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:02:33 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*ft_strjoin_index(char const *s1, char const *s2, int i)
 	join2 = ft_substr(s2, i, s2_len);
 	ft_memcpy(join + s1_len, join2, s2_len);
 	join[total_len] = '\0';
+	_free((void **)&join);
 	return (join);
 }
 
