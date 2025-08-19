@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/19 14:24:04 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/19 20:25:11 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,29 @@ t_token	*handle_merge(t_token *token)
 
 void	check_merge(t_token **token)
 {
-	t_token	*current;
+	t_token	*c;
 	t_token	*prev;
 	t_token	*merged;
 
 	if (!token || !*token)
 		return ;
 	prev = NULL;
-	current = *token;
-	while (current && (current->type == T_DOLLAR || current->next))
+	c = *token;
+	while (c && c->type != T_HEREDOC && (c->type == T_DOLLAR || c->next))
 	{
-		if (current->merge || current->type == T_DOLLAR)
+		if (c->merge || c->type == T_DOLLAR)
 		{
-			merged = handle_merge(current);
+			merged = handle_merge(c);
 			if (prev)
 				prev->next = merged;
 			else
 				*token = merged;
-			current = merged;
+			c = merged;
 		}
 		else
 		{
-			prev = current;
-			current = current->next;
+			prev = c;
+			c = c->next;
 		}
 	}
 }
