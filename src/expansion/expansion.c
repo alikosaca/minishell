@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:43:48 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/18 16:05:57 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/20 12:12:27 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_token	*expansion(t_shell *shell, t_token *tokens)
 		change_token_type(cur);
 		cur = cur->next;
 	}
+	if (!tokens)
+		return (NULL);
 	check_merge(&tokens);
 	return (tokens);
 }
