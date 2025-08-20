@@ -6,7 +6,7 @@
 /*   By: akosaca <akosaca@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:32:24 by akosaca           #+#    #+#             */
-/*   Updated: 2025/08/19 20:25:11 by akosaca          ###   ########.fr       */
+/*   Updated: 2025/08/20 12:29:07 by akosaca          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,69 @@ t_token	*handle_merge(t_token *token)
 	return (merge);
 }
 
+static void	connect_after_merge(t_token **head, t_token *prev, t_token *merged)
+{
+	if (prev)
+		prev->next = merged;
+	else
+		*head = merged;
+}
+
 void	check_merge(t_token **token)
 {
 	t_token	*c;
 	t_token	*prev;
 	t_token	*merged;
 
-	if (!token || !*token)
-		return ;
 	prev = NULL;
 	c = *token;
-	while (c && c->type != T_HEREDOC && (c->type == T_DOLLAR || c->next))
+	while (c && (c->type == T_DOLLAR || c->next))
 	{
+		if (c->type == T_HEREDOC)
+		{
+			c = c->next->next;
+			continue ;
+		}
 		if (c->merge || c->type == T_DOLLAR)
 		{
 			merged = handle_merge(c);
-			if (prev)
-				prev->next = merged;
-			else
-				*token = merged;
+			connect_after_merge(token, prev, merged);
 			c = merged;
+			continue ;
 		}
-		else
-		{
-			prev = c;
-			c = c->next;
-		}
+		prev = c;
+		c = c->next;
 	}
 }
+
+// void	check_merge(t_token **token)
+// {
+// 	t_token	*c;
+// 	t_token	*prev;
+// 	t_token	*merged;
+
+// 	prev = NULL;
+// 	c = *token;
+// 	while (c && (c->type == T_DOLLAR || c->next))
+// 	{
+// 		if (c->type == T_HEREDOC)
+// 		{
+// 			c = c->next->next;
+// 			continue ;
+// 		}
+// 		if (c->merge || c->type == T_DOLLAR)
+// 		{
+// 			merged = handle_merge(c);
+// 			if (prev)
+// 				prev->next = merged;
+// 			else
+// 				*token = merged;
+// 			c = merged;
+// 		}
+// 		else
+// 		{
+// 			prev = c;
+// 			c = c->next;
+// 		}
+// 	}
+// }
