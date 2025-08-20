@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:24:44 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:03:32 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/21 00:01:57 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**env_to_arr(t_env *envlist)
 	char	**env_arr;
 
 	count = count_exported_env(envlist);
-	env_arr = malloc(sizeof(char *) * (count + 1));
+	env_arr = ft_calloc(count + 1, sizeof(char *));
 	if (!env_arr)
 		return (NULL);
 	i = -1;
