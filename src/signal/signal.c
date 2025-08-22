@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:48:41 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:14:36 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:21:29 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	sigint_handler(int sig)
 {
 	(void)sig;
 	g_sig = 130;
-	printf("\n");
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -28,7 +28,7 @@ static void	sigint_heredoc_handler(int sig)
 {
 	(void)sig;
 	g_sig = 130;
-	write(1, "\n", 1);
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	close(STDIN_FILENO);
 }
 

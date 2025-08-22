@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:15:22 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/18 20:36:07 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:21:23 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	parent(pid_t pid)
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGINT)
-			printf("\n");
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		else if (WTERMSIG(status) == SIGQUIT)
 			ft_putendl_fd(MSG_SIGQUIT, STDERR_FILENO);
 		interactive_signals();

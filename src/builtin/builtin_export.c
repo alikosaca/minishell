@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/19 21:49:40 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:21:10 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ static int	print_export_list(t_env *envlist)
 	min = find_next_min(envlist, last);
 	while (min)
 	{
-		printf("declare -x %s", min->key);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(min->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
 		if (min->value)
-			printf("=\"%s\"", min->value);
-		printf("\n");
+		{
+			ft_putstr_fd("\"", STDOUT_FILENO);
+			ft_putstr_fd(min->value, STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		}
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		last = min;
 		min = find_next_min(envlist, last);
 	}

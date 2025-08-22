@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:26:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:04:30 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:14:29 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	should_be_expand(t_shell *shell, t_redirect *redir, char **line)
 
 void	print_line(int fd[2], char *line)
 {
-	write(fd[1], line, ft_strlen(line));
-	write(fd[1], "\n", 1);
+	ft_putstr_fd(line, fd[1]);
+	ft_putstr_fd("\n", fd[1]);
 	_free((void **)&line);
 }

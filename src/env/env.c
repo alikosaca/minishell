@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:30:39 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:03:50 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:21:20 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	env(t_env *envlist, char **argv)
 	while (envlist)
 	{
 		if (envlist->value && envlist->exported)
-			printf("%s=%s\n", envlist->key, envlist->value);
+		{
+			ft_putstr_fd(envlist->key, STDOUT_FILENO);
+			ft_putstr_fd("=", STDOUT_FILENO);
+			ft_putstr_fd(envlist->value, STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
 		envlist = envlist->next;
 	}
 	return (0);

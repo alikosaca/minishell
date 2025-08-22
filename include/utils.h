@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:08:24 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 11:30:46 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:20:01 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
+# include "libft.h"
 # include "structs.h"
 # include "env.h"
 # include "lexer.h"
 # include "parser.h"
-# include "../libft/libft.h"
 
 # define PROMPT "minishell$ "
 

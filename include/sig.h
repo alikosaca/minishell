@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:09:40 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/16 21:13:27 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:12:09 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 
+# include "libft.h"
 # include "structs.h"
 
 # define MSG_SIGQUIT "Quit (core dumped)"

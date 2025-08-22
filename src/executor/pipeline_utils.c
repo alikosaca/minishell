@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:30:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/19 14:03:54 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:21:25 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	wait_all_children(t_shell *shell, pid_t *pids, int child_count)
 			if (WIFSIGNALED(status))
 			{
 				if (WTERMSIG(status) == SIGINT)
-					printf("\n");
+					ft_putstr_fd("\n", STDOUT_FILENO);
 				else if (WTERMSIG(status) == SIGQUIT)
 					ft_putendl_fd(MSG_SIGQUIT, STDERR_FILENO);
 				shell->exitcode = 128 + WTERMSIG(status);
