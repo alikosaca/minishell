@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:35 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/22 17:20:59 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/24 13:17:51 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	loop(t_shell *shell)
 		shell->input = readline(shell->prompt);
 		if (!shell->input)
 		{
-			ft_putendl_fd("exit\n", STDOUT_FILENO);
+			ft_putendl_fd("exit", STDOUT_FILENO);
 			break ;
 		}
 		if (g_sig == 130)
