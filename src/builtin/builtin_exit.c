@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:29:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/24 13:52:04 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/24 14:14:27 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	builtin_exit(t_shell *shell, char **argv)
 {
 	int	j;
 
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (!argv[1])
 	{
 		cleanup(shell);
