@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 20:15:16 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/22 17:21:10 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/24 13:16:15 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int	print_export_list(t_env *envlist)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(min->key, STDOUT_FILENO);
-		ft_putstr_fd("=", STDOUT_FILENO);
 		if (min->value)
 		{
+			ft_putstr_fd("=", STDOUT_FILENO);
 			ft_putstr_fd("\"", STDOUT_FILENO);
 			ft_putstr_fd(min->value, STDOUT_FILENO);
 			ft_putstr_fd("\"", STDOUT_FILENO);
