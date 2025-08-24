@@ -6,7 +6,7 @@
 /*   By: yaycicek <yaycicek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 09:29:57 by yaycicek          #+#    #+#             */
-/*   Updated: 2025/08/22 17:21:04 by yaycicek         ###   ########.fr       */
+/*   Updated: 2025/08/24 13:52:04 by yaycicek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	builtin_exit(t_shell *shell, char **argv)
 			j++;
 		if (!ft_isdigit(argv[1][j]))
 		{
+			opt_err(shell, argv[1], ERR_NUM_ARG_REQ, 2);
 			cleanup(shell);
-			exit(cmd_err(shell, "exit", ERR_NUM_ARG_REQ, 2));
+			exit(shell->exitcode);
 		}
 	}
 	if (argv[2])
